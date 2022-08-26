@@ -19,11 +19,12 @@ SCWTPULR-Robin_mini.bin => QQSPro Stock
    - (L)LinearAdvance - 
    - (R)Arc function enabled.
 
-
   **Note**: After choosing your binary, remove the "SCWTPULR-" header or rename the file to "Robin_mini.bin" for QQS,
   place it on your SD card, insert your SD card into the printer and power on your printer.
   
 -* With GD32 chip, the rename is "Robin_nano.bin"
+
+  **Note2**: In some QQSPs(GD32 chip), the flash is blocked because of the screen. To unblock it, you need to remove the shielding from the wire ribbon that connects the MoBo to the screen and reflash the firmware.
   
   After the flash and to configure and prepare your printer, please follow the steps on the Wiki => 
   
@@ -52,6 +53,7 @@ SCWTPULR-Robin_mini.bin => QQSPro Stock
   - (C) UI MARLIN (TFT Color screen)
   - (I) UI MKS (TFT Color screen>=480x320 use Lvgl/NANOv2-3)
   - (r) UI STANDARD (Marlin Mode on TFT FOR SKR/NANOv2-3)
+  - (s) UI TOUCH for the BTT-TFT Mod for the QQSP/Q5.
   - (D) UI DWIN (H43)
 
   **/*------Modules--------*/**
