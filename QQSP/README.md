@@ -1,4 +1,4 @@
-### 2022-06-18 MARLIN 2.1 RELEASE (compatible with GD32*)
+### 2022-08-27 MARLIN 2.1.1 (compatible with GD32*)
 
 - QQS-Pro STOCK With 4xA4988 = QQSP_STOCK-Robin_mini.bin
 - QQS-Pro STOCK With 4xTMC2208 = QQSP_STOCK_TMC8-Robin_mini.bin
@@ -52,6 +52,7 @@ SCWTPULR-Robin_mini.bin => QQSPro Stock
   - (F) UI STANDARD (Emulation LCD screen on TFT)
   - (C) UI MARLIN (TFT Color screen)
   - (I) UI MKS (TFT Color screen>=480x320 use Lvgl/NANOv2-3)
+  - (s) UI TOUCH (BTT-TFT) TFT serial Mod. 
   - (r) UI STANDARD (Marlin Mode on TFT FOR SKR/NANOv2-3)
   - (s) UI TOUCH for the BTT-TFT Mod for the QQSP/Q5.
   - (D) UI DWIN (H43)

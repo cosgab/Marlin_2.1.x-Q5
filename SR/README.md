@@ -1,4 +1,12 @@
-### 2022-06-18 MARLIN 2.1 RELEASE
+### 2022-08-27 MARLIN 2.1.1 RELEASE
+
+**NOTE**: 
+The SR printer has two types of motherboards. The first ones have BTT_SKR13 and the new ones have Mks_robin_nanoV3.x. 
+These are not the same firmwares for Marlin so be careful when downloading to take the right firmware associated with the MoBo.
+
+SKR13 => Firmware SRB_xxxxxxx.bin
+
+Nano3.x => Firmware SRM_xxxxxxxx.bin
 
 Each firmware has a header that corresponds to the hardware (board) and functions used in the firmware.
 

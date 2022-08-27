@@ -1,4 +1,4 @@
-### 2022-06-18 MARLIN 2.1 RELEASE
+### 2022-08-27 MARLIN 2.1.1
 
  # **NOTE**: Recently, the Q5 printer has two types of motherboards. The first ones have Mks_robin_nanoV1.2 and the new ones have Mks_robin_nanoV1.3. These are not the same firmwares for Marlin so be careful when downloading to take the right firmware associated with the MoBo.
 
