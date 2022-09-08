@@ -1,0 +1,213 @@
+{
+ "network": {
+  "network": [
+   {
+    "id": "130",
+    "label": "hostname",
+    "value": "Mks3D"
+   },
+   {
+    "id": "0",
+    "label": "radio mode",
+    "value": "5"
+   },
+   {
+    "id": "1034",
+    "label": "radio_boot",
+    "value": "1"
+   }
+  ],
+  "sta": [
+   {
+    "id": "1",
+    "label": "SSID",
+    "value": "YOUR_NETWORK"
+   },
+   {
+    "id": "34",
+    "label": "pwd",
+    "value": "********"
+   },
+   {
+    "id": "99",
+    "label": "ip mode",
+    "value": "1"
+   },
+   {
+    "id": "100",
+    "label": "ip",
+    "value": "192.168.4.1"
+   },
+   {
+    "id": "108",
+    "label": "gw",
+    "value": "192.168.4.1"
+   },
+   {
+    "id": "104",
+    "label": "msk",
+    "value": "255.255.255.0"
+   },
+   {
+    "id": "1029",
+    "label": "DNS",
+    "value": "192.168.4.1"
+   },
+   {
+    "id": "1035",
+    "label": "sta fallback mode",
+    "value": "5"
+   }
+  ],
+  "ap": [
+   {
+    "id": "218",
+    "label": "SSID",
+    "value": "AP-FLSUN"
+   },
+   {
+    "id": "251",
+    "label": "pwd",
+    "value": "********"
+   },
+   {
+    "id": "316",
+    "label": "ip",
+    "value": "192.168.4.1"
+   },
+   {
+    "id": "118",
+    "label": "channel",
+    "value": "11"
+   }
+  ]
+ },
+ "service": {
+  "http": [
+   {
+    "id": "328",
+    "label": "enable",
+    "value": "1"
+   },
+   {
+    "id": "121",
+    "label": "port",
+    "value": "80"
+   }
+  ],
+  "telnetp": [
+   {
+    "id": "329",
+    "label": "enable",
+    "value": "1"
+   },
+   {
+    "id": "125",
+    "label": "port",
+    "value": "8080"
+   }
+  ],
+  "time": [
+   {
+    "id": "120",
+    "label": "i-time",
+    "value": "0"
+   },
+   {
+    "id": "462",
+    "label": "tzone",
+    "value": "0"
+   },
+   {
+    "id": "463",
+    "label": "dst",
+    "value": "0"
+   },
+   {
+    "id": "464",
+    "label": "t-server",
+    "value": "1.pool.ntp.org"
+   },
+   {
+    "id": "593",
+    "label": "t-server",
+    "value": "2.pool.ntp.org"
+   },
+   {
+    "id": "722",
+    "label": "t-server",
+    "value": "0.pool.ntp.org"
+   }
+  ],
+  "notification": [
+   {
+    "id": "1022",
+    "label": "auto notif",
+    "value": "1"
+   },
+   {
+    "id": "116",
+    "label": "notification",
+    "value": "0"
+   },
+   {
+    "id": "332",
+    "label": "t1",
+    "value": "********"
+   },
+   {
+    "id": "396",
+    "label": "t2",
+    "value": "********"
+   },
+   {
+    "id": "856",
+    "label": "ts",
+    "value": " "
+   }
+  ]
+ },
+ "system": {
+  "system": [
+   {
+    "id": "461",
+    "label": "targetfw",
+    "value": "20"
+   },
+   {
+    "id": "112",
+    "label": "baud",
+    "value": "115200"
+   }
+  ],
+  "boot": [
+   {
+    "id": "320",
+    "label": "bootdelay",
+    "value": "10000"
+   },
+   {
+    "id": "1023",
+    "label": "verbose",
+    "value": "0"
+   }
+  ],
+  "outputmsg": [
+   {
+    "id": "129",
+    "label": "serial",
+    "value": "1"
+   },
+   {
+    "id": "851",
+    "label": "M117",
+    "value": "1"
+   },
+   {
+    "id": "1006",
+    "label": "telnet",
+    "value": "1"
+   }
+  ]
+ }
+}
