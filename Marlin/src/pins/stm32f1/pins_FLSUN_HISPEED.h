@@ -210,35 +210,29 @@
     //Mode COMMUNICATION_PROTOCOL RAW_SERIAL with monitoring ESP3Dv3
     #define MKS_WIFI_SERIAL_NUM             SERIAL_PORT_2
     #define MKS_WIFI_UART                   USART1
-    #undef PLATFORM_M997_SUPPORT
+    #undef PLATFORM_M997_SUPPORT            //Issue with the Mks Cura plugin that sends M997s.
     #define MKS_WIFI_IO0                    PA8
     #define MKS_WIFI_IO1                    PC7
     #define MKS_WIFI_IO_RST                 PA5
   #elif HAS_TFT_LVGL_UI
     //Cura monitoring with MksWifi/ESP3Dv3/Mescianti (TFT35v1)
     //Mode COMMUNICATION_PROTOCOL MKS_SERIAL for monitoring ESP3Dv3
-    //#define USES_MKS_WIFI_FUNCTION
-    //#define ESP_WIFI_MODULE_COM             2
-    //#define ESP_WIFI_MODULE_BAUDRATE     115200
+    #define USES_MKS_WIFI_FUNCTION
     #define WIFI_IO0_PIN                    PA8   // MKS ESP WIFI IO0 PIN
     #define WIFI_IO1_PIN       			        PC7   // MKS ESP WIFI IO1 PIN
     #define WIFI_RESET_PIN				          PA5   // MKS ESP WIFI RESET PIN
   #else
-    #define ESP_WIFI_MODULE_COM               2   // Must also set either SERIAL_PORT or SERIAL_PORT_2 to this
-    #define ESP_WIFI_MODULE_BAUDRATE    BAUDRATE  // Must use same BAUDRATE as SERIAL_PORT & SERIAL_PORT_2
-    #undef PLATFORM_M997_SUPPORT
-    #define ESP_WIFI_MODULE_GPIO0_PIN        PA8
-    #define ESP_WIFI_MODULE_GPIO1_PIN        PC7
-    #define ESP_WIFI_MODULE_ENABLE_PIN      -1// PA5
-    #define ESP_WIFI_MODULE_RESET_PIN        PA5//-1
+    #undef PLATFORM_M997_SUPPORT                  //Issue with the Mks Cura plugin that sends M997s(reboot MoBo).
   #endif
   /* fix Marlin
   #define ESP_WIFI_MODULE_COM                  2  // Must also set either SERIAL_PORT or SERIAL_PORT_2 to this
   #define ESP_WIFI_MODULE_BAUDRATE      BAUDRATE  // Must use same BAUDRATE as SERIAL_PORT & SERIAL_PORT_2
-  #define ESP_WIFI_MODULE_RESET_PIN         PA5   // WIFI CTRL/RST
-  #define ESP_WIFI_MODULE_ENABLE_PIN        -1
   #define ESP_WIFI_MODULE_TXD_PIN           PA9   // MKS or ESP WIFI RX PIN
   #define ESP_WIFI_MODULE_RXD_PIN           PA10  // MKS or ESP WIFI TX PIN
+  #define ESP_WIFI_MODULE_GPIO0_PIN         PA8
+  #define ESP_WIFI_MODULE_GPIO1_PIN         PC7
+  #define ESP_WIFI_MODULE_RESET_PIN         PA5   // WIFI CTRL/RST
+  #define ESP_WIFI_MODULE_ENABLE_PIN        -1
   */
 #endif
 
@@ -356,7 +350,6 @@
 #else
   #define SDIO_SUPPORT
   #define SDIO_CLOCK                     4500000  // 4.5 MHz
-  //#define SDIO_READ_RETRIES                   16
   #define ONBOARD_SPI_DEVICE                   1  // SPI1
   #define ONBOARD_SD_CS_PIN                 PC11
   #define SD_DETECT_PIN                     -1    // SD_CD (-1 active refresh)
@@ -366,7 +359,7 @@
 // LCD / Controller
 //
 #ifndef BEEPER_PIN
-  #define BEEPER_PIN                        PC5
+  //#define BEEPER_PIN                        PC5
 #endif
 
 #if ENABLED(SPEAKER) && BEEPER_PIN == PC5
@@ -389,10 +382,26 @@
    * Setting an 'LCD_RESET_PIN' may cause a flicker when entering the LCD menu
    * because Marlin uses the reset as a failsafe to revive a glitchy LCD.
    */
-  #define TFT_RESET_PIN                     PC6   // FSMC_RST
+
+  #define FSMC_CS_PIN                       PD7   // NE4
+  #define FSMC_RS_PIN                       PD11  // A0
+
+  #define TFT_CS_PIN                 FSMC_CS_PIN
+  #define TFT_RS_PIN                 FSMC_RS_PIN
+
+  #define LCD_USE_DMA_FSMC                        // Use DMA transfers to send data to the TFT
+  #define FSMC_DMA_DEV                      DMA2
+  #define FSMC_DMA_CHANNEL               DMA_CH5
+
+  #define LCD_RESET_PIN                     PC6   // FSMC_RST
+  #define LCD_BACKLIGHT_PIN                 PD13
+
+  //-----------------------------//
+  /*
+  //#define TFT_RESET_PIN                     PC6   // FSMC_RST
   #define TFT_BACKLIGHT_PIN                 PD13
   
-  #define LCD_RESET_PIN            TFT_RESET_PIN
+  //#define LCD_RESET_PIN            TFT_RESET_PIN
   #define LCD_BACKLIGHT_PIN    TFT_BACKLIGHT_PIN
   
   #define LCD_USE_DMA_FSMC                        // Use DMA transfers to send data to the TFT
@@ -409,7 +418,7 @@
   
   #define DOGLCD_MOSI                       -1    // Prevent auto-define by Conditionals_post.h
   #define DOGLCD_SCK                        -1
-  
+  */
   #define TOUCH_CS_PIN                      PC2   // SPI2_NSS
   #define TOUCH_SCK_PIN                     PB13  // SPI2_SCK
   #define TOUCH_MISO_PIN                    PB14  // SPI2_MISO
@@ -429,16 +438,31 @@
   #endif
 #endif
 
-/* Module TEST TFT BTT //
-#if HAS_WIRED_LCD
-    //#define BEEPER_PIN                      PC5 //PB5//EXP1_10
-    //#define BTN_ENC                         -1 //PA15//EXP1_09
+/* Module TEST TFT BTT */
+#if HAS_WIRED_LC
+  #define BEEPER_PIN                      PC5 //PB5//EXP1_10
+  //#define BTN_ENC                         -1 //PA15//EXP1_09
+  
+  //#define LCD_PINS_RS                         13
+  //#define LCD_PINS_ENABLE                     17
+  //#define LCD_PINS_D4                         16
+  //#define BEEPER_PIN                       151
 
-    #define BTN_EN1                         PA9//EXP1_06//RX1
-    #define BTN_EN2                         PA10//EXP1_08//TX1
+  #define BTN_EN2                         PA10//EXP1_06//RX1
+  #define BTN_EN1                         PA9//EXP1_08//TX1
+  //#define BEEPER_PIN                      -1 //Vcc
+  #define LCD_PINS_RS                     PD11
+  #define LCD_PINS_ENABLE                 PA10
+#endif  
+/*/    
+  #define BTN_ENC                           PA15
+  #define BTN_EN1                           PA9
+  #define BTN_EN2                           PA10
+  #define LCD_PINS_RS                       PB8
+  #define LCD_PINS_ENABLE                   PB15
+  #define LCD_PINS_D4                       PB9
+  #define BEEPER_PIN                        PB5
 
-    #define LCD_PINS_RS                     -1 //PB8
-    #define LCD_PINS_ENABLE                 -1 //EXP1_3
     //#define LCD_PINS_D4                     -1  //PB9
     #ifndef TFT_BUFFER_SIZE
       #define TFT_BUFFER_SIZE               1200
@@ -446,8 +470,9 @@
     #ifndef TFT_QUEUE_SIZE
       #define TFT_QUEUE_SIZE                6144
     #endif    
-#endif
 */
+//#endif
+//
 /**
  *            SKR Mini E3 V2.0
  *                ------

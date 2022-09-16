@@ -23,7 +23,7 @@
 *  Default is actif for QQS and it's uncommented ;-)
 */
 //For run tests on my dev'printer!!
-//#define XP_DEV
+#define XP_DEV
 
 //===================================================
 #ifndef XP_DEV                       // (Default)
@@ -34,7 +34,7 @@
 /*-------------Motherboard/Printer-(1 CHOICE)-------*/
 #define QQSP                         // (Default_QQS) env = flsun_hispeedv1
                                      // env:flsun_hispeedv2 (GD32F303VE6) 
-//#define Q5                         // env = mks_robin_nano35 or (Q5_2021) env = mks_robin_nano_v1_3_f4
+//#define Q5                         // env = mks_robin_nano_v1v2 or (Q5_2021) env = mks_robin_nano_v1_3_f4
                                      // for Q5_2021 = uncomment/comment your MoBo in configuration.h (Line114)
 //#define SR_MKS                     // env = mks_robin_nano_v3_usb_flash_drive_msc
 //#define SR_BTT                     // env = lpc1768
@@ -89,9 +89,9 @@
 
   //#define TFT_OTHER            // For the user who haven't the same screen.
 #else
-  #define TFT_COLOR_UI             //(C) UI Color MARLIN with Mks-TS35v2
-  //#define TFT_BTT_UI             //(r) UI TOUCH by BTT-TFT Family (emulation LCD Marlin)
-  //#define TFT_DWIN_UI            //(D) UI for DGUS screen like CrealityTouch or Mks H43
+  //#define TFT_COLOR_UI         //(C) UI Color MARLIN with Mks-TS35v2
+  #define TFT_BTT_UI             //(r) UI TOUCH by BTT-TFT Family (emulation LCD Marlin)
+  //#define TFT_DWIN_UI          //(D) UI for DGUS screen like CrealityTouch or Mks H43
 #endif
 
 /* ========================================//
@@ -128,7 +128,7 @@
 //#define QQS_SR                         // Custom effector with balls like SR printer.
 //#define FKSN                           // Customn effector FRANKENSUNrods, height
                   /* Module Mks_Wifi */ 
-#define MOD_WIFI                         //(W) (Default_QQS) Module ESP8266/ESP12
+#define MOD_WIFI                       //(W) (Default_QQS) Module ESP8266/ESP12
 //#define ESP3D_30                       //(w) Enable firmware ESP3D v3.0 (ESP8266/ESP12) only with TFT_LVGL_UI
 
                   /* Option for Neopixel */
@@ -211,9 +211,9 @@
 * == Option for Host (OCTOPRINT,REPETIER,PRONTERFACE,ESP3D, etc)
 * ======================================================
 */
-//#define OCTO                           // Enable buffer for Octoprint.
-#define HOST_ACTION_COMMANDS             // Default - Action Command Prompt support Message on Octoprint
-#define HOST_START_MENU_ITEM             // Add a menu item that tells the host to start a print
+//#define HOSTS                          // Enable buffer for Octoprint.
+//#define HOST_ACTION_COMMANDS           // Default - Action Command Prompt support Message on Octoprint
+//#define HOST_START_MENU_ITEM           // Add a menu item that tells the host to start a print
 
 #define BINARY_FILE_TRANSFER             // Bin transfert for ESP3D firmware v2.1 or others.
                                          // Not compatible with the MEATPACK option.
@@ -242,11 +242,11 @@
 * https://github.com/Foxies-CSTL/Marlin_2.1.x/wiki/5.Firmware-Wifi
 */
 #if ANY(MOD_WIFI, ESP3D_30)
-  #if ENABLED(ESP3D_30)
-    #define MKS_WIFI                    // Enable UART2/3 on socket WIFI (MKs boards)
-  #elif ENABLED(TFT_LVGL_UI)
+  #if ENABLED(TFT_LVGL_UI)
     #define MKS_WIFI_MODULE             // Works with TFT_LVGL_UI(Modern UI using LVGL-MKS)
     //#define USES_MKS_WIFI_FUNCTION    // Bin transfert MKS for ESP3D firmware v3.0 or others
+  #elif ENABLED(ESP3D_30)// Enable UART1 on socket WIFI (MKs boards)
+    #define MKS_WIFI 
   #else
     #define MOD_AUX    
   #endif
@@ -273,11 +273,13 @@
 #elif ENABLED(MOD_BTT_UI)
   #define MOD_AUX                   // enable the UART2 for BTT_TFT (TOUCH UI)
   #define TFT_CLASSIC_UI
+  //#define MKS_ROBIN_TFT28
   #define TFT_GENERIC
-  //#define TFT_DRIVER AUTO
+  #define TFT_DRIVER AUTO
   #define TFT_INTERFACE_FSMC        //Default socket on MKS_nano, mini, hispeed.
-  //#define TFT_INTERFACE_SPI
-  //#define TFT_RES_320x240
+//  #define TFT_RES_320x240
+  //#define ULTRA_LCD//CR10_STOCKDISPLAY
+  //#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
   #define G26_MESH_VALIDATION   
 #elif BOTH(TFT_COLOR_UI, SR_MKS)
   #define MKS_TS35_V2_0             // Only for NanoV2 or V3
@@ -285,11 +287,9 @@
   #define MULTI_VOLUME              // Multiple volume support(µSD + USB)
 #elif ENABLED(TFT_OTHER)
   //#define MKS_TS35_V2_0           // Only for NanoV2 or V3
-  #define MKS_ROBIN_TFT35         // Mks_Robin_TFT35V2.0
+  //#define MKS_ROBIN_TFT35         // Mks_Robin_TFT35V2.0
   //#define MKS_ROBIN_TFT43         // Mks_Robin_TFT43
   #define TOUCH_SCREEN              // (C/F) (Default) UI MARLIN
-  #define TFT_ROTATION TFT_ROTATE_180
-  //#define SINGLE_TOUCH_NAVIGATION
 #else
    #define MKS_ROBIN_TFT32           // (Default) Mks_Robin_TFT_V2.0
    #define TOUCH_SCREEN              // (C/F) (Default) UI MARLIN
@@ -298,12 +298,13 @@
 //= For users who dont have a terminal =//
 #if BOTH(ADD_MENUS, TFT_CLASSIC_UI)||BOTH(ADD_MENUS, TFT_COLOR_UI)||BOTH(ADD_MENUS, TFT_BTT_UI)
   #define DELTA_CALIBRATION_MENU        // (Default) Auto for CLASSIC and COLOR.
+  #define SOFT_ENDSTOPS_MENU_ITEM       // (Default) Menu endstop
   #define LCD_INFO_MENU                 // (Default) Informations printer.
   //#define PREHEAT_SHORTCUT_MENU_ITEM  // Add preheat/temperature menu (first page)
   //#define CANCEL_OBJECTS              // Add menu "Cancel Objet"
   //#define MEDIA_MENU_AT_TOP           // Print media menu at top list.
   //#define TOUCH_IDLE_SLEEP 900        // Auto-Sleep screenview. (M255 S100)
-  //#define LCD_BACKLIGHT_TIMEOUT 30    // (s) Timeout before turning off the backlight
+  //#define LCD_BACKLIGHT_TIMEOUT_MINS 3 // (mn) Timeout before turning off the backlight
   #define SOUND_MENU_ITEM               // Add a mute option to the LCD menu
   #ifndef STALLGUARD_2                   
   // Only with TMC2209 sensorless (need wiring DIAG pins)
@@ -518,11 +519,4 @@
 // NEOPIXEL for SR_MKS
 #if BOTH(NEOPIXEL_LED, SR_MKS)
   #define LED_PWM    SERVO0_PIN
-#endif
-//Test TFT35v1
-#ifdef MKS_ROBIN_TFT35
-  #define XPT2046_X_CALIBRATION          16903
-  #define XPT2046_Y_CALIBRATION         -11047
-  #define XPT2046_X_OFFSET                 -27
-  #define XPT2046_Y_OFFSET                 326
 #endif

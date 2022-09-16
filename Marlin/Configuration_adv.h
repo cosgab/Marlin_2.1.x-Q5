@@ -632,7 +632,7 @@
  * Multiple extruders can be assigned to the same pin in which case
  * the fan will turn on when any selected extruder is above the threshold.
  */
-#if NONE(Q5, SR_MKS, SR_BTT, NANO1X) 
+#if NONE(Q5, SR_MKS, SR_BTT, NANO1X, NANO3) 
   #define E0_AUTO_FAN_PIN -1
 #elif ANY(SR_MKS, NANO3)
   #define E0_AUTO_FAN_PIN PB0  //HE1
@@ -1598,12 +1598,14 @@
 
   // Allow international symbols in long filenames. To display correctly, the
   // LCD's font must contain the characters. Check your selected LCD language.
-  #define UTF_FILENAME_SUPPORT
+  #ifdef HOSTS
+    //#define UTF_FILENAME_SUPPORT
 
-  #define LONG_FILENAME_HOST_SUPPORT    // Get the long filename of a file/folder with 'M33 <dosname>' and list long filenames with 'M20 L'
-  #define LONG_FILENAME_WRITE_SUPPORT   // Create / delete files with long filenames via M28, M30, and Binary Transfer Protocol
-  //#define M20_TIMESTAMP_SUPPORT         // Include timestamps by adding the 'T' flag to M20 commands
-
+    #define LONG_FILENAME_HOST_SUPPORT    // Get the long filename of a file/folder with 'M33 <dosname>' and list long filenames with 'M20 L'
+    #define LONG_FILENAME_WRITE_SUPPORT   // Create / delete files with long filenames via M28, M30, and Binary Transfer Protocol
+    //#define M20_TIMESTAMP_SUPPORT         // Include timestamps by adding the 'T' flag to M20 commands
+  #endif
+  
   #define SCROLL_LONG_FILENAMES         // Scroll long filenames in the SD card menu
 
   //#define SD_ABORT_NO_COOLDOWN          // Leave the heaters on after Stop Print (not recommended!)
@@ -2368,7 +2370,7 @@
 // The value of BLOCK_BUFFER_SIZE must be a power of 2 (e.g., 8, 16, 32)
 #if BOTH(SDSUPPORT, DIRECT_STEPPING)
   #define BLOCK_BUFFER_SIZE  8
-#elif ANY(TFT_BTT_UI, OCTO)
+#elif ANY(TFT_BTT_UI, MOD_BTT_UI, HOSTS)
   #define BLOCK_BUFFER_SIZE 32
 #elif ENABLED(SDSUPPORT)
   #define BLOCK_BUFFER_SIZE 16
@@ -2380,10 +2382,10 @@
 
 // The ASCII buffer for serial input
 #define MAX_CMD_SIZE 96
-#if ANY(TFT_BTT_UI, OCTO)
+#if ANY(TFT_BTT_UI, MOD_BTT_UI, HOSTS)
   #define BUFSIZE 32
 #else
-  #define BUFSIZE 16  //4
+  #define BUFSIZE 4
 #endif
 
 // Transmission to Host Buffer Size
@@ -2393,10 +2395,10 @@
 // For debug-echo: 128 bytes for the optimal speed.
 // Other output doesn't need to be that speedy.
 // :[0, 2, 4, 8, 16, 32, 64, 128, 256]
-#if ANY(TFT_BTT_UI, OCTO)
+#if ANY(TFT_BTT_UI, MOD_BTT_UI, HOSTS)
   #define TX_BUFFER_SIZE 32
 #else
-  #define TX_BUFFER_SIZE 16//0
+  #define TX_BUFFER_SIZE 4//0
 #endif
 
 // Host Receive Buffer Size
@@ -2404,7 +2406,7 @@
 // To use flow control, set this buffer size to at least 1024 bytes.
 // :[0, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048]
 //#define RX_BUFFER_SIZE 1024
-#ifdef OCTO
+#ifdef HOSTS
   #define RX_BUFFER_SIZE 1024//2048 
 #endif
 
@@ -2467,7 +2469,7 @@
 //#define NO_TIMEOUTS 1000 // Milliseconds
 
 // Some clients will have this feature soon. This could make the NO_TIMEOUTS unnecessary.
-#ifdef OCTO
+#ifdef HOSTS
   #define ADVANCED_OK
 #endif
 
@@ -2496,7 +2498,7 @@
  *   'M106 P<fan> T2'     : Use the set secondary speed
  *   'M106 P<fan> T1'     : Restore the previous fan speed
  */
-#ifdef TFT_BTT_UI
+#if ANY(TFT_BTT_UI, MOD_BTT_UI)
   #define EXTRA_FAN_SPEED   //if ENABLE FAN_1
 #endif
 
@@ -3156,7 +3158,7 @@
    * Set *_SERIAL_TX_PIN and *_SERIAL_RX_PIN to match for all drivers
    * on the same serial port, either here or in your board's pins file.
    */
-  #if ANY(Q5, SR_MKS, SR_BTT, NANO1X)
+  #if ANY(Q5, SR_MKS, SR_BTT, NANO1X, NAMO3)
     #define  X_SLAVE_ADDRESS 0
     #define  Y_SLAVE_ADDRESS 0
     #define  Z_SLAVE_ADDRESS 0
@@ -3793,7 +3795,7 @@
 /**
  * Auto-report position with M154 S<seconds>
  */
-#ifdef TFT_BTT_UI
+#if ANY(TFT_BTT_UI, MOD_BTT_UI)
   #define AUTO_REPORT_POSITION
 #endif
 
@@ -3953,7 +3955,7 @@
   #define MAIN_MENU_ITEM_4_CONFIRM
 
   #define MAIN_MENU_ITEM_5_DESC "1.Bed Level. UBL for " PREHEAT_1_LABEL
-  #define MAIN_MENU_ITEM_5_GCODE "G29L1\nM1004B70S1"
+  #define MAIN_MENU_ITEM_5_GCODE "G29 L1\nM1004B70S1"
   #define MAIN_MENU_ITEM_5_CONFIRM
 
   #ifdef MPCTEMP
@@ -3970,11 +3972,11 @@
   #define MAIN_MENU_ITEM_7_CONFIRM
 
   #define MAIN_MENU_ITEM_8_DESC "2.Bed Level. UBL for " PREHEAT_2_LABEL
-  #define MAIN_MENU_ITEM_8_GCODE "G29L2\nM1004B80S2"
+  #define MAIN_MENU_ITEM_8_GCODE "G29 L2\nM1004B80S2"
   #define MAIN_MENU_ITEM_8_CONFIRM
 
   #define MAIN_MENU_ITEM_9_DESC "3.Bed Level. UBL for " PREHEAT_3_LABEL
-  #define MAIN_MENU_ITEM_9_GCODE "G29L3\nM1004B90S3"
+  #define MAIN_MENU_ITEM_9_GCODE "G29 L3\nM1004B90S3"
   #define MAIN_MENU_ITEM_9_CONFIRM
 
   #define MAIN_MENU_ITEM_10_DESC "Reboot Printer"
@@ -4088,7 +4090,7 @@
 #if ENABLED(HOST_ACTION_COMMANDS)
   //#define HOST_PAUSE_M76                // Tell the host to pause in response to M76
   #define HOST_PROMPT_SUPPORT           // Initiate host prompts to get user feedback
-  #if BOTH(HOST_PROMPT_SUPPORT, TFT_BTT_UI)
+  #if BOTH(HOST_PROMPT_SUPPORT, TFT_BTT_UI) || BOTH(HOST_PROMPT_SUPPORT, MOD_BTT_UI)
     #define HOST_STATUS_NOTIFICATIONS   // Send some status messages to the host as notifications
   #endif
   //#define HOST_START_MENU_ITEM          // Add a menu item that tells the host to start

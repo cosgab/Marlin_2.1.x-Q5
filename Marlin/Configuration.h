@@ -180,6 +180,8 @@
   #if ANY(MOD_AUX, ESP3D_30)
     #if ENABLED(TFT_LVGL_UI)
       #define MKS_WIFI_MODULE
+      //#define SERIAL_PORT_2 1   // 1=ESP3Dv2.1 MKS-Wifi or serial TFT.
+      //#define NUM_SERIAL 2      
     #elif ENABLED(ESP3D_30)
       #define SERIAL_PORT_2 1   // 1=ESP3Dv2.1 MKS-Wifi or serial TFT.
       #define NUM_SERIAL 2
@@ -187,6 +189,7 @@
     #else
       #define SERIAL_PORT_2 1
       #define NUM_SERIAL 2
+      #define BAUDRATE_2 250000
     #endif
   #endif
 #endif
@@ -810,7 +813,7 @@
 
   #define MPC_INCLUDE_FAN                             // Model the fan speed?
   
-  #ifdef XP2
+  #if ANY(XP1, XP2)
     #define MPC_HEATER_POWER { 50.0f }
     #define MPC_BLOCK_HEAT_CAPACITY { 13.6647 }           // (J/K) Heat block heat capacities.
     #define MPC_SENSOR_RESPONSIVENESS { 0.0666 }         // (K/s per ∆K) Rate of change of sensor temperature from heat block.
@@ -1043,7 +1046,7 @@
   // and processor overload (too many expensive sqrt calls).
   #if ANY(SR_MKS, SR_BTT)
     #define DELTA_SEGMENTS_PER_SECOND 160
-  #elif ENABLED(XP1)
+  #elif ENABLED(XP12)
     #define DELTA_SEGMENTS_PER_SECOND 100  //200
   #else
     #define DELTA_SEGMENTS_PER_SECOND  80  //200
@@ -1085,10 +1088,10 @@
   #elif ENABLED(QQS_SR) //Custom effector (L<diagonal-rod> R<radius> H<height> S<seg-per-sec> XYZ<tower-angle-trim> ABC<rod-trim>)
     #define DELTA_PRINTABLE_RADIUS  130.0            // (mm)
     #define DELTA_MAX_RADIUS        130.0
-    #define DELTA_DIAGONAL_ROD      280.0            // Custom arm with Ball = 285
+    #define DELTA_DIAGONAL_ROD      285.0            // Custom arm with Ball = 285
     #define DELTA_HEIGHT            366.0
     #define DELTA_ENDSTOP_ADJ { 0.0, 0.0 , 0.0 }     // Trim adjustments for individual towers
-    #define DELTA_RADIUS            140.8            // Custom radius with Ball = 130.5
+    #define DELTA_RADIUS            130.5            // Custom radius with Ball = 130.5
     #define DELTA_TOWER_ANGLE_TRIM { 0.0, 0.0, 0.0 } //XYZ
     #define DELTA_DIAGONAL_ROD_TRIM_TOWER { 0.0, 0.0, 0.0 } //ABC
     //#define DELTA_RADIUS_TRIM_TOWER { 0.0, 0.0, 0.0 }
@@ -1753,9 +1756,9 @@
 // X and Y axis travel speed (mm/min) between probes 
 #define XY_PROBE_FEEDRATE (66*60)    //3960 default=133*60
 
-#if ANY(N_PROBE, P_PROBE)
-  #define Z_PROBE_FEEDRATE_FAST (10*60)  //600
-  #define Z_PROBE_FEEDRATE_SLOW (Z_PROBE_FEEDRATE_FAST / 2) //300
+#if ANY(N_PROBE, P_PROBE, X_PROBE)
+  #define Z_PROBE_FEEDRATE_FAST (40*60)  //600
+  #define Z_PROBE_FEEDRATE_SLOW (Z_PROBE_FEEDRATE_FAST / 10) //300
 #else
 // Feedrate (mm/min) for the first approach when double-probing (MULTIPLE_PROBING == 2)
 //#define Z_PROBE_FEEDRATE_FAST (200*60)
@@ -2061,7 +2064,7 @@
 #endif
 
 #if EITHER(MIN_SOFTWARE_ENDSTOPS, MAX_SOFTWARE_ENDSTOPS)
-  #define SOFT_ENDSTOPS_MENU_ITEM  // Enable/Disable software endstops from the LCD
+  //#define SOFT_ENDSTOPS_MENU_ITEM  // Enable/Disable software endstops from the LCD
 #endif
 
 /**
@@ -2138,7 +2141,7 @@
   // Commands to execute on filament runout.
   // With multiple runout sensors use the %c placeholder for the current tool in commands (e.g., "M600 T%c")
   // NOTE: After 'M412 H1' the host handles filament runout and this script does not apply.
-  #define FILAMENT_RUNOUT_SCRIPT "M600 X0 Y-125 Z50" // Test like BTT-TFT
+  #define FILAMENT_RUNOUT_SCRIPT "M600 X0 Y-100 Z50" // Test like BTT-TFT
 
   // After a runout is detected, continue printing this length of filament
   // before executing the runout script. Useful for a sensor at the end of
@@ -2870,7 +2873,7 @@ EEPROM_W25Q
  *
  * Use CRC checks and retries on the SD communication.
  */
-#define SD_CHECK_AND_RETRY
+//#define SD_CHECK_AND_RETRY
 
 /**
  * LCD Menu Items
