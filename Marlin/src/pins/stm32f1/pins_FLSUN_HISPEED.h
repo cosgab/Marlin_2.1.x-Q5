@@ -222,7 +222,7 @@
     #define WIFI_IO1_PIN       			        PC7   // MKS ESP WIFI IO1 PIN
     #define WIFI_RESET_PIN				          PA5   // MKS ESP WIFI RESET PIN
   #else
-    #undef PLATFORM_M997_SUPPORT                  //Issue with the Mks Cura plugin that sends M997s(reboot MoBo).
+    //#undef PLATFORM_M997_SUPPORT                //Issue with the Mks Cura plugin that sends M997s(reboot MoBo).
   #endif
   /* fix Marlin
   #define ESP_WIFI_MODULE_COM                  2  // Must also set either SERIAL_PORT or SERIAL_PORT_2 to this
