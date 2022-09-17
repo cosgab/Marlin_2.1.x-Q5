@@ -177,19 +177,23 @@
     #endif
   #endif
 #else
-  #if ANY(MOD_AUX, ESP3D_30)
+  #ifdef MOD_AUX
     #if ENABLED(TFT_LVGL_UI)
       #define MKS_WIFI_MODULE
       //#define SERIAL_PORT_2 1   // 1=ESP3Dv2.1 MKS-Wifi or serial TFT.
       //#define NUM_SERIAL 2      
-    #elif ENABLED(ESP3D_30)
+    #elif ANY(MOD_WIFI, ESP3D_30)
       #define SERIAL_PORT_2 1   // 1=ESP3Dv2.1 MKS-Wifi or serial TFT.
       #define NUM_SERIAL 2
       #define BAUDRATE_2 115200
     #else
       #define SERIAL_PORT_2 1
-      #define NUM_SERIAL 2
+      //#define NUM_SERIAL 2
       #define BAUDRATE_2 250000
+
+      //#define LCD_BAUDRATE 115200
+      //#define SERIAL_PORT_3 2 // 3=BTT-TFT(0,1=nok)
+      //#define BAUDRATE_3 250000 //115200 
     #endif
   #endif
 #endif
