@@ -61,11 +61,13 @@
 #endif
 
 //PandaPi sensor
+/*
 #if BD_SENSOR
   #define  I2C_BD_SDA_PIN   PB7//PC6 EEPROM
   #define  I2C_BD_SCL_PIN   PB6//PB2 EEPROM
   #define  I2C_BD_DELAY  10
 #endif
+*/
 
 //
 // SPI

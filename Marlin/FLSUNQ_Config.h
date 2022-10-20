@@ -23,7 +23,7 @@
 *  Default is actif for QQS and it's uncommented ;-)
 */
 //For run tests on my dev'printer!!
-#define XP_DEV
+//#define XP_DEV
 
 //===================================================
 #ifndef XP_DEV                       // (Default)
@@ -211,9 +211,9 @@
 * == Option for Host (OCTOPRINT,REPETIER,PRONTERFACE,ESP3D, etc)
 * ======================================================
 */
-//#define HOSTS                          // Enable buffer for Octoprint.
+#define HOSTS                          // Enable buffer for Octoprint.
 //#define HOST_ACTION_COMMANDS           // Default - Action Command Prompt support Message on Octoprint
-//#define HOST_START_MENU_ITEM           // Add a menu item that tells the host to start a print
+#define HOST_START_MENU_ITEM           // Add a menu item that tells the host to start a print
 
 #define BINARY_FILE_TRANSFER             // Bin transfert for ESP3D firmware v2.1 or others.
                                          // Not compatible with the MEATPACK option.
@@ -269,6 +269,7 @@
   //#define LCD_SERIAL_PORT 1
 #elif ENABLED(TFT_BTT_UI)
   #define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER  //(r)(Default) UI Color FLSUN or BTT screen 
+  //#define REPRAPWORLD_GRAPHICAL_LCD
   //#define MULTI_VOLUME            // Multiple volume support(µSD + USB) like NANOv3.x/SKR2
 #elif ENABLED(MOD_BTT_UI)
   #define MOD_AUX                   // enable the UART2 for BTT_TFT (TOUCH UI)
@@ -280,6 +281,7 @@
 //  #define TFT_RES_320x240
   //#define ULTRA_LCD//CR10_STOCKDISPLAY
   //#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
+  //#define SET_PROGRESS_MANUALLY
   #define G26_MESH_VALIDATION   
 #elif BOTH(TFT_COLOR_UI, SR_MKS)
   #define MKS_TS35_V2_0             // Only for NanoV2 or V3
@@ -506,15 +508,19 @@
     #define E_CURRENT       850
   #endif
 #endif
-// PanpaPi Probe: change your IC2 pins (Tests in progress.......).
+// PanpaPi Probe: change your IC2 pins (Tests in progress.......).Dist=0.2<=>2.6
 #ifdef B_PROBE
   #define BD_SENSOR
   //#undef AUTO_BED_LEVELING_UBL
   //#undef RESTORE_LEVELING_AFTER_G28
   //#undef G26_MESH_VALIDATION
-  #define I2C_BD_SDA_PIN   E1_DIR_PIN  //PA1  - PC6 // E1 DIR
-  #define I2C_BD_SCL_PIN   E1_STEP_PIN //PD15 - PB2 // E1 STEP
-  #define I2C_BD_DELAY  10
+  #ifdef QQSP
+    #define I2C_BD_SCL_PIN   PA2   // PW_DET (Green) 
+  #else
+    #define I2C_BD_SCL_PIN   FIL_RUNOUT2_PIN //(Green)
+  #endif
+  #define I2C_BD_SDA_PIN   Z_MIN_PIN  //PC8 (White)
+  #define I2C_BD_DELAY  20
 #endif
 // NEOPIXEL for SR_MKS
 #if BOTH(NEOPIXEL_LED, SR_MKS)
