@@ -882,7 +882,7 @@
 #endif
 #define HOMING_BUMP_MM      { 5, 5, 5 }       // (linear=mm, rotational=°) Backoff from endstops after first bump
                                               // For delta all values must be the same
-#define HOMING_BUMP_DIVISOR { 10, 10, 10 }       // Re-Bump Speed Divisor (Divides the Homing Feedrate)
+#define HOMING_BUMP_DIVISOR { 10, 10, 10 }    // Re-Bump Speed Divisor (Divides the Homing Feedrate)
 
 //#define HOMING_BACKOFF_POST_MM { 2, 2, 2 }  // (linear=mm, rotational=°) Backoff from endstops after homing
 //#define XY_COUNTERPART_BACKOFF_MM 0         // (mm) Backoff X after homing Y, and vice-versa
@@ -1097,8 +1097,12 @@
 #define DISABLE_INACTIVE_E true
 
 // Default Minimum Feedrates for printing and travel moves
-#define DEFAULT_MINIMUMFEEDRATE       0.0     // (mm/s. °/s for rotational-only moves) Minimum feedrate. Set with M205 S.
-#define DEFAULT_MINTRAVELFEEDRATE     0.0     // (mm/s. °/s for rotational-only moves) Minimum travel feedrate. Set with M205 T.
+#define DEFAULT_MINIMUMFEEDRATE       0.0     // (mm/s) Minimum feedrate. Set with M205 S.
+#define DEFAULT_MINTRAVELFEEDRATE     0.0     // (mm/s) Minimum travel feedrate. Set with M205 T.
+#if HAS_ROTATIONAL_AXES
+  #define DEFAULT_ANGULAR_MINIMUMFEEDRATE   0.0     // (°/s) Minimum feedrate for rotational-only moves. Set with M205 P.
+  #define DEFAULT_ANGULAR_MINTRAVELFEEDRATE 0.0     // (°/s) Minimum travel feedrate for rotational-only moves. Set with M205 Q.
+#endif
 
 // Minimum time that a segment needs to take as the buffer gets emptied
 #define DEFAULT_MINSEGMENTTIME        20000   // (µs) Set with M205 B.
@@ -1453,7 +1457,7 @@
 #endif // HAS_DISPLAY || DWIN_LCD_PROUI
 
 // Add the G-code 'M73' to set / report the current job progress
-//#define SET_PROGRESS_MANUALLY
+#define SET_PROGRESS_MANUALLY
 #if ENABLED(SET_PROGRESS_MANUALLY)
   #define SET_PROGRESS_PERCENT          // Add 'P' parameter to set percentage done, otherwise use Marlin's estimate
   //#define SET_REMAINING_TIME            // Add 'R' parameter to set remaining time, otherwise use Marlin's estimate
@@ -1523,7 +1527,7 @@
 
   //#define MEDIA_MENU_AT_TOP               // Force the media menu to be listed on the top of the main menu
 
-  #define EVENT_GCODE_SD_ABORT "G28XY"      // G-code to run on SD Abort Print (e.g., "G28XY" or "G27")
+  #define EVENT_GCODE_SD_ABORT "G28"        // G-code to run on SD Abort Print (e.g., "G28XY" or "G27")
 
   #if ENABLED(PRINTER_EVENT_LEDS)
     #define PE_LEDS_COMPLETED_TIME  (30*60) // (seconds) Time to keep the LED "done" color before restoring normal illumination
@@ -1715,6 +1719,7 @@
    */
   //#define SDCARD_CONNECTION LCD
   //#define SDCARD_CONNECTION ONBOARD
+
   // Enable if SD detect is rendered useless (e.g., by using an SD extender)
   //#define NO_SD_DETECT
 
@@ -2526,8 +2531,8 @@
     #define MAX_AUTORETRACT            10.0 // (mm) Don't convert E moves over this length
   #endif
   #ifdef NEMA14
-    #define RETRACT_LENGTH              0.8 // (mm) Default retract length (positive value)
-    #define RETRACT_FEEDRATE           45   // (mm/s) Default feedrate for retracting
+    #define RETRACT_LENGTH              0.4 // (mm) Default retract length (positive value)
+    #define RETRACT_FEEDRATE           30   // (mm/s) Default feedrate for retracting
   #else
     #define RETRACT_LENGTH              5   // (mm) Default retract length (positive value)
     #define RETRACT_FEEDRATE           50   // (mm/s) Default feedrate for retracting
@@ -2654,7 +2659,7 @@
     #define FILAMENT_CHANGE_UNLOAD_ACCEL        25
     #define FILAMENT_CHANGE_UNLOAD_LENGTH      550
   #elif ENABLED(NEMA14)
-    #define FILAMENT_CHANGE_UNLOAD_FEEDRATE     20    //40 LGX
+    #define FILAMENT_CHANGE_UNLOAD_FEEDRATE     10    //40 LGX
     #define FILAMENT_CHANGE_UNLOAD_ACCEL        25
     #define FILAMENT_CHANGE_UNLOAD_LENGTH      110
   #elif ANY(SR_MKS, SR_BTT)
@@ -3584,8 +3589,6 @@
     #endif
 
     // Define the minimum and maximum test pulse time values for a laser test fire function
-    #define LASER_TEST_PULSE_MIN           1   // Used with Laser Control Menu
-    #define LASER_TEST_PULSE_MAX         999   // Caution: Menu may not show more than 3 characters
     #define LASER_TEST_PULSE_MIN           1   // (ms) Used with Laser Control Menu
     #define LASER_TEST_PULSE_MAX         999   // (ms) Caution: Menu may not show more than 3 characters
 
@@ -3770,8 +3773,6 @@
  */
 //#define CNC_COORDINATE_SYSTEMS
 
-// @section reporting
-
 /**
  * CNC Drilling Cycle - UNDER DEVELOPMENT
  *
@@ -3779,6 +3780,8 @@
  * Currently only supports a single cycle, no G-code chaining.
  */
 //#define CNC_DRILLING_CYCLE
+
+// @section reporting
 
 /**
  * Auto-report fan speed with M123 S<seconds>
@@ -3877,8 +3880,6 @@
 
 //#define REPETIER_GCODE_M360     // Add commands originally from Repetier FW
 
-																				  
-
 /**
  * Enable this option for a leaner build of Marlin that removes all
  * workspace offsets, simplifying coordinate transformations, leveling, etc.
@@ -3902,6 +3903,7 @@
 #ifdef G0_FEEDRATE
   //#define VARIABLE_G0_FEEDRATE // The G0 feedrate is set by F in G0 motion mode
 #endif
+//#define G0_ANGULAR_FEEDRATE 2700 // (°/min)
 
 // @section gcode
 
@@ -3938,7 +3940,7 @@
   //#define CUSTOM_MENU_MAIN_SCRIPT_DONE "M117 User Script Done"
   //#define CUSTOM_MENU_MAIN_SCRIPT_AUDIBLE_FEEDBACK
   #define CUSTOM_MENU_MAIN_SCRIPT_RETURN   // Return to status screen after a script
-  #define CUSTOM_MENU_MAIN_ONLY_IDLE       // Only show custom menu when the machine is idle
+  #define CUSTOM_MENU_MAIN_ONLY_IDLE         // Only show custom menu when the machine is idle
 
   #define MAIN_MENU_ITEM_1_DESC "Init. EEPROM"
   #define MAIN_MENU_ITEM_1_GCODE "M502\nM500\nM997"
