@@ -140,6 +140,7 @@
  * :[2400, 9600, 19200, 38400, 57600, 115200, 250000, 500000, 1000000]
  */
 //#define BAUDRATE 115200
+
 //#define BAUD_RATE_GCODE     // Enable G-code M575 to set the baud rate
 
 /**
@@ -189,7 +190,7 @@
     #else
       #define SERIAL_PORT_2 1
       //#define NUM_SERIAL 2
-      #define BAUDRATE_2 250000
+      #define BAUDRATE_2 115000
 
       //#define LCD_BAUDRATE 115200
       //#define SERIAL_PORT_3 2 // 3=BTT-TFT(0,1=nok)
@@ -891,6 +892,15 @@
   //#define MIN_BED_POWER 0
   //#define PID_BED_DEBUG // Print Bed PID debug data to the serial port.
 
+  // 120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
+  // from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
+  //#define DEFAULT_bedKp 61.05
+  //#define DEFAULT_bedKi 11.72
+  //#define DEFAULT_bedKd 211.99
+
+  // FIND YOUR OWN: "M303 E-1 S60 C8 U" to run autotune on the bed at 60 degrees for 8 cycles.
+  //M303 E-1 C8 S60 =>Memo M304 P61.05 I11.27 D218.99
+
   // FLSUN QQS-Pro 1.6mm aluminium heater with 4mm lattice glass
   #ifdef Q5
     #define DEFAULT_bedKp 20.20
@@ -905,11 +915,6 @@
     #define DEFAULT_bedKi 11.7156
     #define DEFAULT_bedKd 244.9348
   #endif
-  // FIND YOUR OWN: "M303 E-1 S60 C8 U" to run autotune on the bed at 60 degrees for 8 cycles.
-  //M303 E-1 C8 S60 =>Memo M304 P61.05 I11.27 D218.99
-  //#define DEFAULT_bedKp 61.05
-  //#define DEFAULT_bedKi 11.72
-  //#define DEFAULT_bedKd 211.99
 
 #endif // PIDTEMPBED
 
@@ -961,7 +966,7 @@
 #if ANY(PIDTEMP, PIDTEMPBED, PIDTEMPCHAMBER)
   //#define PID_OPENLOOP          // Puts PID in open loop. M104/M140 sets the output power from 0 to PID_MAX
   //#define SLOW_PWM_HEATERS      // PWM with very low frequency (roughly 0.125Hz=8s) and minimum state time of approximately 1s useful for heaters driven by a relay
-  #define PID_FUNCTIONAL_RANGE 30 // If the temperature difference between the target temperature and the actual temperature
+  #define PID_FUNCTIONAL_RANGE 30 //10 If the temperature difference between the target temperature and the actual temperature
                                   // is more than PID_FUNCTIONAL_RANGE then the PID will be shut off and the heater will be set to min/max.
 
   #define PID_EDIT_MENU         // Add PID editing to the "Advanced Settings" menu. (~700 bytes of flash)
@@ -1453,6 +1458,8 @@
  *   M204 P    Acceleration Print
  *   M204 R    Retract Acceleration
  *   M204 T    Travel Acceleration
+ *   M204 I    Angular Acceleration
+ *   M204 J    Angular Travel Acceleration
  */
 #if ANY(SR_MKS, SR_BTT)
   #define DEFAULT_ACCELERATION          2800
@@ -1462,6 +1469,10 @@
   #define DEFAULT_ACCELERATION          1500   // X, Y, Z and E acceleration for printing moves
   #define DEFAULT_RETRACT_ACCELERATION  1500   // E acceleration for retracts
   #define DEFAULT_TRAVEL_ACCELERATION   1500   // X, Y, Z acceleration for travel (non printing) moves
+#endif
+#if ENABLED(AXIS4_ROTATES)
+  #define DEFAULT_ANGULAR_ACCELERATION        3000  // I, J, K acceleration for rotational-only printing moves
+  #define DEFAULT_ANGULAR_TRAVEL_ACCELERATION 3000  // I, J, K acceleration for rotational-only travel (non printing) moves
 #endif
 
 /**
@@ -1762,8 +1773,8 @@
 #define XY_PROBE_FEEDRATE (66*60)    //3960 default=133*60
 
 #if ANY(N_PROBE, P_PROBE, X_PROBE)
-  #define Z_PROBE_FEEDRATE_FAST (40*60)  //600
-  #define Z_PROBE_FEEDRATE_SLOW (Z_PROBE_FEEDRATE_FAST / 10) //300
+  #define Z_PROBE_FEEDRATE_FAST (80*60)  //600
+  #define Z_PROBE_FEEDRATE_SLOW (Z_PROBE_FEEDRATE_FAST / 15) //300
 #else
 // Feedrate (mm/min) for the first approach when double-probing (MULTIPLE_PROBING == 2)
 //#define Z_PROBE_FEEDRATE_FAST (200*60)
@@ -1824,6 +1835,8 @@
   #define MULTIPLE_PROBING 2
   #define EXTRA_PROBING  1
 #else
+  //#define MULTIPLE_PROBING 2
+  //#define EXTRA_PROBING  1
 #endif
 
 /**
@@ -2000,7 +2013,7 @@
 
 // Direction of endstops when homing; 1=MAX, -1=MIN
 // :[-1,1]
-#define X_HOME_DIR 1
+#define X_HOME_DIR 1  // deltas always home to max
 #define Y_HOME_DIR 1
 #define Z_HOME_DIR 1
 //#define I_HOME_DIR -1
@@ -2100,12 +2113,12 @@
   #endif
   #ifdef XP2
     #define FIL_RUNOUT_ENABLED_DEFAULT true // Enable the sensor on startup. Override with M412 followed by M500.
-    #define FIL_RUNOUT_PULLDOWN//#define FIL_RUNOUT_PULLDOWN
     #define FIL_RUNOUT_STATE     LOW
+    #define FIL_RUNOUT_PULLDOWN//#define FIL_RUNOUT_PULLDOWN
   #else
     #define FIL_RUNOUT_ENABLED_DEFAULT false // Enable the sensor on startup. Override with M412 followed by M500.
-    #define FIL_RUNOUT_PULLUP
     #define FIL_RUNOUT_STATE     LOW
+    #define FIL_RUNOUT_PULLUP
   #endif
   #define NUM_RUNOUT_SENSORS   1          // Number of sensors, up to one per extruder. Define a FIL_RUNOUT#_PIN for each.
 
@@ -2452,6 +2465,7 @@
 #endif
 
 // Delta only homes to Z
+// Homing speeds (linear=mm/min, rotational=°/min)
 //#define HOMING_FEEDRATE_MM_M { (200*60), (200*60), (200*60) }
 #if ANY(Q5, STALLGUARD_2)
   #define HOMING_FEEDRATE_MM_M { (50*60), (50*60), (50*60) }
@@ -2540,6 +2554,7 @@
 #define EEPROM_CHITCHAT       // Give feedback on EEPROM commands. Disable to save PROGMEM.
 #define EEPROM_BOOT_SILENT    // Keep M503 quiet and only give errors during first load
 #if ENABLED(EEPROM_SETTINGS)
+
 /*
 MKS Robin EEPROM:
 EEPROM_SD
@@ -2548,29 +2563,30 @@ EEPROM_W25Q
 //#define EEPROM_W25Q
 
 #if ENABLED(EEPROM_W25Q)
-#undef SDCARD_EEPROM_EMULATION
-#undef USE_REAL_EEPROM
-#undef FLASH_EEPROM_EMULATION
-#undef SRAM_EEPROM_EMULATION
-#undef I2C_EEPROM_AT24C16
-#define SPI_EEPROM_W25Q
-#define SPI_EEPROM
-#define SPI_EEPROM_OFFSET 0x700000
-#define USE_WIRED_EEPROM    1
-#define MARLIN_EEPROM_SIZE  4096
+  #undef SDCARD_EEPROM_EMULATION
+  #undef USE_REAL_EEPROM
+  #undef FLASH_EEPROM_EMULATION
+  #undef SRAM_EEPROM_EMULATION
+  #undef I2C_EEPROM_AT24C16
+  #define SPI_EEPROM_W25Q
+  #define SPI_EEPROM
+  #define SPI_EEPROM_OFFSET 0x700000
+  #define USE_WIRED_EEPROM    1
+  #define MARLIN_EEPROM_SIZE  4096
 #endif
 
 #if ENABLED(EEPROM_SD)
-#define SDCARD_EEPROM_EMULATION
-#undef USE_REAL_EEPROM
-#undef FLASH_EEPROM_EMULATION
-#undef SRAM_EEPROM_EMULATION
-#undef I2C_EEPROM_AT24C16
-#undef SPI_EEPROM_W25Q
-#undef USE_WIRED_EEPROM 
-#define MARLIN_EEPROM_SIZE  4096
+  #define SDCARD_EEPROM_EMULATION
+  #undef USE_REAL_EEPROM
+  #undef FLASH_EEPROM_EMULATION
+  #undef SRAM_EEPROM_EMULATION
+  #undef I2C_EEPROM_AT24C16
+  #undef SPI_EEPROM_W25Q
+  #undef USE_WIRED_EEPROM 
+  #define MARLIN_EEPROM_SIZE  4096
 #endif
-  #define EEPROM_AUTO_INIT  // Init EEPROM automatically on any errors.
+
+  //#define EEPROM_AUTO_INIT  // Init EEPROM automatically on any errors.
   //#define EEPROM_INIT_NOW   // Init EEPROM on first boot after a new build.
 #endif
 
@@ -2632,6 +2648,8 @@ EEPROM_W25Q
 #define PREHEAT_5_TEMP_BED     50
 #define PREHEAT_5_TEMP_CHAMBER 35
 #define PREHEAT_5_FAN_SPEED     0 // Value from 0 to 255
+
+// @section motion
 
 /**
  * Nozzle Park
@@ -3491,7 +3509,7 @@ EEPROM_W25Q
 //#define MKS_ROBIN_TFT_V1_1R
 
 //
-// 480x320, 3.5", FSMC Stock Display from Tronxy
+// 480x320, 3.5", FSMC Stock Display from TronXY
 //
 //#define TFT_TRONXY_X5SA
 
@@ -3531,7 +3549,7 @@ EEPROM_W25Q
 //#define TFT_GENERIC
 #if ENABLED(TFT_GENERIC)
   // :[ 'AUTO', 'ST7735', 'ST7789', 'ST7796', 'R61505', 'ILI9328', 'ILI9341', 'ILI9488' ]
-  //#define TFT_DRIVER AUTO
+  #define TFT_DRIVER AUTO
 
   // Interface. Enable one of the following options:
   //#define TFT_INTERFACE_FSMC
