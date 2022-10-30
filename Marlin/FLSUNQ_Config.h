@@ -128,7 +128,7 @@
 //#define QQS_SR                         // Custom effector with balls like SR printer.
 //#define FKSN                           // Customn effector FRANKENSUNrods, height
                   /* Module Mks_Wifi */ 
-#define MOD_WIFI                       //(W) (Default_QQS) Module ESP8266/ESP12
+#define MOD_WIFI                         //(W) (Default_QQS) Module ESP8266/ESP12
 //#define ESP3D_30                       //(w) Enable firmware ESP3D v3.0 (ESP8266/ESP12) only with TFT_LVGL_UI
 
                   /* Option for Neopixel */
@@ -226,6 +226,7 @@
 //#define SD_REPRINT_LAST_SELECTED_FILE  // Reselect last print file.
 //#define CONFIGURATION_EMBEDDING        // Use 'M503 C' to write the settings out to the SD Card as 'mc.zip'.
 //#define FWRETRACT                      // Firmware-based and LCD-controlled retract
+//#define INPUT_SHAPING                  // (Z) Zero Vibration (ZV) Input Shaping for X and/or Y movements.
 
 //-----------------------------//
 //For tests on my dev'printer!!//
@@ -274,15 +275,15 @@
 #elif ENABLED(MOD_BTT_UI)
   #define MOD_AUX                   // enable the UART2 for BTT_TFT (TOUCH UI)
   #define TFT_CLASSIC_UI
-  //#define MKS_ROBIN_TFT28
-  #define TFT_GENERIC
-  #define TFT_DRIVER AUTO
-  #define TFT_INTERFACE_FSMC        //Default socket on MKS_nano, mini, hispeed.
-//  #define TFT_RES_320x240
+  #define MKS_ROBIN_TFT28
+  //#define TFT_GENERIC
+  //#define TFT_DRIVER AUTO
+  //#define TFT_INTERFACE_FSMC        //Default socket on MKS_nano, mini, hispeed.
+  //#define TFT_RES_320x240
   //#define ULTRA_LCD//CR10_STOCKDISPLAY
   //#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
   //#define SET_PROGRESS_MANUALLY
-  #define G26_MESH_VALIDATION   
+  //#define G26_MESH_VALIDATION   
 #elif BOTH(TFT_COLOR_UI, SR_MKS)
   #define MKS_TS35_V2_0             // Only for NanoV2 or V3
   #define TOUCH_SCREEN              // (C/F) (Default) UI MARLIN

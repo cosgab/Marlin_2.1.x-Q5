@@ -1427,10 +1427,10 @@
  * Override with M203
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#if ANY(XP1, SR_MKS, SR_BTT)
-  #define DEFAULT_MAX_FEEDRATE          { 500, 500, 500, 210 }
+#if ANY(SR_MKS, SR_BTT)
+  #define DEFAULT_MAX_FEEDRATE          { 400, 400, 400, 120 }
 #else
-  #define DEFAULT_MAX_FEEDRATE          { 250, 250, 250, 210 }
+  #define DEFAULT_MAX_FEEDRATE          { 250, 250, 250, 120 }
 #endif
 
 //#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
@@ -1530,7 +1530,9 @@
  *
  * See https://github.com/synthetos/TinyG/wiki/Jerk-Controlled-Motion-Explained
  */
-#define S_CURVE_ACCELERATION
+#ifndef INPUT_SHAPING
+  #define S_CURVE_ACCELERATION
+#endif
 
 //===========================================================================
 //============================= Z Probe Options =============================
@@ -2298,7 +2300,7 @@
     #define G26_XY_FEEDRATE         20    // (mm/s) Feedrate for G26 XY moves.
     #define G26_XY_FEEDRATE_TRAVEL  80    // (mm/s) Feedrate for G26 XY travel moves.
     #ifdef NEMA14
-      #define G26_RETRACT_MULTIPLIER   0.8
+      #define G26_RETRACT_MULTIPLIER   0.5
     #else
       #define G26_RETRACT_MULTIPLIER   4.0  // G26 Q (retraction) used by default between mesh test elements.
     #endif
@@ -2346,8 +2348,8 @@
     #define MESH_INSET 1
     #define GRID_MAX_POINTS_X 10     // MeshHight
   #elif ANY(XP1, XP2)
-    #define MESH_INSET 15
-    #define GRID_MAX_POINTS_X 7      //MeshLow
+    #define MESH_INSET 13//17
+    #define GRID_MAX_POINTS_X 5      //MeshStd
   #else
   	#define MESH_INSET 15            // Set Mesh bounds as an inset region of the bed
 	  #define GRID_MAX_POINTS_X 8    // MeshFine Don't use more than 15 points per axis, implementation limited.
