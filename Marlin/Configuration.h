@@ -719,9 +719,9 @@
 // (Use MINTEMP for thermistor short/failure protection.)
 #ifndef HEATER_0_MAXTEMP
   #ifdef VOLCANO
-    #define HEATER_0_MAXTEMP 300  // Volcano thermistor or HotMetal
+    #define HEATER_0_MAXTEMP 315  // Volcano thermistor or HotMetal
   #else
-    #define HEATER_0_MAXTEMP 275
+    #define HEATER_0_MAXTEMP 275  // Real 260°C with Stock PTFE
   #endif
 #endif
 #define HEATER_1_MAXTEMP 275
@@ -1132,7 +1132,6 @@
     #define DELTA_TOWER_ANGLE_TRIM { 0.0, 0.0, 0.0 }  //XYZ
     #define DELTA_DIAGONAL_ROD_TRIM_TOWER { 0.0, 0.0, 0.0 } //ABC
     //#define DELTA_RADIUS_TRIM_TOWER { 0.0, 0.0, 0.0 }
-    #define PROBING_MARGIN 10
   #else
 
   // Print surface diameter/2 minus unreachable space (avoid collisions with vertical towers).
