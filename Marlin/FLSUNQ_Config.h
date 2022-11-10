@@ -504,12 +504,12 @@
 #endif  
 #ifndef E_CURRENT
   #ifdef NEMA14
-    #define E_CURRENT       380
+    #define E_CURRENT       350
   #else
     #define E_CURRENT       850
   #endif
 #endif
-// PanpaPi Probe: change your IC2 pins (Tests in progress.......).Dist=0.2<=>2.6
+// PandaPi Probe: change your IC2 pins (Tests in progress.......).Dist=0.2<=>2.6
 #ifdef B_PROBE
   #define BD_SENSOR
   //#undef AUTO_BED_LEVELING_UBL

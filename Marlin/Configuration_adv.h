@@ -1295,7 +1295,9 @@
  * vibration and surface artifacts. The algorithm adapts to provide the best possible step smoothing at the
  * lowest stepping frequencies.
  */
-#define ADAPTIVE_STEP_SMOOTHING
+#ifndef INPUT_SHAPING
+  #define ADAPTIVE_STEP_SMOOTHING
+#endif
 
 /**
  * Custom Microstepping
@@ -2158,8 +2160,11 @@
   #endif
   //#define ADVANCE_K_EXTRA       // Add a second linear advance constant, configurable with M900 L.
   //#define LA_DEBUG              // Print debug information to serial during operation. Disable for production use.
-  #define EXPERIMENTAL_SCURVE   // Allow S-Curve Acceleration to be used with LA.
+  #ifndef INPUT_SHAPING
+    #define EXPERIMENTAL_SCURVE   // Enable this option to permit S-Curve Acceleration
+  #endif  
   #ifdef NEMA14
+    //#define ADVANCE_K_EXTRA 
     #define ALLOW_LOW_EJERK       // Allow a DEFAULT_EJERK value of <10. Recommended for direct drive hotends.
   #endif
   //#define EXPERIMENTAL_I2S_LA   // Allow I2S_STEPPER_STREAM to be used with LA. Performance degrades as the LA step rate reaches ~20kHz.
@@ -2412,7 +2417,9 @@
  *
  * Override the default value based on the driver type set in Configuration.h.
  */
-//#define MAXIMUM_STEPPER_RATE 250000
+#ifdef INPUT_SHAPING
+  #define MAXIMUM_STEPPER_RATE 100000
+#endif
 
 // @section temperature
 

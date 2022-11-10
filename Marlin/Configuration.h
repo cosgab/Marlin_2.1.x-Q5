@@ -1427,7 +1427,7 @@
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
 #if ANY(SR_MKS, SR_BTT)
-  #define DEFAULT_MAX_FEEDRATE          { 400, 400, 400, 120 }
+  #define DEFAULT_MAX_FEEDRATE          { 400, 400, 400, 100 }
 #else
   #define DEFAULT_MAX_FEEDRATE          { 250, 250, 250, 120 }
 #endif
@@ -1465,7 +1465,7 @@
  *   M204 J    Angular Travel Acceleration
  */
 #if ANY(SR_MKS, SR_BTT)
-  #define DEFAULT_ACCELERATION          2800
+  #define DEFAULT_ACCELERATION          3700
   #define DEFAULT_RETRACT_ACCELERATION  1500   // E
   #define DEFAULT_TRAVEL_ACCELERATION   2800
 #else
