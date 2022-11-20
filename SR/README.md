@@ -1,5 +1,10 @@
 ### 2022-08-27 MARLIN 2.1.1 RELEASE
 
+**IMPORTANT NOTE**: 
+Most of the problems with the SR come from the detrimental interaction of the Stock display (serial exchanges on the USB port, UART) on the operation of the old Marlin modified by FLSun. This leads to problems with step loss/skipping with the stepper motor drivers, extruder noise, blocking in some prints, ... (TMC in UART mode) or problems of dialogue priority with Octoprint, Repetier server or pronterface (USB) and the TFT screen.
+
+- [ ] **So all my firmwares work without this weak link but with another TFT screen and contain all the last improvements of Marlin.**  
+
 **NOTE**: 
 The SR printer has two types of motherboards. The first ones have BTT_SKR13 and the new ones have Mks_robin_nanoV3.x. 
 These are not the same firmwares for Marlin so be careful when downloading to take the right firmware associated with the MoBo.
