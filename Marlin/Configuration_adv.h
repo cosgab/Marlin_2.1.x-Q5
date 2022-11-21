@@ -1091,13 +1091,13 @@
 //#define INPUT_SHAPING
 #if ENABLED(INPUT_SHAPING)
   #ifdef QQSP
-    #define SHAPING_FREQ_X    27.80
-    #define SHAPING_FREQ_Y    32.00
+    #define SHAPING_FREQ_X    31.6
+    #define SHAPING_FREQ_Y    29.6
     #define SHAPING_ZETA_X  0.1f
     #define SHAPING_ZETA_Y  0.1f
   #elif ENABLED(Q5)
-    #define SHAPING_FREQ_X    25.00
-    #define SHAPING_FREQ_Y    23.39
+    #define SHAPING_FREQ_X    40.8
+    #define SHAPING_FREQ_Y    40.0
     #define SHAPING_ZETA_X  0.1f
     #define SHAPING_ZETA_Y  0.1f
   #elif ANY(SR_BTT, SR_MKS)
