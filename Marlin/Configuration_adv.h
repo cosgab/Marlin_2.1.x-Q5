@@ -1089,30 +1089,13 @@
  *  Y<1>         Set the given parameters only for the Y axis.
  */
 //#define INPUT_SHAPING
-#if ENABLED(INPUT_SHAPING)
-  #ifdef QQSP
-    #define SHAPING_FREQ_X    31.6
-    #define SHAPING_FREQ_Y    29.6
-    #define SHAPING_ZETA_X  0.1f
-    #define SHAPING_ZETA_Y  0.1f
-  #elif ENABLED(Q5)
-    #define SHAPING_FREQ_X    40.8
-    #define SHAPING_FREQ_Y    40.0
-    #define SHAPING_ZETA_X  0.1f
-    #define SHAPING_ZETA_Y  0.1f
-  #elif ANY(SR_BTT, SR_MKS)
-    #define SHAPING_FREQ_X    25.00   // info FLSun
-    #define SHAPING_FREQ_Y    23.39   // info FLSun
-    #define SHAPING_ZETA_X  0.1f
-    #define SHAPING_ZETA_Y  0.1f        
-  #else
-    #define SHAPING_FREQ_X    40  // (Hz) The dominant resonant frequency of the X axis.
-    #define SHAPING_FREQ_Y    40  // (Hz) The dominant resonant frequency of the Y axis.
-    #define SHAPING_ZETA_X  0.3f  // Damping ratio of the X axis (range: 0.0 = no damping to 1.0 = critical damping).
-    #define SHAPING_ZETA_Y  0.3f  // Damping ratio of the Y axis (range: 0.0 = no damping to 1.0 = critical damping).
-  #endif  
-  #define SHAPING_MENU        // Add a menu to the LCD to set shaping parameters.
-#endif
+//#if ENABLED(INPUT_SHAPING)
+//  #define SHAPING_FREQ_X    40  // (Hz) The dominant resonant frequency of the X axis.
+//  #define SHAPING_FREQ_Y    40  // (Hz) The dominant resonant frequency of the Y axis.
+//  #define SHAPING_ZETA_X  0.3f  // Damping ratio of the X axis (range: 0.0 = no damping to 1.0 = critical damping).
+//  #define SHAPING_ZETA_Y  0.3f  // Damping ratio of the Y axis (range: 0.0 = no damping to 1.0 = critical damping).
+  //#define SHAPING_MENU        // Add a menu to the LCD to set shaping parameters.
+//#endif
 
 #define AXIS_RELATIVE_MODES { false, false, false, false }
 
@@ -3133,7 +3116,7 @@
     #define STEALTHCHOP_U
     #define STEALTHCHOP_V
     #define STEALTHCHOP_W
-    //#define STEALTHCHOP_E
+    #define STEALTHCHOP_E
   #endif
 
   /**

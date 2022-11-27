@@ -138,6 +138,7 @@
 //#define NEOPIXEL_PIXELS     24         // Number of LEDs in the strip
 
         /* Option for other Probe (BD_probe, IR, Touch-Mi,.. ) or Sensorless (TMC2209_UART) */
+
 // WARNING:These options need wiring pins DIAG to EndStop plug(Signal).
 // more at the bottom page.
 //#define STALLGUARD_1                   // (G) Special mod for TMC2209_UART = SENSORLESS_HOMING
@@ -354,7 +355,6 @@
 #ifdef Q_UART8
   #define MICROSTEPS32
   #define Q_TMC
-  #define STEALTHCHOP_E
   #define DRIVER_AXES TMC2208
   #ifndef DRIVER_EXT
     #define DRIVER_EXT TMC2208
@@ -365,7 +365,6 @@
 #if ANY(Q_UART9, SR_MKS, SR_BTT)
   #define MICROSTEPS32
   #define Q_TMC
-  #define STEALTHCHOP_E
   #define DRIVER_AXES TMC2209
   #ifndef DRIVER_EXT
     #define DRIVER_EXT TMC2209
@@ -402,7 +401,6 @@
     #define Q_TMC
     #define BOOT_MARLIN_LOGO_SMALL
     #define TMC_HARDWARE_SERIAL
-    #define STEALTHCHOP_E
     #define DRIVER_AXES TMC2209
     #ifndef DRIVER_EXT
       #define DRIVER_EXT TMC2209
@@ -509,6 +507,33 @@
     #define E_CURRENT       850
   #endif
 #endif
+
+// Input Shaping -- EXPERIMENTAL //
+#ifdef INPUT_SHAPING    //Default QQSP
+  #ifdef Q5
+    #define SHAPING_FREQ_X    40.00
+    #define SHAPING_ZETA_X  0.1f
+    #define SHAPING_FREQ_Y    40.00
+    #define SHAPING_ZETA_Y  0.1f
+  #elif ENABLED(SR_DD)
+    #define SHAPING_FREQ_X    37.8
+    #define SHAPING_ZETA_X  0.1f  
+    #define SHAPING_FREQ_Y    40.8
+    #define SHAPING_ZETA_Y  0.1f  
+  #elif ANY(SR_BTT, SR_MKS)
+    #define SHAPING_FREQ_X    25.0   // info FLSun
+    #define SHAPING_ZETA_X  0.1f
+    #define SHAPING_FREQ_Y    23.39   // info FLSun
+    #define SHAPING_ZETA_Y  0.1f 
+  #else
+    #define SHAPING_FREQ_X    31.6
+    #define SHAPING_ZETA_X  0.1f
+    #define SHAPING_FREQ_Y    23.6
+    #define SHAPING_ZETA_Y  0.1f
+  #endif 
+  #define SHAPING_MENU   
+#endif
+
 // PandaPi Probe: change your IC2 pins (Tests in progress.......).Dist=0.2<=>2.6
 #ifdef B_PROBE
   #define BD_SENSOR
