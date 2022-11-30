@@ -361,7 +361,7 @@
 // LCD / Controller
 //
 #ifndef BEEPER_PIN
-  //#define BEEPER_PIN                        PC5
+  #define BEEPER_PIN                        PC5
 #endif
 
 #if ENABLED(SPEAKER) && BEEPER_PIN == PC5

@@ -1285,9 +1285,7 @@
  * vibration and surface artifacts. The algorithm adapts to provide the best possible step smoothing at the
  * lowest stepping frequencies.
  */
-#ifndef INPUT_SHAPING
-  #define ADAPTIVE_STEP_SMOOTHING
-#endif
+#define ADAPTIVE_STEP_SMOOTHING
 
 /**
  * Custom Microstepping
@@ -1504,7 +1502,7 @@
 #define SET_PROGRESS_MANUALLY
 #if ENABLED(SET_PROGRESS_MANUALLY)
   #define SET_PROGRESS_PERCENT          // Add 'P' parameter to set percentage done, otherwise use Marlin's estimate
-  //#define SET_REMAINING_TIME            // Add 'R' parameter to set remaining time, otherwise use Marlin's estimate
+  #define SET_REMAINING_TIME            // Add 'R' parameter to set remaining time, otherwise use Marlin's estimate
   //#define SET_INTERACTION_TIME          // Add 'C' parameter to set time until next filament change or other user interaction
   #if ENABLED(SET_INTERACTION_TIME)
     #define SHOW_INTERACTION_TIME         // Display time until next user interaction ('C' = filament change)
@@ -1515,8 +1513,8 @@
 // LCD Print Progress options, multiple can be rotated depending on screen layout
 #if HAS_DISPLAY && EITHER(SDSUPPORT, SET_PROGRESS_MANUALLY)
   #define SHOW_PROGRESS_PERCENT           // Show print progress percentage (doesn't affect progress bar)
-  #define SHOW_ELAPSED_TIME               // Display elapsed printing time (prefix 'E')
-  //#define SHOW_REMAINING_TIME           // Display estimated time to completion (prefix 'R')
+  //#define SHOW_ELAPSED_TIME               // Display elapsed printing time (prefix 'E')
+  #define SHOW_REMAINING_TIME           // Display estimated time to completion (prefix 'R')
 
   //#define PRINT_PROGRESS_SHOW_DECIMALS  // Show/report progress with decimal digits, not all UIs support this
 
@@ -2150,9 +2148,7 @@
   #endif
   //#define ADVANCE_K_EXTRA       // Add a second linear advance constant, configurable with M900 L.
   //#define LA_DEBUG              // Print debug information to serial during operation. Disable for production use.
-  #ifndef INPUT_SHAPING
-    #define EXPERIMENTAL_SCURVE   // Enable this option to permit S-Curve Acceleration
-  #endif  
+  #define EXPERIMENTAL_SCURVE     // Enable this option to permit S-Curve Acceleration
   #ifdef NEMA14
     //#define ADVANCE_K_EXTRA 
     #define ALLOW_LOW_EJERK       // Allow a DEFAULT_EJERK value of <10. Recommended for direct drive hotends.
@@ -2407,9 +2403,7 @@
  *
  * Override the default value based on the driver type set in Configuration.h.
  */
-#ifdef INPUT_SHAPING
-  #define MAXIMUM_STEPPER_RATE 100000
-#endif
+//#define MAXIMUM_STEPPER_RATE 100000
 
 // @section temperature
 

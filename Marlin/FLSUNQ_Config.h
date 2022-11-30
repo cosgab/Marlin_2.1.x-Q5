@@ -276,7 +276,7 @@
 #elif ENABLED(MOD_BTT_UI)
   #define MOD_AUX                   // enable the UART2 for BTT_TFT (TOUCH UI)
   #define TFT_CLASSIC_UI
-  #define MKS_ROBIN_TFT28
+  #define MKS_ROBIN_TFT32
   //#define TFT_GENERIC
   //#define TFT_DRIVER AUTO
   //#define TFT_INTERFACE_FSMC        //Default socket on MKS_nano, mini, hispeed.
@@ -510,28 +510,35 @@
 
 // Input Shaping -- EXPERIMENTAL //
 #ifdef INPUT_SHAPING    //Default QQSP
+  #define INPUT_SHAPING_X
+  #define INPUT_SHAPING_Y
+  #define SHAPING_MENU 
   #ifdef Q5
     #define SHAPING_FREQ_X    40.00
-    #define SHAPING_ZETA_X  0.1f
+    #define SHAPING_ZETA_X  0.15f
     #define SHAPING_FREQ_Y    40.00
-    #define SHAPING_ZETA_Y  0.1f
-  #elif ENABLED(SR_DD)
+    #define SHAPING_ZETA_Y  0.15f
+  #elif BOTH(SRM, NEMA14)
     #define SHAPING_FREQ_X    37.8
-    #define SHAPING_ZETA_X  0.1f  
+    #define SHAPING_ZETA_X  0.15f  
     #define SHAPING_FREQ_Y    40.8
-    #define SHAPING_ZETA_Y  0.1f  
+    #define SHAPING_ZETA_Y  0.15f
+  #elif BOTH(QQSP, NEMA14)
+    #define SHAPING_FREQ_X    25.6
+    #define SHAPING_ZETA_X  0.15f  
+    #define SHAPING_FREQ_Y    25.6
+    #define SHAPING_ZETA_Y  0.15f      
   #elif ANY(SR_BTT, SR_MKS)
     #define SHAPING_FREQ_X    25.0   // info FLSun
-    #define SHAPING_ZETA_X  0.1f
+    #define SHAPING_ZETA_X  0.15f
     #define SHAPING_FREQ_Y    23.39   // info FLSun
-    #define SHAPING_ZETA_Y  0.1f 
+    #define SHAPING_ZETA_Y  0.15f 
   #else
     #define SHAPING_FREQ_X    31.6
-    #define SHAPING_ZETA_X  0.1f
+    #define SHAPING_ZETA_X  0.15f
     #define SHAPING_FREQ_Y    23.6
-    #define SHAPING_ZETA_Y  0.1f
-  #endif 
-  #define SHAPING_MENU   
+    #define SHAPING_ZETA_Y  0.15f
+  #endif   
 #endif
 
 // PandaPi Probe: change your IC2 pins (Tests in progress.......).Dist=0.2<=>2.6

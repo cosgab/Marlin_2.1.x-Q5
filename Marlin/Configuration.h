@@ -1429,7 +1429,7 @@
 #if ANY(SR_MKS, SR_BTT)
   #define DEFAULT_MAX_FEEDRATE          { 400, 400, 400, 100 }
 #else
-  #define DEFAULT_MAX_FEEDRATE          { 250, 250, 250, 120 }
+  #define DEFAULT_MAX_FEEDRATE          { 250, 250, 250, 100 }
 #endif
 
 //#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
@@ -1529,9 +1529,7 @@
  *
  * See https://github.com/synthetos/TinyG/wiki/Jerk-Controlled-Motion-Explained
  */
-#ifndef INPUT_SHAPING
-  #define S_CURVE_ACCELERATION
-#endif
+#define S_CURVE_ACCELERATION
 
 //===========================================================================
 //============================= Z Probe Options =============================
