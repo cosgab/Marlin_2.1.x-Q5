@@ -534,10 +534,10 @@
     #define SHAPING_FREQ_Y    23.39   // info FLSun
     #define SHAPING_ZETA_Y  0.15f 
   #else
-    #define SHAPING_FREQ_X    31.6
-    #define SHAPING_ZETA_X  0.15f
-    #define SHAPING_FREQ_Y    23.6
-    #define SHAPING_ZETA_Y  0.15f
+    #define SHAPING_FREQ_X    31.6  //27.8
+    #define SHAPING_ZETA_X  0.20f
+    #define SHAPING_FREQ_Y    23.6  //27.8
+    #define SHAPING_ZETA_Y  0.20f
   #endif   
 #endif
 
