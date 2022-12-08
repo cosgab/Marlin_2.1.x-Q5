@@ -121,7 +121,7 @@
 
 // BMG_right Extruder (B) step(417) ou SuperDriveHX Extruder (n) step(720).
 //#define BMG                            //(B) Uncommment for BMG_left.
-//#define NEMA14                         //(X) Uncommment for Mini-Sherpa/SuperDrive/Lgx.
+//#define DDRIVE                         //(X) Uncommment for Mini-Sherpa/SuperDrive/Lgx.
 //#define OMG                            //(O) Uncommment for OMG.(QQS no inv)
                   /*  Custom Effector  */
                   /* rods, height, arms*/
@@ -449,7 +449,7 @@
 //eSteps
 #ifndef EXTRUDER_STEPS
   #ifdef MICROSTEPS32
-    #ifdef NEMA14
+    #ifdef DDRIVE
       #define EXTRUDER_STEPS 1440 //  Extruder SuperHX, Mini-Sherpa, Orbiter, LGX_Lite
     #elif ENABLED(OMG)           
       #define EXTRUDER_STEPS 790 //  
@@ -459,7 +459,7 @@
       #define EXTRUDER_STEPS 820 // Extruder TITAN(Default)
     #endif  
   #else
-    #ifdef NEMA14
+    #ifdef DDRIVE
       #define EXTRUDER_STEPS 720 //  Extruder SuperHX, Mini-Sherpa, Orbiter, LGX_Lite
     #elif ENABLED(OMG)           
       #define EXTRUDER_STEPS 390 //  
@@ -475,7 +475,7 @@
   #define XYZJERK  10.0
 #endif
 #ifndef EJERK
-  #ifdef NEMA14
+  #ifdef DDRIVE
     #define EJERK       2.8
   #else
     #define EJERK       10.0
@@ -501,7 +501,7 @@
   #define XYZ_CURRENT_HOME  600
 #endif  
 #ifndef E_CURRENT
-  #ifdef NEMA14
+  #ifdef DDRIVE
     #define E_CURRENT       350
   #else
     #define E_CURRENT       850
@@ -518,12 +518,12 @@
     #define SHAPING_ZETA_X  0.15f
     #define SHAPING_FREQ_Y    40.00
     #define SHAPING_ZETA_Y  0.15f
-  #elif BOTH(SRM, NEMA14)
+  #elif BOTH(SRM, DDRIVE)
     #define SHAPING_FREQ_X    37.8
     #define SHAPING_ZETA_X  0.15f  
     #define SHAPING_FREQ_Y    40.8
     #define SHAPING_ZETA_Y  0.15f
-  #elif BOTH(QQSP, NEMA14)
+  #elif BOTH(QQSP, DDRIVE)
     #define SHAPING_FREQ_X    25.6
     #define SHAPING_ZETA_X  0.15f  
     #define SHAPING_FREQ_Y    25.6

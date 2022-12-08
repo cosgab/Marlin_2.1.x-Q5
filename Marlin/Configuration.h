@@ -2170,7 +2170,7 @@
   // After a runout is detected, continue printing this length of filament
   // before executing the runout script. Useful for a sensor at the end of
   // a feed tube. Requires 4 bytes SRAM per sensor, plus 4 bytes overhead.
-  #ifdef NEMA14
+  #ifdef DDRIVE
     #define FILAMENT_RUNOUT_DISTANCE_MM 190  //190mm print after detect
   #else
     #define FILAMENT_RUNOUT_DISTANCE_MM 25  //OPT
@@ -2298,7 +2298,7 @@
     #define MESH_TEST_BED_TEMP      60    // (°C) Default bed temperature for G26.
     #define G26_XY_FEEDRATE         20    // (mm/s) Feedrate for G26 XY moves.
     #define G26_XY_FEEDRATE_TRAVEL  80    // (mm/s) Feedrate for G26 XY travel moves.
-    #ifdef NEMA14
+    #ifdef DDRIVE
       #define G26_RETRACT_MULTIPLIER   0.5
     #else
       #define G26_RETRACT_MULTIPLIER   4.0  // G26 Q (retraction) used by default between mesh test elements.

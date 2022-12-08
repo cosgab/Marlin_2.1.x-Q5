@@ -2143,15 +2143,18 @@
 #if ENABLED(LIN_ADVANCE)
   #if ENABLED(DISTINCT_E_FACTORS)
     #define ADVANCE_K { 0.22 }    // (mm) Compression length per 1mm/s extruder speed, per extruder
-  #else
-    #define ADVANCE_K 0.0        // (mm) Compression length applying to all extruders
+  //#else
+  //  #define ADVANCE_K 0.0        // (mm) Compression length applying to all extruders
   #endif
   //#define ADVANCE_K_EXTRA       // Add a second linear advance constant, configurable with M900 L.
   //#define LA_DEBUG              // Print debug information to serial during operation. Disable for production use.
   #define EXPERIMENTAL_SCURVE     // Enable this option to permit S-Curve Acceleration
-  #ifdef NEMA14
-    //#define ADVANCE_K_EXTRA 
+  #ifdef DDRIVE
+    //#define ADVANCE_K_EXTRA
+    #define ADVANCE_K 0.045  
     #define ALLOW_LOW_EJERK       // Allow a DEFAULT_EJERK value of <10. Recommended for direct drive hotends.
+  #else
+    #define ADVANCE_K 0.22
   #endif
   //#define EXPERIMENTAL_I2S_LA   // Allow I2S_STEPPER_STREAM to be used with LA. Performance degrades as the LA step rate reaches ~20kHz.
 #endif
@@ -2573,7 +2576,7 @@
     #define MIN_AUTORETRACT             0.1 // (mm) Don't convert E moves under this length
     #define MAX_AUTORETRACT            10.0 // (mm) Don't convert E moves over this length
   #endif
-  #ifdef NEMA14
+  #ifdef DDRIVE
     #define RETRACT_LENGTH              0.4 // (mm) Default retract length (positive value)
     #define RETRACT_FEEDRATE           30   // (mm/s) Default feedrate for retracting
   #else
@@ -2701,7 +2704,7 @@
     #define FILAMENT_CHANGE_UNLOAD_FEEDRATE     28
     #define FILAMENT_CHANGE_UNLOAD_ACCEL        25
     #define FILAMENT_CHANGE_UNLOAD_LENGTH      550
-  #elif ENABLED(NEMA14)
+  #elif ENABLED(DDRIVE)
     #define FILAMENT_CHANGE_UNLOAD_FEEDRATE     10    //40 LGX
     #define FILAMENT_CHANGE_UNLOAD_ACCEL        25
     #define FILAMENT_CHANGE_UNLOAD_LENGTH      110
@@ -2725,7 +2728,7 @@
     #define FILAMENT_CHANGE_FAST_LOAD_FEEDRATE  40
     #define FILAMENT_CHANGE_FAST_LOAD_ACCEL     25
     #define FILAMENT_CHANGE_FAST_LOAD_LENGTH   600
-  #elif ENABLED(NEMA14)
+  #elif ENABLED(DDRIVE)
     #define FILAMENT_CHANGE_FAST_LOAD_FEEDRATE  15  //20 LGX
     #define FILAMENT_CHANGE_FAST_LOAD_ACCEL     25  //15 LGX
     #define FILAMENT_CHANGE_FAST_LOAD_LENGTH    60
