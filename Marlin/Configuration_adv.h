@@ -1089,7 +1089,7 @@
  *  T[map]       Input Shaping type, 0:ZV, 1:EI, 2:2H EI (not implemented yet)
  *  X<1>         Set the given parameters only for the X axis.
  *  Y<1>         Set the given parameters only for the Y axis.
- */
+ *
 //#define INPUT_SHAPING_X
 //#define INPUT_SHAPING_Y
 #if EITHER(INPUT_SHAPING_X, INPUT_SHAPING_Y)
@@ -1105,6 +1105,7 @@
   //#define SHAPING_MAX_STEPRATE 10000  // By default the maximum total step rate of the shaped axes. Override to affect SRAM usage.
   //#define SHAPING_MENU                // Add a menu to the LCD to set shaping parameters.
 #endif
+*/
 
 #define AXIS_RELATIVE_MODES { false, false, false, false }
 
@@ -2442,7 +2443,8 @@
   #define MAX_CMD_SIZE 500
 #else
   #define MAX_CMD_SIZE 96
-#endif#if ANY(TFT_BTT_UI, MOD_BTT_UI, HOSTS)
+#endif
+#if ANY(TFT_BTT_UI, MOD_BTT_UI, HOSTS)
   #define BUFSIZE 32
 #else
   #define BUFSIZE 16
@@ -2592,8 +2594,7 @@
     #define RETRACT_FEEDRATE           50   // (mm/s) Default feedrate for retracting
     #define RETRACT_LENGTH_SWAP        13   // (mm) Default swap retract length (positive value)
   #endif
-    #define RETRACT_LENGTH_SWAP         3   // (mm) Default swap retract length (positive value)
-  #define RETRACT_LENGTH_SWAP          13   // (mm) Default swap retract length (positive value)
+  //#define RETRACT_LENGTH_SWAP          13   // (mm) Default swap retract length (positive value)
   //#define RETRACT_FEEDRATE           45   // (mm/s) Default feedrate for retracting
   #define RETRACT_ZRAISE                0.4 // (mm) Default retract Z-raise
   #define RETRACT_RECOVER_LENGTH        0   // (mm) Default additional recover length (added to retract length on recover)
