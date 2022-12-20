@@ -33,7 +33,7 @@
 //==================== Hardware =====================//
 /*-------------Motherboard/Printer-(1 CHOICE)-------*/
 #define QQSP                         // (Default_QQS) env = flsun_hispeedv1
-                                     // env:flsun_hispeedv2 (GD32F303VE6) 
+                                     // env:flsun_hispeedv1 (GD32F303VE6) 
 //#define Q5                         // env = mks_robin_nano_v1v2 or (Q5_2021) env = mks_robin_nano_v1_3_f4
                                      // for Q5_2021 = uncomment/comment your MoBo in configuration.h (Line114)
 //#define SR_MKS                     // env = mks_robin_nano_v3_usb_flash_drive_msc
@@ -82,13 +82,14 @@
                 /*--- Choice UI TFT ----*/
   #define TFT_COLOR_UI           //(C) (Default) UI Color MARLIN
   //#define TFT_CLASSIC_UI       //(F) Standard LCD (UI Classic LCD)
+  //#define MOD_BTT_UI           //(s) UI TOUCH for QQSP/Q5(without Wifi module) and BTT TFT screen.
   //#define TFT_LVGL_UI          //(I) Standard LCD (UI Color MKS) Color MKS (Bug with captor sensor PR22595)
   //#define TFT_BTT_UI           //(r) UI Classic (emulation LCD Marlin) for BTT TFT screen.
-  //#define MOD_BTT_UI           //(s) UI TOUCH for QQSP/Q5(without Wifi module) and BTT TFT screen.
   //#define TFT_DWIN_UI          //(D) UI for DGUS screen
 
   //#define TFT_OTHER            // For the user who haven't the same screen.
 #else
+                /*--- Choice UI TFT ----*/
   //#define TFT_COLOR_UI         //(C) UI Color MARLIN with Mks-TS35v2
   #define TFT_BTT_UI             //(r) UI TOUCH by BTT-TFT Family (emulation LCD Marlin)
   //#define TFT_DWIN_UI          //(D) UI for DGUS screen like CrealityTouch or Mks H43
@@ -127,7 +128,7 @@
                   /* rods, height, arms*/
 //#define QQS_SR                         // Custom effector with balls like SR printer.
 //#define FKSN                           // Customn effector FRANKENSUNrods, height
-                  /* Module Mks_Wifi */ 
+                  /* Module Socket_Wifi */ 
 #define MOD_WIFI                         //(W) (Default_QQS) Module ESP8266/ESP12
 //#define ESP3D_30                       //(w) Enable firmware ESP3D v3.0 (ESP8266/ESP12) only with TFT_LVGL_UI
 
@@ -138,7 +139,6 @@
 //#define NEOPIXEL_PIXELS     24         // Number of LEDs in the strip
 
         /* Option for other Probe (BD_probe, IR, Touch-Mi,.. ) or Sensorless (TMC2209_UART) */
-
 // WARNING:These options need wiring pins DIAG to EndStop plug(Signal).
 // more at the bottom page.
 //#define STALLGUARD_1                   // (G) Special mod for TMC2209_UART = SENSORLESS_HOMING
@@ -205,16 +205,17 @@
  * = like (Prontoface/Octoprint/HostRepertier/Astoprint)=
  * ====== Choice add menu on TFT: (OPT) =================
  */
-#define ADD_MENUS                        // (Default) Add menu PID, DELTA, INFO,...
+#define ADD_MENUS                        // (Default) Add menu PID, Special DELTA, INFO,...
 
-/*__________________________8__________________________*/
-/** ===================================================
-* == Option for Host (OCTOPRINT,REPETIER,PRONTERFACE,ESP3D, etc)
-* ======================================================
+/*___________________________________8_______________________________________*/
+/** ==========================================================================
+* == Option for Host (OCTOPRINT,REPETIER,PRONTERFACE,ESP3D, etc)            ==
+* == Tip: commented the line "BOOT_MARLIN_LOGO_SMALL" for more space EEPROM ==
+* ============================================================================
 */
-#define HOSTS                          // Enable buffer for Octoprint.
-//#define HOST_ACTION_COMMANDS           // Default - Action Command Prompt support Message on Octoprint
-#define HOST_START_MENU_ITEM           // Add a menu item that tells the host to start a print
+#define HOSTS                            // Enable buffer for Octoprint.
+#define HOST_ACTION_COMMANDS             // Default - Action Command Prompt support Message on Octoprint
+#define HOST_START_MENU_ITEM             // Add a menu item that tells the host to start a print
 
 #define BINARY_FILE_TRANSFER             // Bin transfert for ESP3D firmware v2.1 or others.
                                          // Not compatible with the MEATPACK option.
@@ -254,6 +255,29 @@
   #endif
 #endif
 
+//= For users who dont have a terminal =//
+#if BOTH(ADD_MENUS, TFT_CLASSIC_UI)||BOTH(ADD_MENUS, TFT_COLOR_UI)||BOTH(ADD_MENUS, TFT_BTT_UI)
+  #define DELTA_CALIBRATION_MENU        // (Default) Auto for CLASSIC and COLOR.
+  #define SOFT_ENDSTOPS_MENU_ITEM       // (Default) Menu endstop
+  #define LCD_INFO_MENU                 // (Default) Informations printer.
+  //#define MEDIA_MENU_AT_TOP           // Add Print media menu at top list.
+  //#define PREHEAT_SHORTCUT_MENU_ITEM  // Add preheat/temperature menu (first page)
+  //#define CANCEL_OBJECTS              // Add menu "Cancel Objet"
+  //#define TOUCH_IDLE_SLEEP 900        // Auto-Sleep screenview. (M255 S100)
+  //#define LCD_BACKLIGHT_TIMEOUT_MINS 3 // (mn) Timeout before turning off the backlight
+  #define SOUND_MENU_ITEM               // Add a mute option to the LCD menu
+  #ifndef STALLGUARD_2                   
+  // Only with TMC2209 sensorless (need wiring DIAG pins)
+    #define DIAG_JUMPERS_REMOVED
+    #define PROBE_OFFSET_WIZARD
+    #define G26_MESH_VALIDATION         // (Default) Command G26 to print a Mesh Validation Pattern tool.
+    #define CUSTOM_MENU_MAIN            // Special Delta preparation menu.
+  #endif
+  #ifdef NEOPIXEL_LED
+    #define LED_CONTROL_MENU            // To control LedStrip.
+  #endif
+#endif
+
 /**
  * =================================================
  * ===Part for Hardware definitions=================
@@ -277,6 +301,7 @@
   #define MOD_AUX                   // enable the UART2 for BTT_TFT (TOUCH UI)
   #define TFT_CLASSIC_UI
   #define MKS_ROBIN_TFT32
+  #define HOST_STATUS_NOTIFICATIONS
   //#define TFT_GENERIC
   //#define TFT_DRIVER AUTO
   //#define TFT_INTERFACE_FSMC        //Default socket on MKS_nano, mini, hispeed.
@@ -284,7 +309,7 @@
   //#define ULTRA_LCD//CR10_STOCKDISPLAY
   //#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
   //#define SET_PROGRESS_MANUALLY
-  //#define G26_MESH_VALIDATION   
+  #define G26_MESH_VALIDATION
 #elif BOTH(TFT_COLOR_UI, SR_MKS)
   #define MKS_TS35_V2_0             // Only for NanoV2 or V3
   #define TOUCH_SCREEN              // (C/F) (Default) UI MARLIN
@@ -295,31 +320,8 @@
   //#define MKS_ROBIN_TFT43         // Mks_Robin_TFT43
   #define TOUCH_SCREEN              // (C/F) (Default) UI MARLIN
 #else
-   #define MKS_ROBIN_TFT32           // (Default) Mks_Robin_TFT_V2.0
-   #define TOUCH_SCREEN              // (C/F) (Default) UI MARLIN
-#endif
-
-//= For users who dont have a terminal =//
-#if BOTH(ADD_MENUS, TFT_CLASSIC_UI)||BOTH(ADD_MENUS, TFT_COLOR_UI)||BOTH(ADD_MENUS, TFT_BTT_UI)
-  #define DELTA_CALIBRATION_MENU        // (Default) Auto for CLASSIC and COLOR.
-  #define SOFT_ENDSTOPS_MENU_ITEM       // (Default) Menu endstop
-  #define LCD_INFO_MENU                 // (Default) Informations printer.
-  //#define PREHEAT_SHORTCUT_MENU_ITEM  // Add preheat/temperature menu (first page)
-  //#define CANCEL_OBJECTS              // Add menu "Cancel Objet"
-  //#define MEDIA_MENU_AT_TOP           // Print media menu at top list.
-  //#define TOUCH_IDLE_SLEEP 900        // Auto-Sleep screenview. (M255 S100)
-  //#define LCD_BACKLIGHT_TIMEOUT_MINS 3 // (mn) Timeout before turning off the backlight
-  #define SOUND_MENU_ITEM               // Add a mute option to the LCD menu
-  #ifndef STALLGUARD_2                   
-  // Only with TMC2209 sensorless (need wiring DIAG pins)
-    #define DIAG_JUMPERS_REMOVED
-    #define PROBE_OFFSET_WIZARD
-    #define G26_MESH_VALIDATION         //  (Default) Command G26 to print a Mesh Validation Pattern tool.
-    #define CUSTOM_MENU_MAIN            // Special Delta preparation menu.
-  #endif
-  #ifdef NEOPIXEL_LED
-    #define LED_CONTROL_MENU            // To control LedStrip.
-  #endif
+  #define MKS_ROBIN_TFT32           // (Default) Mks_Robin_TFT_V2.0
+  #define TOUCH_SCREEN              // (C/F) (Default) UI MARLIN
 #endif
 
 // Set for QQS(4xA4988) or Q5(3x2208+A4988) 
@@ -383,15 +385,16 @@
     #define TMC_BAUD_RATE               19200
 #endif
 
-/**---------------------------//
- * Special mods TMC2209:      //
- *                            //
- * UART: Single wire          //
- * SENSORLESS: Homing/Probing //
- * ---------------------------//
+/**-----------------------------//
+ * Special mods TMC or TFT:     //
+ * - TFT need wiring socket Wifi//
+ * - TMC2209                    //
+ * UART: Single wire            //
+ * SENSORLESS: Homing/Probing   //
+ * -----------------------------//
  */
 
-// Note for QQSPro::
+// Note for QQSPro:
 // HardwareSerial with one pins for four drivers
 // Compatible with TMC2209. Provides best performance.
 // Requires SLAVE_ADDRESS definitions in Configuration_adv.h
@@ -407,7 +410,7 @@
     #endif
 #endif
 
-/** Note for QQSP/Q5 with screen
+/** Note for QQSP/Q5 with serial screen(DWIN/BTT-TFT):
  *  Need wiring pins PA10/PA9/GND/5v.
  * Socket Module Wifi 
  *
@@ -423,7 +426,7 @@
  *       ￣￣ AE￣￣
  */
 
-// Note:
+// Note for STALLGUARD functions:
 // Need wiring pins DIAG to EndSTOP(Signal) for QQSP/Q5.
 // Need put jumpers DIAG for SR.
 
@@ -454,21 +457,21 @@
     #elif ENABLED(OMG)           
       #define EXTRUDER_STEPS 790 //  
     #elif ANY(BMG, SR_MKS, SR_BTT)
-      #define EXTRUDER_STEPS 834 // Extruder BMG(Left/Right)
+      #define EXTRUDER_STEPS 834 //  Extruder BMG(Left/Right)
     #else
-      #define EXTRUDER_STEPS 820 // Extruder TITAN(Default)
+      #define EXTRUDER_STEPS 820 //  Extruder TITAN(Default)
     #endif  
   #else
     #ifdef DDRIVE
       #define EXTRUDER_STEPS 720 //  Extruder SuperHX, Mini-Sherpa, Orbiter, LGX_Lite
     #elif ENABLED(OMG)           
-      #define EXTRUDER_STEPS 390 //  
+      #define EXTRUDER_STEPS 390
     #elif ANY(BMG, SR_MKS, SR_BTT)
-      #define EXTRUDER_STEPS 417 // Extruder BMG(Left/Right)
+      #define EXTRUDER_STEPS 417 //  Extruder BMG(Left/Right)
     #else
-      #define EXTRUDER_STEPS 410 //820 // Extruder TITAN(Default)
+      #define EXTRUDER_STEPS 410 //  Extruder TITAN(Default)
     #endif
-  #endif  
+  #endif
 #endif
 //Jerk
 #ifndef XYZJERK

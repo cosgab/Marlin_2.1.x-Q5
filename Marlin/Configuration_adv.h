@@ -1367,7 +1367,7 @@
 
 #if HAS_MANUAL_MOVE_MENU
   #define MANUAL_FEEDRATE_XYZ 50*60
-  #define MANUAL_FEEDRATE { MANUAL_FEEDRATE_XYZ, MANUAL_FEEDRATE_XYZ, 10*60, 60 } // (mm/min) Feedrates for manual moves along X, Y, Z, E from panel
+  #define MANUAL_FEEDRATE { MANUAL_FEEDRATE_XYZ, MANUAL_FEEDRATE_XYZ, 10*60, 2*60 } // (mm/min) Feedrates for manual moves along X, Y, Z, E from panel
   #define FINE_MANUAL_MOVE 0.025    // (mm) Smallest manual move (< 0.1mm) applying to Z on most machines
   #if IS_ULTIPANEL
     #define MANUAL_E_MOVES_RELATIVE // Display extruder move distance rather than "position"
@@ -1427,7 +1427,7 @@
     #endif
 
     // Show Deploy / Stow Probe options in the Motion menu.
-    #define PROBE_DEPLOY_STOW_MENU
+    //#define PROBE_DEPLOY_STOW_MENU
   #endif
 
   // Include a page of printer information in the LCD Main Menu
@@ -1506,7 +1506,7 @@
   #define SET_PROGRESS_PERCENT            // Add 'P' parameter to set percentage done
   #define SET_REMAINING_TIME              // Add 'R' parameter to set remaining time
   //#define SET_INTERACTION_TIME          // Add 'C' parameter to set time until next filament change or other user interaction
-  //#define M73_REPORT                    // Report M73 values to host
+  #define M73_REPORT                    // Report M73 values to host
   #if BOTH(M73_REPORT, SDSUPPORT)
     #define M73_REPORT_SD_ONLY            // Report only when printing from SD
   #endif
@@ -2213,10 +2213,10 @@
  * the probe to be unable to reach any points.
  */
 #if PROBE_SELECTED && !IS_KINEMATIC
-  //#define PROBING_MARGIN_LEFT PROBING_MARGIN
-  //#define PROBING_MARGIN_RIGHT PROBING_MARGIN
-  //#define PROBING_MARGIN_FRONT PROBING_MARGIN
-  //#define PROBING_MARGIN_BACK PROBING_MARGIN
+  #define PROBING_MARGIN_LEFT PROBING_MARGIN
+  #define PROBING_MARGIN_RIGHT PROBING_MARGIN
+  #define PROBING_MARGIN_FRONT PROBING_MARGIN
+  #define PROBING_MARGIN_BACK PROBING_MARGIN
 #endif
 
 #if EITHER(MESH_BED_LEVELING, AUTO_BED_LEVELING_UBL)
@@ -2438,11 +2438,14 @@
 // @section serial
 
 // The ASCII buffer for serial input
-#define MAX_CMD_SIZE 96
-#if ANY(TFT_BTT_UI, MOD_BTT_UI, HOSTS)
+#ifdef XP
+  #define MAX_CMD_SIZE 500
+#else
+  #define MAX_CMD_SIZE 96
+#endif#if ANY(TFT_BTT_UI, MOD_BTT_UI, HOSTS)
   #define BUFSIZE 32
 #else
-  #define BUFSIZE 4
+  #define BUFSIZE 16
 #endif
 
 // Transmission to Host Buffer Size
@@ -2455,7 +2458,7 @@
 #if ANY(TFT_BTT_UI, MOD_BTT_UI, HOSTS)
   #define TX_BUFFER_SIZE 32
 #else
-  #define TX_BUFFER_SIZE 4//0
+  #define TX_BUFFER_SIZE 16//0
 #endif
 
 // Host Receive Buffer Size
@@ -2582,13 +2585,16 @@
   #endif
   #ifdef DDRIVE
     #define RETRACT_LENGTH              0.4 // (mm) Default retract length (positive value)
-    #define RETRACT_FEEDRATE           30   // (mm/s) Default feedrate for retracting
+    #define RETRACT_FEEDRATE           35   // (mm/s) Default feedrate for retracting
+    #define RETRACT_LENGTH_SWAP         3   // (mm) Default swap retract length (positive value)
   #else
     #define RETRACT_LENGTH              5   // (mm) Default retract length (positive value)
     #define RETRACT_FEEDRATE           50   // (mm/s) Default feedrate for retracting
+    #define RETRACT_LENGTH_SWAP        13   // (mm) Default swap retract length (positive value)
   #endif
+    #define RETRACT_LENGTH_SWAP         3   // (mm) Default swap retract length (positive value)
   #define RETRACT_LENGTH_SWAP          13   // (mm) Default swap retract length (positive value)
-  //#define RETRACT_FEEDRATE             45   // (mm/s) Default feedrate for retracting
+  //#define RETRACT_FEEDRATE           45   // (mm/s) Default feedrate for retracting
   #define RETRACT_ZRAISE                0.4 // (mm) Default retract Z-raise
   #define RETRACT_RECOVER_LENGTH        0   // (mm) Default additional recover length (added to retract length on recover)
   #define RETRACT_RECOVER_LENGTH_SWAP   0   // (mm) Default additional swap recover length (added to retract length on recover from toolchange)
@@ -2709,9 +2715,9 @@
     #define FILAMENT_CHANGE_UNLOAD_ACCEL        25
     #define FILAMENT_CHANGE_UNLOAD_LENGTH      550
   #elif ENABLED(DDRIVE)
-    #define FILAMENT_CHANGE_UNLOAD_FEEDRATE     10    //40 LGX
+    #define FILAMENT_CHANGE_UNLOAD_FEEDRATE     20    //40 LGX
     #define FILAMENT_CHANGE_UNLOAD_ACCEL        25
-    #define FILAMENT_CHANGE_UNLOAD_LENGTH      110
+    #define FILAMENT_CHANGE_UNLOAD_LENGTH      100
   #elif ANY(SR_MKS, SR_BTT)
     #define FILAMENT_CHANGE_UNLOAD_FEEDRATE     40
     #define FILAMENT_CHANGE_UNLOAD_ACCEL        25
@@ -2749,7 +2755,7 @@
   #endif
   //#define ADVANCED_PAUSE_CONTINUOUS_PURGE       // Purge continuously up to the purge length until interrupted.
   #define ADVANCED_PAUSE_PURGE_FEEDRATE        5  // (mm/s) Extrude feedrate (after loading). Should be slower than load feedrate.
-  #define ADVANCED_PAUSE_PURGE_LENGTH         30  // (mm) Length to extrude after loading.
+  #define ADVANCED_PAUSE_PURGE_LENGTH         50  // (mm) Length to extrude after loading.
                                                   //   Set to 0 for manual extrusion.
                                                   //   Filament can be extruded repeatedly from the Filament Change menu
                                                   //   until extrusion is consistent, and to purge old filament.
@@ -2757,7 +2763,7 @@
   //#define ADVANCED_PAUSE_FANS_PAUSE             // Turn off print-cooling fans while the machine is paused.
 
                                                   // Filament Unload does a Retract, Delay, and Purge first:
-  #define FILAMENT_UNLOAD_PURGE_RETRACT        6  // (mm) Unload initial retract length.
+  #define FILAMENT_UNLOAD_PURGE_RETRACT       10  // (mm) Unload initial retract length.
   #define FILAMENT_UNLOAD_PURGE_DELAY      10000  // (ms) Delay for the filament to cool after retract.
   #define FILAMENT_UNLOAD_PURGE_LENGTH         8  // (mm) An unretract is done, then this length is purged.
   #define FILAMENT_UNLOAD_PURGE_FEEDRATE      25  // (mm/s) feedrate to purge before unload
@@ -2952,8 +2958,8 @@
   #endif
 
   #if AXIS_IS_TMC_CONFIG(E0)
-    #define E0_CURRENT       E_CURRENT
-    #define E0_MICROSTEPS    E_MICROSTEPS
+    #define E0_CURRENT      E_CURRENT
+    #define E0_MICROSTEPS   E_MICROSTEPS
     #define E0_RSENSE         0.11
     #define E0_CHAIN_POS     -1
     //#define E0_INTERPOLATE true
@@ -2961,7 +2967,7 @@
   #endif
 
   #if AXIS_IS_TMC_CONFIG(E1)
-    #define E1_CURRENT      800
+    #define E1_CURRENT      E0_CURRENT
     #define E1_MICROSTEPS   E0_MICROSTEPS
     #define E1_RSENSE         0.11
     #define E1_CHAIN_POS     -1
@@ -3081,6 +3087,7 @@
   #endif
   //#define X2_SLAVE_ADDRESS 0
   //#define Y2_SLAVE_ADDRESS 0
+  //#define Z2_SLAVE_ADDRESS 0
   //#define Z3_SLAVE_ADDRESS 0
   //#define Z4_SLAVE_ADDRESS 0
   //#define  I_SLAVE_ADDRESS 0
@@ -3849,18 +3856,18 @@
   //#define CUSTOM_MENU_MAIN_SCRIPT_DONE "M117 User Script Done"
   //#define CUSTOM_MENU_MAIN_SCRIPT_AUDIBLE_FEEDBACK
   #define CUSTOM_MENU_MAIN_SCRIPT_RETURN   // Return to status screen after a script
-  #define CUSTOM_MENU_MAIN_ONLY_IDLE         // Only show custom menu when the machine is idle
+  #define CUSTOM_MENU_MAIN_ONLY_IDLE       // Only show custom menu when the machine is idle
 
   #define MAIN_MENU_ITEM_1_DESC "Init. EEPROM"
   #define MAIN_MENU_ITEM_1_GCODE "M502\nM500\nM997"
   #define MAIN_MENU_ITEM_1_CONFIRM
 
   #define MAIN_MENU_ITEM_2_DESC "Fast Calib.Delta"
-  #define MAIN_MENU_ITEM_2_GCODE "G33P3V3T\nM500\nM140S0"
+  #define MAIN_MENU_ITEM_2_GCODE "G33P3V3\nM500\nM140S0"
   #define MAIN_MENU_ITEM_2_CONFIRM
 
   #define MAIN_MENU_ITEM_3_DESC "Fine Calib.Delta"
-  #define MAIN_MENU_ITEM_3_GCODE "G33P5V3T\nM500\nM140S0"  //P6ok
+  #define MAIN_MENU_ITEM_3_GCODE "G33P5V3\nM500\nM140S0"  //P6ok
   #define MAIN_MENU_ITEM_3_CONFIRM
 
   #define MAIN_MENU_ITEM_4_DESC "ZOffSet Wizard"
@@ -3868,28 +3875,29 @@
   #define MAIN_MENU_ITEM_4_CONFIRM
 
   #define MAIN_MENU_ITEM_5_DESC "1.Bed Level. UBL for " PREHEAT_1_LABEL
-  #define MAIN_MENU_ITEM_5_GCODE "G29 L1\nM1004B70S1"
+  #define MAIN_MENU_ITEM_5_GCODE "G29L1\nM1004B70S1"
   #define MAIN_MENU_ITEM_5_CONFIRM
 
+
   #ifdef MPCTEMP
-   #define MAIN_MENU_ITEM_6_DESC "1.Run Autotune on Active extruder"
-   #define MAIN_MENU_ITEM_6_GCODE "M306T\nM500\nG28\nM107"
+    #define MAIN_MENU_ITEM_6_DESC "1.Run Autotune on Active extruder"
+    #define MAIN_MENU_ITEM_6_GCODE "M306T\nM500\nG28\nM107"
   #else
-    #define MAIN_MENU_ITEM_6_DESC "1.PID_Nozzle_for " PREHEAT_1_LABEL
+    #define MAIN_MENU_ITEM_6_DESC "1.Run PID_Nozzle_for " PREHEAT_1_LABEL
     #define MAIN_MENU_ITEM_6_GCODE "M106P0S180\nM303E0C8S210U\nM500\nG28\nM107\nM117 PID Tune Done"
   #endif
   #define MAIN_MENU_ITEM_6_CONFIRM
 
   #define MAIN_MENU_ITEM_7_DESC "1.Print_Test_Pattern in " PREHEAT_1_LABEL
-  #define MAIN_MENU_ITEM_7_GCODE "G28W\nG29L1\nG26I0P4\nM500\nG28W\nM117 Print Mesh Done"
+  #define MAIN_MENU_ITEM_7_GCODE "G28\nG29L1\nG26I0P4\nM500\nG28\nM117 Print Mesh Done"
   #define MAIN_MENU_ITEM_7_CONFIRM
 
   #define MAIN_MENU_ITEM_8_DESC "2.Bed Level. UBL for " PREHEAT_2_LABEL
-  #define MAIN_MENU_ITEM_8_GCODE "G29 L2\nM1004B80S2"
+  #define MAIN_MENU_ITEM_8_GCODE "G29L2\nM1004B80S2"
   #define MAIN_MENU_ITEM_8_CONFIRM
 
   #define MAIN_MENU_ITEM_9_DESC "3.Bed Level. UBL for " PREHEAT_3_LABEL
-  #define MAIN_MENU_ITEM_9_GCODE "G29 L3\nM1004B90S3"
+  #define MAIN_MENU_ITEM_9_GCODE "G29L3\nM1004B90S3"
   #define MAIN_MENU_ITEM_9_CONFIRM
 
   #define MAIN_MENU_ITEM_10_DESC "Reboot Printer"
@@ -4001,7 +4009,7 @@
  */
 //#define HOST_ACTION_COMMANDS     // Define on FLSUNQ_Config
 #if ENABLED(HOST_ACTION_COMMANDS)
-  //#define HOST_PAUSE_M76                // Tell the host to pause in response to M76
+  #define HOST_PAUSE_M76                // Tell the host to pause in response to M76
   #define HOST_PROMPT_SUPPORT           // Initiate host prompts to get user feedback
   #if BOTH(HOST_PROMPT_SUPPORT, TFT_BTT_UI) || BOTH(HOST_PROMPT_SUPPORT, MOD_BTT_UI)
     #define HOST_STATUS_NOTIFICATIONS   // Send some status messages to the host as notifications
