@@ -11,7 +11,7 @@ Below is an example with the firmware for a Q5 printer with a Mks_Robin_nanov1.2
 **Exemple:**
 8+SCWTPULR-Robin_nano.bin => Q5 Stock
 => - (8+S)3xTMC2208 standalone(XYZ) + 1xA4988(E0) - 
-   - (C)UI Marlin TFT32 - 
+   - (C)UI Marlin TFT32 (Stock) - 
    - (W)Wifi module - 
    - (T)Extruder Titan (Stock) - 
    - (P)PreHeat bed (60°C min)when you run a calibration or a levelling- 
@@ -68,6 +68,7 @@ Below is an example with the firmware for a Q5 printer with a Mks_Robin_nanov1.2
   - (R) ARC_SUPPORT
   - (L) Linear Advance (Possible Bug with BabyStep and TMC2208)
   - (M) MEATPACK (Improve dialogue/communication with OctoPrint)
+  - (Z) Input Shaping.
 
   **/*-------Others options for advanced users who build their firmware----*/**
   - HOST_ACTION_COMMANDS (Action Command Prompt support Message on OctoPrint) (default)
