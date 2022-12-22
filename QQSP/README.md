@@ -77,7 +77,8 @@ SCWTPULR-Robin_mini.bin => QQSPro Stock
   - (R) ARC_SUPPORT
   - (L) Linear Advance (Possible Bug with BabyStep and TMC2208)
   - (M) MEATPACK (Improve dialogue/communication with OctoPrint)
-
+  - (Z) Input Shaping.
+  
   **/*-------Others options for advanced users who build their firmware----*/**
   - HOST_ACTION_COMMANDS (Action Command Prompt support Message on OctoPrint) (default)
   - Host start print by menu (Only TFT_COLOR_UI)
