@@ -88,7 +88,8 @@ SRM-SCBPULR32-Robin_nano_v3.bin
   - (R) ARC_SUPPORT (default)
   - (L) Linear Advance (default)
   - (M) MEATPACK (Improve dialogue/communication with OctoPrint)
-
+  - (Z) Input Shaping.
+  
   **/*-------Others options for advanced users who build their firmware----*/**
   - HOST_ACTION_COMMANDS (Action Command Prompt support Message on OctoPrint) (default)
   - Host start print by menu (Only TFT_COLOR_UI)
