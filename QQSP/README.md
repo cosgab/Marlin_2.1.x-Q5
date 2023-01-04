@@ -67,12 +67,12 @@ SCWTPULR-Robin_mini.bin => QQSPro Stock
   - (X) Extruder DirectDrive Nema14 (SuperDriveHX/Mini-Sherpa/Lgx/...)
   
   **/*-------Others options in firmware----*/**
-  - (G) SENSORLESS_HOMING (Only 2209)
-  - (g) SENSORLESS_PROBING (Only 2209)
-  - (m) MPCTEMP - Model predictive temperature control
+  - (G) SENSORLESS_HOMING (Only 2209 and need wiring)
+  - (g) SENSORLESS_PROBING (Only 2209 and need wiring)
+  - (m) MPCTEMP - Model predictive temperature control (New PID Nozzle)
   - (H) Hotend Volcano or HotendAllMetal
   - (A) BED_LEVELING_BILINEAR
-  - (U) BED_LEVELING_UBL
+  - (U) BED_LEVELING_UBL (levelings saved to location)
   - (P) PreHeat bed before leveling
   - (R) ARC_SUPPORT
   - (L) Linear Advance (Possible Bug with BabyStep and TMC2208)
@@ -85,12 +85,13 @@ SCWTPULR-Robin_mini.bin => QQSPro Stock
   - BINARY_FILE_TRANSFER (default)
   - TEMP_SENSOR_0 (After changed the thermitor nozzle)
   - LCD_LANGUAGE (Change to the native language)
-  - Add line for nb of leds.
+  - NEOPIXEL_PIXELS (Add line for nb of leds).
+  - FWRETRACT (To use the retraction of the extrusion by the firmware).
   - Fixed "Special Menu" for MPC and levelings.
   - etc 
  
-  **/*-------Others Firmwares for Q5 nanov1.2 or QQS with SKR family or Mks_Nano Family----*/**
-  - (Q5_8+SCTPULR-Robin_nano)   Q5 Stock(3xTMC2208+1xA4988) with TITAN extruder. 
-  - (Q5_9CBPULR-Robin_nano)     Q5 with 4xTMC2209 with BMG extruder.
-  - (QQS)U9rTPULR16-SKR14_firmware QQS with SKRv1.4 Board with emulation LCD (Marlin Mode)
+  **/*-------Others Firmwares for QQS with SKR family or Mks_Nano Family Boards ----*/**
+  - (QQSP_8+SCTPULR-Robin_nano)     QQS with NanoV1.2 + 3xTMC2208standalone+1xA4988 and TITAN/STOCK extruder. 
+  - (QQSP_9CBPULR-Robin_nano35)     QQS with NanoV1.3 + 4xTMC2209Standalone and BMG extruder.
+  - (QQSP_U9rTPULR16-SKR14_firmware QQS with SKRv1.4 Board + 4x2209Uart with BTT-TFT emulation LCD (Marlin Mode)
 ***
