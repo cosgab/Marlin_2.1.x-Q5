@@ -127,7 +127,7 @@ tags
 
 # Secure Credentials
 Configuration_Secure.h
-Config_*.h
+Marlin/Configs/Config_*.h
 
 # Visual Studio
 *.sln
@@ -172,4 +172,4 @@ __pycache__
 # IOLogger logs
 *_log.csv
 .vscode/extensions.json
-.vscode/extensions.json
+
