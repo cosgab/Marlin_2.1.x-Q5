@@ -46,13 +46,13 @@
 /*________________________2___________________________*/
           /*-----Type Stepper Drivers-(1 CHOICE)-----*/
 /* MODE STOCK for QQS & Q5 & SR */
-#define STOCK                         // (S) (Default_QQS) For 4xA4988(green or red color).
+//#define STOCK                         // (S) (Default_QQS) For 4xA4988(green or red color).
                                       // (S) (Default_Q5) For 3xTMC2208+1xA4988.
                                       // (S) (Default_SR) For 4xTMC2209_UART.
 
 /* MODE STANDALONE XYZ+E for QQS & Q5 */
 //#define ALL_TMC8                    // (8) For 4xTMC2208_STANDALONE
-//#define ALL_TMC9                    // (9) For 4xTMC2209_STANDALONE
+#define ALL_TMC9                    // (9) For 4xTMC2209_STANDALONE
 
 /* MODE UART XYZ+E for QQS & Q5 */
 //#define Q_UART8                     // (U8) 4xTMC2208_UART Note: remove on your printer the module WIFI and wire your TMC.
@@ -129,8 +129,8 @@
 //#define QQS_SR                         // Custom effector with balls like SR printer.
 //#define FKSN                           // Customn effector FRANKENSUNrods, height
                   /* Module Socket_Wifi */ 
-#define MOD_WIFI                         //(W) (Default_QQS) Module ESP8266/ESP12
-//#define ESP3D_30                       //(w) Enable firmware ESP3D v3.0 (ESP8266/ESP12) only with TFT_LVGL_UI
+//#define MOD_WIFI                         //(W) (Default_QQS) Module ESP8266/ESP12
+#define ESP3D_30                       //(w) Enable firmware ESP3D v3.0 (ESP8266/ESP12) only with TFT_LVGL_UI
 
                   /* Option for Neopixel */
 //For LedStrip which need an external power source on Vcc_ledstrip_pin.
@@ -249,7 +249,9 @@
     #define MKS_WIFI_MODULE             // Works with TFT_LVGL_UI(Modern UI using LVGL-MKS)
     //#define USES_MKS_WIFI_FUNCTION    // Bin transfert MKS for ESP3D firmware v3.0 or others
   #elif ENABLED(ESP3D_30)// Enable UART1 on socket WIFI (MKs boards)
-    #define MKS_WIFI 
+    #define MKS_WIFI
+    #define EEPROM_W25Q
+    #define BOOT_MARLIN_LOGO_SMALL
   #else
     #define MOD_AUX    
   #endif

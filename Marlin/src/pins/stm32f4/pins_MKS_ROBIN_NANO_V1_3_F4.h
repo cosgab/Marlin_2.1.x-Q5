@@ -43,3 +43,63 @@
 #define LED_PIN                             PB1
 
 #include "../stm32f1/pins_MKS_ROBIN_NANO_common.h"
+
+#ifdef PRINTER_NAME_FB4S
+  #undef PRINTER_NAME_FB4S
+#endif
+
+#ifndef PRINTER_NAME_FB5
+  #define PRINTER_NAME_FB5
+#endif
+
+// Если нужен сменный драйвер в слоте второго экструдера как основной экструдер, нужно раскоментировать этот параметр
+//#define EXT_EXTRUDER_DRIVER
+
+#ifdef EXT_EXTRUDER_DRIVER
+  #undef E1_ENABLE_PIN
+  #undef E1_STEP_PIN
+  #undef E1_DIR_PIN
+  #undef E0_ENABLE_PIN
+  #undef E0_STEP_PIN
+  #undef E0_DIR_PIN
+
+  #define E0_ENABLE_PIN                       PA3
+  #define E0_STEP_PIN                         PA6
+  #define E0_DIR_PIN                          PA1
+#endif
+
+ #define FIL_RUNOUT_LEVEL  LOW
+
+ #if HAS_FSMC_TFT
+    #undef TFT_BUFFER_SIZE
+    #define TFT_BUFFER_SIZE                  480*30
+#endif
+
+/*
+Модуль MKS WIFI
+*/
+#define MKS_WIFI
+
+#ifdef MKS_WIFI
+
+ #define MKS_WIFI_SERIAL_NUM                SERIAL_PORT_2
+ #define MKS_WIFI_UART                      USART1
+  #undef PLATFORM_M997_SUPPORT
+
+ #define MKS_WIFI_IO0                       PC13
+ #define MKS_WIFI_IO4                       PC7
+ #define MKS_WIFI_IO_RST                    PA5
+#endif
+
+#ifndef XPT2046_X_CALIBRATION
+  #define XPT2046_X_CALIBRATION          17880
+#endif
+#ifndef XPT2046_Y_CALIBRATION
+  #define XPT2046_Y_CALIBRATION         -12234
+#endif
+#ifndef XPT2046_X_OFFSET
+  #define XPT2046_X_OFFSET                 -45
+#endif
+#ifndef XPT2046_Y_OFFSET
+  #define XPT2046_Y_OFFSET                  349
+#endif

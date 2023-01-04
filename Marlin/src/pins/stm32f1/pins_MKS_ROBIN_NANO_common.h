@@ -51,10 +51,11 @@
 
 #define SPI_DEVICE                             2
 
-//
-// Servos
-//
-#define SERVO0_PIN                          PA8   // Enable BLTOUCH
+/*
+BlTouch
+*/
+#define SERVO0_PIN                           PA8   
+#define BL_TOUCH_Z_PIN                      PA11
 
 //
 // Limit Switches
@@ -164,7 +165,7 @@
 #endif
 
 #define SDIO_SUPPORT
-#define SDIO_CLOCK                       4500000  // 4.5 MHz
+#define SDIO_CLOCK                       18000000  // 4.5 MHz
 #define SD_DETECT_PIN                       PD12
 #define ONBOARD_SD_CS_PIN                   PC11
 
