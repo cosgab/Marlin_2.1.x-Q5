@@ -90,8 +90,8 @@
   //#define TFT_OTHER            // For the user who haven't the same screen.
 #else
                 /*--- Choice UI TFT ----*/
-  //#define TFT_COLOR_UI         //(C) UI Color MARLIN with Mks-TS35v2
-  #define TFT_BTT_UI             //(r) UI TOUCH by BTT-TFT Family (emulation LCD Marlin)
+  #define TFT_COLOR_UI         //(C) UI Color MARLIN with Mks-TS35v2
+  //#define TFT_BTT_UI             //(r) UI TOUCH by BTT-TFT Family (emulation LCD Marlin)
   //#define TFT_DWIN_UI          //(D) UI for DGUS screen like CrealityTouch or Mks H43
 #endif
 
@@ -249,7 +249,9 @@
     #define MKS_WIFI_MODULE             // Works with TFT_LVGL_UI(Modern UI using LVGL-MKS)
     //#define USES_MKS_WIFI_FUNCTION    // Bin transfert MKS for ESP3D firmware v3.0 or others
   #elif ENABLED(ESP3D_30)// Enable UART1 on socket WIFI (MKs boards)
-    #define MKS_WIFI 
+    #define MKS_WIFI
+    #define EEPROM_W25Q
+    #define BOOT_MARLIN_LOGO_SMALL
   #else
     #define MOD_AUX    
   #endif
