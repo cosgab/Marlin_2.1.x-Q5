@@ -214,7 +214,7 @@
     #define MKS_WIFI_UART                   USART1
     #undef PLATFORM_M997_SUPPORT            //Issue with the Mks Cura plugin that sends M997s.
     #define MKS_WIFI_IO0                    PA8
-    #define MKS_WIFI_IO1                    PC7
+    #define MKS_WIFI_IO4                    PC7
     #define MKS_WIFI_IO_RST                 PA5
   #elif HAS_TFT_LVGL_UI
     //Cura monitoring with MksWifi/ESP3Dv3/Mescianti (TFT35v1)
@@ -365,7 +365,7 @@
 #endif
 
 #if ENABLED(SPEAKER) && BEEPER_PIN == PC5
-  #error "FLSun HiSpeed default BEEPER_PIN is not a SPEAKER."
+  //#error "FLSun HiSpeed default BEEPER_PIN is not a SPEAKER."
 #endif
 
 //
