@@ -178,7 +178,7 @@
     #endif
   #endif
 #else
-  #ifdef MOD_AUX
+  #if ANY(MOD_AUX, ESP3D_30)
     #if ENABLED(TFT_LVGL_UI)
       #define MKS_WIFI_MODULE
       //#define SERIAL_PORT_2 1   // 1=ESP3Dv2.1 MKS-Wifi or serial TFT.
