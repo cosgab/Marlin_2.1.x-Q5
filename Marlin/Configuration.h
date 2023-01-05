@@ -2041,7 +2041,7 @@
 #define Z_MIN_POS 0
 #define X_MAX_POS DELTA_PRINTABLE_RADIUS
 #define Y_MAX_POS DELTA_PRINTABLE_RADIUS
-#define Z_MAX_POS DELTA_HEIGHT
+#define Z_MAX_POS MANUAL_Z_HOME_POS
 //#define I_MIN_POS 0
 //#define I_MAX_POS 50
 //#define J_MIN_POS 0
@@ -2680,7 +2680,7 @@ EEPROM_W25Q
   #if ANY(N_PROBE, P_PROBE)
     #define NOZZLE_PARK_POINT { 0, 0, 20 }
   #else
-    #define NOZZLE_PARK_POINT { 0, (Y_MAX_POS - 20), 50 } //OPT
+    #define NOZZLE_PARK_POINT { 0, (Y_MAX_POS - 20), 80 } //OPT
   #endif
   #define NOZZLE_PARK_MOVE          0   // Park motion: 0 = XY Move, 1 = X Only, 2 = Y Only, 3 = X before Y, 4 = Y before X
   #define NOZZLE_PARK_Z_RAISE_MIN   2   // (mm) Always raise Z by at least this distance
