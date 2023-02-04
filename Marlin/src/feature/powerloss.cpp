@@ -33,7 +33,7 @@
 
 bool PrintJobRecovery::enabled; // Initialized by settings.load()
 
-MediaFile PrintJobRecovery::file;
+SdFile PrintJobRecovery::file;
 job_recovery_info_t PrintJobRecovery::info;
 const char PrintJobRecovery::filename[5] = "/PLR";
 uint8_t PrintJobRecovery::queue_index_r;
