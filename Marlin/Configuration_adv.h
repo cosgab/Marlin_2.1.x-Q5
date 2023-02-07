@@ -2158,7 +2158,6 @@
   #endif
   //#define ADVANCE_K_EXTRA       // Add a second linear advance constant, configurable with M900 L.
   //#define LA_DEBUG              // Print debug information to serial during operation. Disable for production use.
-  #define EXPERIMENTAL_SCURVE     // Enable this option to permit S-Curve Acceleration
   #ifdef DDRIVE
     //#define ADVANCE_K_EXTRA
     #define ADVANCE_K 0.045  

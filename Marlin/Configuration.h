@@ -3649,7 +3649,7 @@ EEPROM_W25Q
    */
   #define TFT_FONT  NOTOSANS
 
-  //#define TFT_SHARED_SPI   // SPI is shared between TFT display and other devices. Disable async data transfer
+  #define TFT_SHARED_SPI   // SPI is shared between TFT display and other devices. Disable async data transfer
 #endif
 
 #if ENABLED(TFT_LVGL_UI)
@@ -3666,6 +3666,8 @@ EEPROM_W25Q
  */
 #if BOTH(TFT_COLOR_UI, Q5)|| BOTH(TFT_CLASSIC_UI, Q5)
   #define TFT_ROTATION TFT_ROTATE_180
+#else
+  #define TFT_ROTATION TFT_NO_ROTATION
 #endif
 
 //=============================================================================

@@ -178,7 +178,7 @@
       * ===============================
       */
 
-//#define DELTA_HOME_TO_SAFE_ZONE        // Option to move down after homing to a height where XYZ movement is unconstrained.
+#define DELTA_HOME_TO_SAFE_ZONE        // Option to move down after homing to a height where XYZ movement is unconstrained.
 
 #define PREHEAT_BEFORE_PROBING           //(P) (Default) Run a PreHeat bed at 60°C only.
 //#define PREHEAT_BEFORE_LEVELING        // Option to preheat (nozzle and bed) before levelling (H80/B60).
@@ -194,6 +194,7 @@
   //======Many options for Modules: ========//
 #define LIN_ADVANCE                      // (L) (Default2209) with K=0 For TMC_UART2208 prefer mode spreadCycle(by TFT menu) or commented if problem.
 #define POWER_LOSS_RECOVERY              // (Default) Continue print after Power-Loss.
+//#define FWRETRACT                      // Firmware-based and LCD-controlled retract
 
 //=================================================================================//
 //======================== End_Hardware ===========================================//
@@ -213,11 +214,11 @@
 * == Tip: commented the line "BOOT_MARLIN_LOGO_SMALL" for more space EEPROM ==
 * ============================================================================
 */
-#define HOSTS                            // Enable buffer for Octoprint.
+//#define HOSTS                            // Enable buffer for Octoprint.
 #define HOST_ACTION_COMMANDS             // Default - Action Command Prompt support Message on Octoprint
 #define HOST_START_MENU_ITEM             // Add a menu item that tells the host to start a print
 
-#define BINARY_FILE_TRANSFER             // Bin transfert for ESP3D firmware v2.1 or others.
+//#define BINARY_FILE_TRANSFER             // Bin transfert for ESP3D firmware v2.1 or others.
                                          // Not compatible with the MEATPACK option.
 //------ Support for MeatPack G-code compression (OCTOPRINT)--------//
 //#define MEATPACK_ON_SERIAL_PORT_1      // (M) With connection USB
@@ -227,7 +228,6 @@
 //#define SDCARD_SORT_ALPHA
 //#define SD_REPRINT_LAST_SELECTED_FILE  // Reselect last print file.
 //#define CONFIGURATION_EMBEDDING        // Use 'M503 C' to write the settings out to the SD Card as 'mc.zip'.
-//#define FWRETRACT                      // Firmware-based and LCD-controlled retract
 //#define INPUT_SHAPING                  // (Z) Zero Vibration (ZV) Input Shaping for X and/or Y movements.
 
 //-----------------------------//
