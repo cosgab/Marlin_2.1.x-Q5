@@ -332,9 +332,10 @@ void CardReader::printListing(SdFile parent,  const char * const prepend, const 
     else if (is_visible_entity(p OPTARG(CUSTOM_FIRMWARE_UPLOAD, onlyBin))) {
       if (prepend) { SERIAL_ECHO(prepend); SERIAL_CHAR('/'); }
       #if ENABLED(MKS_WIFI)      
-      if (port.index == MKS_WIFI_SERIAL_NUM){
-        printLongPath(createFilename(filename, p));
-      }else{
+        if (port.index == MKS_WIFI_SERIAL_NUM){
+          printLongPath(createFilename(filename, p));
+        }else{
+      #endif
       SERIAL_ECHO(createFilename(filename, p));
       SERIAL_CHAR(' ');
       SERIAL_ECHO(p.fileSize);
@@ -355,39 +356,14 @@ void CardReader::printListing(SdFile parent,  const char * const prepend, const 
           SERIAL_ECHO(longFilename[0] ? longFilename : filename);
         }
       #endif
-
       SERIAL_EOL();
-      }
-      #else
-      SERIAL_ECHO(createFilename(filename, p));
-      SERIAL_CHAR(' ');
-      SERIAL_ECHO(p.fileSize);
-
-      if (includeTime) {
-    		SERIAL_CHAR(' ');
-    		uint16_t crmodDate = p.lastWriteDate, crmodTime = p.lastWriteTime;
-    		if (crmodDate < p.creationDate || (crmodDate == p.creationDate && crmodTime < p.creationTime)) {
-    			crmodDate = p.creationDate;
-    			crmodTime = p.creationTime;
-    		}
-    		SERIAL_ECHOPGM("0x", hex_word(crmodDate));
-    		print_hex_word(crmodTime);
-    	}
-
-      #if ENABLED(LONG_FILENAME_HOST_SUPPORT)
-        if (includeLongNames) {
-          SERIAL_CHAR(' ');
-          if (prependLong) { SERIAL_ECHO(prependLong); SERIAL_CHAR('/'); }
-          SERIAL_ECHO(longFilename[0] ? longFilename : filename);
-        }
-      #endif
-
-      SERIAL_EOL();
-     
+      #if ENABLED(MKS_WIFI)      
+        };
       #endif
     }
   }
 }
+
 //
 // List all files on the SD card
 //
@@ -433,21 +409,21 @@ void CardReader::ls(const uint8_t lsflags) {
       // Find the item, setting the long filename
       diveDir.rewind();
       #if ENABLED(MKS_WIFI)
-      strcpy(f_name_buf,segment);
-      selectByName(diveDir, f_name_buf);
+        strcpy(f_name_buf,segment);
+        selectByName(diveDir, f_name_buf);
       #else
-      selectByName(diveDir, segment);
+        selectByName(diveDir, segment);
       #endif
 
       // Print /LongNamePart to serial output
       #if ENABLED(MKS_WIFI)
-      if(port.index != MKS_WIFI_SERIAL_NUM){
-      SERIAL_CHAR('/');
-      };
+        if(port.index != MKS_WIFI_SERIAL_NUM){
+          SERIAL_CHAR('/');
+        };
       #else
-      SERIAL_CHAR('/');
+        SERIAL_CHAR('/');
       #endif
-      SERIAL_ECHO(longFilename[0] ? longFilename : "???");
+      SERIAL_ECHO(longFilename[0] ? longFilename : filename);
 
       // If the filename was printed then that's it
       if (!flag.filenameIsDir) break;
@@ -632,7 +608,7 @@ void CardReader::startOrResumeFilePrinting() {
 //
 void CardReader::endFilePrintNow(TERN_(SD_RESORT, const bool re_sort/*=false*/)) {
   TERN_(ADVANCED_PAUSE_FEATURE, did_pause_print = 0);
-  TERN_(HAS_DWIN_E3V2_BASIC, HMI_flag.print_finish = flag.sdprinting);
+  TERN_(DWIN_CREALITY_LCD, HMI_flag.print_finish = flag.sdprinting);
   flag.abort_sd_printing = false;
   if (isFileOpen()) file.close();
   TERN_(SD_RESORT, if (re_sort) presort());

@@ -514,7 +514,7 @@
 #elif MB(MKS_ROBIN_MINI)
   #include "stm32f1/pins_MKS_ROBIN_MINI.h"      // STM32F1                                env:mks_robin_mini env:mks_robin_mini_maple
 #elif MB(MKS_ROBIN_NANO)
-  #include "stm32f1/pins_MKS_ROBIN_NANO.h"      // STM32F1                                env:mks_robin_nano_v1v2 env:mks_robin_nano_v1v2_maple env:mks_robin_nano_v1v2_usbmod
+  #include "stm32f1/pins_MKS_ROBIN_NANO.h"      // STM32F1                                env:mks_robin_nano_v1v2 env:mks_robin_nano_v1v2_maple env:mks_robin_nano_v1v2_usbmod env:mks_robin_nano_v1v2_fb4s_a4988 env:mks_robin_nano_v1v2_fb4s_2208 env:mks_robin_nano_v1v2_fb5_2208 env:mks_robin_nano_v1v2_fb5_a4988 env:mks_robin_nano_v1v2_fb5_rb30
 #elif MB(MKS_ROBIN_NANO_V2)
   #include "stm32f1/pins_MKS_ROBIN_NANO_V2.h"   // STM32F1                                env:mks_robin_nano_v1v2 env:mks_robin_nano_v1v2_maple
 #elif MB(MKS_ROBIN_LITE)
@@ -602,7 +602,7 @@
 #elif MB(FLY_MINI)
   #include "stm32f1/pins_FLY_MINI.h"            // STM32F1                                env:FLY_MINI env:FLY_MINI_maple
 #elif MB(FLSUN_HISPEED)
-  #include "stm32f1/pins_FLSUN_HISPEED.h"       // STM32F1                                env:flsun_hispeedv1 env:flsun_hispeed_maple
+  #include "stm32f1/pins_FLSUN_HISPEED.h"       // STM32F1                                env:flsun_hispeedv1
 #elif MB(BEAST)
   #include "stm32f1/pins_BEAST.h"               // STM32F103VE?                           env:STM32F103VE env:STM32F103RE_maple
 #elif MB(MINGDA_MPX_ARM_MINI)
@@ -702,7 +702,7 @@
 #elif MB(OPULO_LUMEN_REV3)
   #include "stm32f4/pins_OPULO_LUMEN_REV3.h"    // STM32F4                                env:Opulo_Lumen_REV3
 #elif MB(MKS_ROBIN_NANO_V1_3_F4)
-  #include "stm32f4/pins_MKS_ROBIN_NANO_V1_3_F4.h" // STM32F4                             env:mks_robin_nano_v1_3_f4 env:mks_robin_nano_v1_3_f4_usbmod
+  #include "stm32f4/pins_MKS_ROBIN_NANO_V1_3_F4.h" // STM32F4                             env:mks_robin_nano_v1_3_f4 env:mks_robin_nano_v1_3_f4_usbmod env:mks_robin_nano_v1_3_a4988 env:mks_robin_nano_v1_3_2208 env:mks_robin_nano_v1_3_s env:mks_robin_nano_v1_3_s_2209
 #elif MB(MKS_EAGLE)
   #include "stm32f4/pins_MKS_EAGLE.h"           // STM32F4                                env:mks_eagle
 #elif MB(ARTILLERY_RUBY)

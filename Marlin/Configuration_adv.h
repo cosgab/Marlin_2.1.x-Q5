@@ -21,6 +21,8 @@
  */
 #pragma once
 
+//#define CONFIG_EXAMPLES_DIR "delta/FLSUN/"
+
 /**
  * Configuration_adv.h
  *
@@ -469,10 +471,10 @@
  * Thermistors able to support high temperature tend to have a hard time getting
  * good readings at room and lower temperatures. This means TEMP_SENSOR_X_RAW_LO_TEMP
  * will probably be caught when the heating element first turns on during the
- * preheating process, which will trigger a min_temp_error as a safety measure
+ * preheating process, which will trigger a MINTEMP error as a safety measure
  * and force stop everything.
  * To circumvent this limitation, we allow for a preheat time (during which,
- * min_temp_error won't be triggered) and add a min_temp buffer to handle
+ * MINTEMP error won't be triggered) and add a min_temp buffer to handle
  * aberrant readings.
  *
  * If you want to enable this feature for your hotend thermistor(s)
@@ -480,7 +482,7 @@
  */
 
 // The number of consecutive low temperature errors that can occur
-// before a min_temp_error is triggered. (Shouldn't be more than 10.)
+// before a MINTEMP error is triggered. (Shouldn't be more than 10.)
 //#define MAX_CONSECUTIVE_LOW_TEMPERATURE_ERROR_ALLOWED 0
 
 /**
@@ -639,10 +641,10 @@
  * Multiple extruders can be assigned to the same pin in which case
  * the fan will turn on when any selected extruder is above the threshold.
  */
-#if NONE(Q5, SR_MKS, SR_BTT, NANO1X, NANO3) 
+#if NONE(Q5, SR_MKS, SR_BTT, NANO3) 
   #define E0_AUTO_FAN_PIN -1
-#elif ANY(SR_MKS, NANO3)
-  #define E0_AUTO_FAN_PIN PB0  //HE1
+#elif ENABLED(SR_MKS)
+  #define E0_AUTO_FAN_PIN PB0  
 #else
   #define E0_AUTO_FAN_PIN FAN1_PIN  //PB0 for SR_MKS(default) or wiring to PB1.
 #endif
@@ -654,11 +656,7 @@
 #define E6_AUTO_FAN_PIN -1
 #define E7_AUTO_FAN_PIN -1
 #define CHAMBER_AUTO_FAN_PIN -1
-#ifdef XP2_FAN
-  #define COOLER_AUTO_FAN_PIN PB1 //FAN1_PIN
-#else
-  #define COOLER_AUTO_FAN_PIN -1
-#endif
+#define COOLER_AUTO_FAN_PIN -1
 
 #define EXTRUDER_AUTO_FAN_TEMPERATURE 80
 #define EXTRUDER_AUTO_FAN_SPEED 255   // 255 == full speed
@@ -887,6 +885,7 @@
 #ifdef SENSORLESS_HOMING
   #define SENSORLESS_BACKOFF_MM  { 2, 2, 2 }  // (linear=mm, rotational=°) Backoff from endstops before sensorless homing
 #endif
+
 #define HOMING_BUMP_MM      { 5, 5, 5 }       // (linear=mm, rotational=°) Backoff from endstops after first bump
                                               // For delta all values must be the same
 #define HOMING_BUMP_DIVISOR { 10, 10, 10 }    // Re-Bump Speed Divisor (Divides the Homing Feedrate)
@@ -1089,7 +1088,7 @@
  *  T[map]       Input Shaping type, 0:ZV, 1:EI, 2:2H EI (not implemented yet)
  *  X<1>         Set the given parameters only for the X axis.
  *  Y<1>         Set the given parameters only for the Y axis.
- *
+ */
 //#define INPUT_SHAPING_X
 //#define INPUT_SHAPING_Y
 #if EITHER(INPUT_SHAPING_X, INPUT_SHAPING_Y)
@@ -1105,7 +1104,6 @@
   //#define SHAPING_MAX_STEPRATE 10000  // By default the maximum total step rate of the shaped axes. Override to affect SRAM usage.
   //#define SHAPING_MENU                // Add a menu to the LCD to set shaping parameters.
 #endif
-*/
 
 #define AXIS_RELATIVE_MODES { false, false, false, false }
 
@@ -1142,12 +1140,8 @@
 #define DISABLE_INACTIVE_E true
 
 // Default Minimum Feedrates for printing and travel moves
-#define DEFAULT_MINIMUMFEEDRATE       0.0     // (mm/s) Minimum feedrate. Set with M205 S.
-#define DEFAULT_MINTRAVELFEEDRATE     0.0     // (mm/s) Minimum travel feedrate. Set with M205 T.
-#if HAS_ROTATIONAL_AXES
-  #define DEFAULT_ANGULAR_MINIMUMFEEDRATE   0.0     // (°/s) Minimum feedrate for rotational-only moves. Set with M205 P.
-  #define DEFAULT_ANGULAR_MINTRAVELFEEDRATE 0.0     // (°/s) Minimum travel feedrate for rotational-only moves. Set with M205 Q.
-#endif
+#define DEFAULT_MINIMUMFEEDRATE       0.0     // (mm/s. °/s for rotational-only moves) Minimum feedrate. Set with M205 S.
+#define DEFAULT_MINTRAVELFEEDRATE     0.0     // (mm/s. °/s for rotational-only moves) Minimum travel feedrate. Set with M205 T.
 
 // Minimum time that a segment needs to take as the buffer gets emptied
 #define DEFAULT_MINSEGMENTTIME        20000   // (µs) Set with M205 B.
@@ -1167,7 +1161,7 @@
  * See https://hydraraptor.blogspot.com/2010/12/frequency-limit.html
  * Use M201 F<freq> G<min%> to change limits at runtime.
  */
-//#define XY_FREQUENCY_LIMIT       27 // (Hz) Maximum frequency of small zigzag infill moves. Set with M201 F<hertz>.
+//#define XY_FREQUENCY_LIMIT      27 // (Hz) Maximum frequency of small zigzag infill moves. Set with M201 F<hertz>.
 #ifdef XY_FREQUENCY_LIMIT
   #define XY_FREQUENCY_MIN_PERCENT 10 // (percent) Minimum FR percentage to apply. Set with M201 G<min%>.
 #endif
@@ -1441,7 +1435,7 @@
   //#define TURBO_BACK_MENU_ITEM
 
   // Insert a menu for preheating at the top level to allow for quick access
-  //#define PREHEAT_SHORTCUT_MENU_ITEM  // Define on FLSUNQ_Config
+  //#define PREHEAT_SHORTCUT_MENU_ITEM
 
 #endif // HAS_MARLINUI_MENU
 
@@ -1588,7 +1582,7 @@
    * an option on the LCD screen to continue the print from the last-known
    * point in the file.
    */
-  //#define POWER_LOSS_RECOVERY
+  //#define POWER_LOSS_RECOVERY         // Define on FLSUNQ_Config
   #if ENABLED(POWER_LOSS_RECOVERY)
     #define PLR_ENABLED_DEFAULT   false // Power Loss Recovery enabled by default. (Set with 'M413 Sn' & M500)
     //#define BACKUP_POWER_SUPPLY       // Backup power / UPS to move the steppers on power loss
@@ -1654,11 +1648,11 @@
   // Allow international symbols in long filenames. To display correctly, the
   // LCD's font must contain the characters. Check your selected LCD language.
   #ifdef HOSTS
-    //#define UTF_FILENAME_SUPPORT
+    #define UTF_FILENAME_SUPPORT
 
     #define LONG_FILENAME_HOST_SUPPORT    // Get the long filename of a file/folder with 'M33 <dosname>' and list long filenames with 'M20 L'
     #define LONG_FILENAME_WRITE_SUPPORT   // Create / delete files with long filenames via M28, M30, and Binary Transfer Protocol
-    //#define M20_TIMESTAMP_SUPPORT         // Include timestamps by adding the 'T' flag to M20 commands
+  //#define M20_TIMESTAMP_SUPPORT         // Include timestamps by adding the 'T' flag to M20 commands
   #endif
   
   #define SCROLL_LONG_FILENAMES         // Scroll long filenames in the SD card menu
@@ -1693,7 +1687,7 @@
    *
    * [1] On AVR an interrupt-capable pin is best for UHS3 compatibility.
    */
-  #ifdef SR_MKS
+  #if ANY(SR_MKS, NANO3)
     #define USB_FLASH_DRIVE_SUPPORT
   #endif
   #if ENABLED(USB_FLASH_DRIVE_SUPPORT)
@@ -1766,7 +1760,6 @@
    */
   //#define SDCARD_CONNECTION LCD
   //#define SDCARD_CONNECTION ONBOARD
-
   // Enable if SD detect is rendered useless (e.g., by using an SD extender)
   //#define NO_SD_DETECT
 
@@ -1776,8 +1769,8 @@
    */
   //#define MULTI_VOLUME
   #if ENABLED(MULTI_VOLUME)
-    #define VOLUME_SD_ONBOARD //2
-    #define VOLUME_USB_FLASH_DRIVE //1
+    #define VOLUME_SD_ONBOARD
+    #define VOLUME_USB_FLASH_DRIVE
     #define DEFAULT_VOLUME SV_SD_ONBOARD
     #define DEFAULT_SHARED_VOLUME SV_USB_FLASH_DRIVE
   #endif
@@ -1789,15 +1782,6 @@
  * storage device. This option hides the SD card from the host PC.
  */
 //#define NO_SD_HOST_DRIVE   // Disable SD Card access over USB (for security).
-
-/**
- * By default the framework is responsible for the shared media I/O.
- * Enable this if you need Marlin to take care of the shared media I/O.
- * Useful if shared media isn't working properly on some boards.
- */
-#if ENABLED(SDSUPPORT) && DISABLED(NO_SD_HOST_DRIVE)
-  //#define DISKIO_HOST_DRIVE
-#endif
 
 /**
  * Additional options for Graphical Displays
@@ -1874,7 +1858,7 @@
   //#define STATUS_FLOWMETER_ANIM     // Use multiple bitmaps to indicate coolant flow
   #define STATUS_ALT_BED_BITMAP       // Use the alternative bed bitmap
   #define STATUS_ALT_FAN_BITMAP       // Use the alternative fan bitmap
-  #define STATUS_FAN_FRAMES   4       // :[0,1,2,3,4] Number of fan animation frames
+  #define STATUS_FAN_FRAMES 4         // :[0,1,2,3,4] Number of fan animation frames
   //#define STATUS_HEAT_PERCENT       // Show heating in a progress bar
   //#define BOOT_MARLIN_LOGO_ANIMATED // Animated Marlin logo. Costs ~3260 (or ~940) bytes of flash.
 
@@ -2153,13 +2137,12 @@
   #endif
   //#define ADVANCE_K_EXTRA       // Add a second linear advance constant, configurable with M900 L.
   //#define LA_DEBUG              // Print debug information to serial during operation. Disable for production use.
-  #define EXPERIMENTAL_SCURVE     // Enable this option to permit S-Curve Acceleration
+  #define EXPERIMENTAL_SCURVE     // Allow S-Curve Acceleration to be used with LA.
   #ifdef DDRIVE
-    //#define ADVANCE_K_EXTRA
     #define ADVANCE_K 0.045  
     #define ALLOW_LOW_EJERK       // Allow a DEFAULT_EJERK value of <10. Recommended for direct drive hotends.
   #else
-    #define ADVANCE_K 0.22
+    #define ADVANCE_K 0.0
   #endif
   //#define EXPERIMENTAL_I2S_LA   // Allow I2S_STEPPER_STREAM to be used with LA. Performance degrades as the LA step rate reaches ~20kHz.
 #endif
@@ -2411,7 +2394,7 @@
  *
  * Override the default value based on the driver type set in Configuration.h.
  */
-//#define MAXIMUM_STEPPER_RATE 100000
+//#define MAXIMUM_STEPPER_RATE 250000
 
 // @section temperature
 
@@ -2439,11 +2422,7 @@
 // @section serial
 
 // The ASCII buffer for serial input
-#ifdef XP
-  #define MAX_CMD_SIZE 500
-#else
-  #define MAX_CMD_SIZE 96
-#endif
+#define MAX_CMD_SIZE 96
 #if ANY(TFT_BTT_UI, MOD_BTT_UI, HOSTS)
   #define BUFSIZE 32
 #else
@@ -2460,7 +2439,7 @@
 #if ANY(TFT_BTT_UI, MOD_BTT_UI, HOSTS)
   #define TX_BUFFER_SIZE 32
 #else
-  #define TX_BUFFER_SIZE 16//0
+  #define TX_BUFFER_SIZE 16
 #endif
 
 // Host Receive Buffer Size
@@ -2469,7 +2448,7 @@
 // :[0, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048]
 //#define RX_BUFFER_SIZE 1024
 #ifdef HOSTS
-  #define RX_BUFFER_SIZE 1024//2048 
+  #define RX_BUFFER_SIZE 1024 //64 
 #endif
 
 #if RX_BUFFER_SIZE >= 1024
@@ -2585,7 +2564,7 @@
     #define MIN_AUTORETRACT             0.1 // (mm) Don't convert E moves under this length
     #define MAX_AUTORETRACT            10.0 // (mm) Don't convert E moves over this length
   #endif
-  #ifdef DDRIVE
+    #ifdef DDRIVE
     #define RETRACT_LENGTH              0.4 // (mm) Default retract length (positive value)
     #define RETRACT_FEEDRATE           35   // (mm/s) Default feedrate for retracting
     #define RETRACT_LENGTH_SWAP         3   // (mm) Default swap retract length (positive value)
@@ -2594,7 +2573,8 @@
     #define RETRACT_FEEDRATE           50   // (mm/s) Default feedrate for retracting
     #define RETRACT_LENGTH_SWAP        13   // (mm) Default swap retract length (positive value)
   #endif
-  //#define RETRACT_LENGTH_SWAP          13   // (mm) Default swap retract length (positive value)
+  //#define RETRACT_LENGTH              3   // (mm) Default retract length (positive value)
+  //#define RETRACT_LENGTH_SWAP        13   // (mm) Default swap retract length (positive value)
   //#define RETRACT_FEEDRATE           45   // (mm/s) Default feedrate for retracting
   #define RETRACT_ZRAISE                0.4 // (mm) Default retract Z-raise
   #define RETRACT_RECOVER_LENGTH        0   // (mm) Default additional recover length (added to retract length on recover)
@@ -2621,7 +2601,7 @@
 
   /**
    * Extra G-code to run while executing tool-change commands. Can be used to use an additional
-   * stepper motor (e.g., I axis in Configuration.h) to drive the tool-changer.
+   * stepper motor (I axis, see option LINEAR_AXES in Configuration.h) to drive the tool-changer.
    */
   //#define EVENT_GCODE_TOOLCHANGE_T0 "G28 A\nG1 A0" // Extra G-code to run while executing tool-change command T0
   //#define EVENT_GCODE_TOOLCHANGE_T1 "G1 A10"       // Extra G-code to run while executing tool-change command T1
@@ -2716,7 +2696,7 @@
     #define FILAMENT_CHANGE_UNLOAD_ACCEL        25
     #define FILAMENT_CHANGE_UNLOAD_LENGTH      550
   #elif ENABLED(DDRIVE)
-    #define FILAMENT_CHANGE_UNLOAD_FEEDRATE     20    //40 LGX
+    #define FILAMENT_CHANGE_UNLOAD_FEEDRATE     20
     #define FILAMENT_CHANGE_UNLOAD_ACCEL        25
     #define FILAMENT_CHANGE_UNLOAD_LENGTH      100
   #elif ANY(SR_MKS, SR_BTT)
@@ -2740,13 +2720,13 @@
     #define FILAMENT_CHANGE_FAST_LOAD_ACCEL     25
     #define FILAMENT_CHANGE_FAST_LOAD_LENGTH   600
   #elif ENABLED(DDRIVE)
-    #define FILAMENT_CHANGE_FAST_LOAD_FEEDRATE  15  //20 LGX
-    #define FILAMENT_CHANGE_FAST_LOAD_ACCEL     25  //15 LGX
+    #define FILAMENT_CHANGE_FAST_LOAD_FEEDRATE  15
+    #define FILAMENT_CHANGE_FAST_LOAD_ACCEL     25
     #define FILAMENT_CHANGE_FAST_LOAD_LENGTH    60
   #elif ANY(SR_MKS, SR_BTT)
     #define FILAMENT_CHANGE_FAST_LOAD_FEEDRATE  40
     #define FILAMENT_CHANGE_FAST_LOAD_ACCEL     25
-    #define FILAMENT_CHANGE_FAST_LOAD_LENGTH   550
+    #define FILAMENT_CHANGE_FAST_LOAD_LENGTH   550  // Default 565mm
   #else                                             // 0 to disable start loading and skip to fast load only
     #define FILAMENT_CHANGE_FAST_LOAD_FEEDRATE  40// 6  //40  // (mm/s) Load filament feedrate. This can be pretty fast.
     #define FILAMENT_CHANGE_FAST_LOAD_ACCEL     30  // (mm/s^2) Lower acceleration may allow a faster feedrate.
@@ -3054,6 +3034,9 @@
   //#define E1_CS_PIN         -1
   //#define E2_CS_PIN         -1
   //#define E3_CS_PIN         -1
+  //#define E4_CS_PIN         -1
+  //#define E5_CS_PIN         -1
+  //#define E6_CS_PIN         -1
   //#define E7_CS_PIN         -1
 
   /**
@@ -3080,7 +3063,7 @@
    * Set *_SERIAL_TX_PIN and *_SERIAL_RX_PIN to match for all drivers
    * on the same serial port, either here or in your board's pins file.
    */
-  #if ANY(Q5, SR_MKS, SR_BTT, NANO1X, NAMO3)
+  #if ANY(Q5, SR_MKS, SR_BTT, NANO3)
     #define  X_SLAVE_ADDRESS 0
     #define  Y_SLAVE_ADDRESS 0
     #define  Z_SLAVE_ADDRESS 0
@@ -3304,6 +3287,7 @@
    * M122 S0/1 will enable continuous reporting.
    */
   #define TMC_DEBUG
+  
 
   /**
    * You can set your own advanced settings by filling in predefined functions.
@@ -3690,14 +3674,6 @@
  */
 //#define CNC_COORDINATE_SYSTEMS
 
-/**
- * CNC Drilling Cycle - UNDER DEVELOPMENT
- *
- * Enables G81 to perform a drilling cycle.
- * Currently only supports a single cycle, no G-code chaining.
- */
-//#define CNC_DRILLING_CYCLE
-
 // @section reporting
 
 /**
@@ -3717,7 +3693,7 @@
 /**
  * Auto-report position with M154 S<seconds>
  */
-#if ANY(TFT_BTT_UI, MOD_BTT_UI)
+#if ANY(MOD_BTT_UI, TFT_BTT_UI)
   #define AUTO_REPORT_POSITION
 #endif
 
@@ -3820,7 +3796,6 @@
 #ifdef G0_FEEDRATE
   //#define VARIABLE_G0_FEEDRATE // The G0 feedrate is set by F in G0 motion mode
 #endif
-//#define G0_ANGULAR_FEEDRATE 2700 // (°/min)
 
 // @section gcode
 
@@ -3859,7 +3834,7 @@
   #define CUSTOM_MENU_MAIN_SCRIPT_RETURN   // Return to status screen after a script
   #define CUSTOM_MENU_MAIN_ONLY_IDLE       // Only show custom menu when the machine is idle
 
-  #define MAIN_MENU_ITEM_1_DESC "Init. EEPROM"
+  #define MAIN_MENU_ITEM_1_DESC "Initialize EEPROM"
   #define MAIN_MENU_ITEM_1_GCODE "M502\nM500\nM997"
   #define MAIN_MENU_ITEM_1_CONFIRM
 
@@ -3871,15 +3846,14 @@
   #define MAIN_MENU_ITEM_3_GCODE "G33P5V3\nM500\nM140S0"  //P6ok
   #define MAIN_MENU_ITEM_3_CONFIRM
 
-  #define MAIN_MENU_ITEM_4_DESC "ZOffSet Wizard"
+  #define MAIN_MENU_ITEM_4_DESC "ZProbe Wizard"
   #define MAIN_MENU_ITEM_4_GCODE "G28" //Modif menu_main.cpp(lig158)
   #define MAIN_MENU_ITEM_4_CONFIRM
 
   #define MAIN_MENU_ITEM_5_DESC "1.Bed Level. UBL for " PREHEAT_1_LABEL
   #define MAIN_MENU_ITEM_5_GCODE "G29L1\nM1004B70S1"
   #define MAIN_MENU_ITEM_5_CONFIRM
-
-
+  
   #ifdef MPCTEMP
     #define MAIN_MENU_ITEM_6_DESC "1.Run Autotune on Active extruder"
     #define MAIN_MENU_ITEM_6_GCODE "M306T\nM500\nG28\nM107"
@@ -3904,7 +3878,6 @@
   #define MAIN_MENU_ITEM_10_DESC "Reboot Printer"
   #define MAIN_MENU_ITEM_10_GCODE "M997"
   #define MAIN_MENU_ITEM_10_CONFIRM
-
 
   //#define MAIN_MENU_ITEM_1_DESC "Home & UBL Info"
   //#define MAIN_MENU_ITEM_1_GCODE "G28\nG29 W"
@@ -4327,8 +4300,6 @@
     #define MMU2_CAN_LOAD_INCREMENT_SEQUENCE \
       { -MMU2_CAN_LOAD_INCREMENT, MMU2_CAN_LOAD_FEEDRATE }
 
-    // Continue unloading if sensor detects filament after the initial unload move
-    //#define MMU_IR_UNLOAD_MOVE
   #else
 
     /**
