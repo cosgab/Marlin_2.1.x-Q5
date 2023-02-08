@@ -1,4 +1,4 @@
-### 2022-08-27 MARLIN 2.1.1 (compatible with GD32*)
+### 2023-02-08 MARLIN 2.1.2 (compatible with GD32*)
 
 - QQS-Pro STOCK With 4xA4988 = QQSP_STOCK-Robin_mini.bin
 - QQS-Pro STOCK With 4xTMC2208 = QQSP_STOCK_TMC8-Robin_mini.bin
@@ -37,7 +37,7 @@ SCWTPULR-Robin_mini.bin => QQSPro Stock
   **Header caption:**
 
   **/*------Drivers--------*/**
-  - (S) 4xA4988 (green/red rectangle)
+  - (S) 4xA4988 (Stock= Default for QQSP)
   - (8) TMC2208 Standalone
   - (9) TMC2209 Standalone
   - (U8) 4xTMC2208_UART with no module ESP12.
@@ -50,7 +50,7 @@ SCWTPULR-Robin_mini.bin => QQSPro Stock
 
   **/*-------Options UI TFT--------*/**
   - (F) UI STANDARD (Emulation LCD screen on TFT)
-  - (C) UI MARLIN (TFT Color screen)
+  - (C) UI MARLIN (TFT Color screen) (Default)
   - (I) UI MKS (TFT Color screen>=480x320 use Lvgl/NANOv2-3)
   - (s) UI TOUCH (BTT-TFT) TFT serial Mod. 
   - (r) UI STANDARD (Marlin Mode on TFT FOR SKR/NANOv2-3)
@@ -58,31 +58,31 @@ SCWTPULR-Robin_mini.bin => QQSPro Stock
   - (D) UI DWIN (H43)
 
   **/*------Modules--------*/**
-  - (n) NeoPixel (management of led strips)
+  - (N) NeoPixel (management of led strips, number=nb leds)
   - (W) Module ESP8266/ESP12 (infos at the middle of the page)
   - (w) Module ESP8266/ESP12 with ESP3Dv3.0 Firmware.
   - (T) Extruder Titan/Stock
   - (B) Extruder BMG (also reverse direction)
   - (O) Extruder OMG
-  - (X) Extruder DirectDrive Nema14 (SuperDriveHX/Mini-Sherpa/Lgx/...)
+  - (X) Extruder DirectDrive Nema14 pancake (SuperDriveHX/Mini-Sherpa/Lgx/...)
   
   **/*-------Others options in firmware----*/**
   - (G) SENSORLESS_HOMING (Only 2209 and need wiring)
   - (g) SENSORLESS_PROBING (Only 2209 and need wiring)
   - (m) MPCTEMP - Model predictive temperature control (New PID Nozzle)
-  - (H) Hotend Volcano or HotendAllMetal
+  - (H) Hotend Volcano or HotendAllMetal (number=type thermistor)
   - (A) BED_LEVELING_BILINEAR
-  - (U) BED_LEVELING_UBL (levelings saved to location)
+  - (U) BED_LEVELING_UBL (levelings saved to location) (Default)
   - (P) PreHeat bed before leveling
-  - (R) ARC_SUPPORT
-  - (L) Linear Advance (Possible Bug with BabyStep and TMC2208)
-  - (M) MEATPACK (Improve dialogue/communication with OctoPrint)
-  - (Z) Input Shaping.
+  - (R) ARC_SUPPORT (Default)
+  - (L) Linear Advance (Default)
+  - (M) MEATPACK (Improve dialogue/communication with OctoPrint) (Default)
+  - (Z) Input Shaping (no validate on Deltas).
   
   **/*-------Others options for advanced users who build their firmware----*/**
   - HOST_ACTION_COMMANDS (Action Command Prompt support Message on OctoPrint) (default)
   - Host start print by menu (Only TFT_COLOR_UI)
-  - BINARY_FILE_TRANSFER (default)
+  - BINARY_FILE_TRANSFER
   - TEMP_SENSOR_0 (After changed the thermitor nozzle)
   - LCD_LANGUAGE (Change to the native language)
   - NEOPIXEL_PIXELS (Add line for nb of leds).
