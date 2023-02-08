@@ -45,13 +45,13 @@
 /*________________________2___________________________*/
           /*-----Type Stepper Drivers-(1 CHOICE)-----*/
 /* MODE STOCK for QQS & Q5 & SR */
-//#define STOCK                         // (S) (Default_QQS) For 4xA4988(green or red color).
+#define STOCK                         // (S) (Default_QQS) For 4xA4988(green or red color).
                                       // (S) (Default_Q5) For 3xTMC2208+1xA4988.
                                       // (S) (Default_SR) For 4xTMC2209_UART.
 
 /* MODE STANDALONE XYZ+E for QQS & Q5 */
 //#define ALL_TMC8                    // (8) For 4xTMC2208_STANDALONE
-#define ALL_TMC9                    // (9) For 4xTMC2209_STANDALONE
+//#define ALL_TMC9                    // (9) For 4xTMC2209_STANDALONE
 
 /* MODE UART XYZ+E for QQS & Q5 */
 //#define Q_UART8                     // (U8) 4xTMC2208_UART Note: remove on your printer the module WIFI and wire your TMC.
@@ -120,7 +120,7 @@
 
 // BMG_right Extruder (B) step(417) ou SuperDriveHX Extruder (X) step(720).
 //#define BMG                            //(B) Uncommment for BMG_left.
-#define DDRIVE                         //(X) Uncommment for Mini-Sherpa/SuperDrive/Orbiter.
+//#define DDRIVE                         //(X) Uncommment for Mini-Sherpa/SuperDrive/Orbiter.
 //#define OMG                            //(O) Uncommment for OMG.(QQS no inv)
                   /*  Custom Effector  */
                   /* rods, height, arms*/
