@@ -76,6 +76,7 @@ Below is an example with the firmware for a Q5 printer with a Mks_Robin_nanov1.2
   - TEMP_SENSOR_0 (After changed the thermitor nozzle)
   - LCD_LANGUAGE (Change to the native language)
   - Add line for nb of leds.
+  - FW Retract
   - Fixed "Special Menu" for MPC and levelings.
   - etc 
  
