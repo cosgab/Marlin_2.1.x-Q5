@@ -77,7 +77,7 @@ SCWTPULR-Robin_mini.bin => QQSPro Stock
   - (R) ARC_SUPPORT (Default)
   - (L) Linear Advance (Default)
   - (M) MEATPACK (Improve dialogue/communication with OctoPrint) (Default)
-  - (Z) Input Shaping (no validate on Deltas).
+  - (Z) Input Shaping (no validated on Deltas).
   
   **/*-------Others options for advanced users who build their firmware----*/**
   - HOST_ACTION_COMMANDS (Action Command Prompt support Message on OctoPrint) (default)
