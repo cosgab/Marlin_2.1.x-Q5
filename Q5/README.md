@@ -1,4 +1,4 @@
-### 2022-08-27 MARLIN 2.1.1
+### 2023-02-08 MARLIN 2.1.2
 
  # **NOTE**: Recently, the Q5 printer has two types of motherboards. The first ones have Mks_robin_nanoV1.2 and the new ones have Mks_robin_nanoV1.3. These are not the same firmwares for Marlin so be careful when downloading to take the right firmware associated with the MoBo.
 
@@ -30,7 +30,7 @@ Below is an example with the firmware for a Q5 printer with a Mks_Robin_nanov1.2
   **Header caption:**
 
   **/*------Drivers--------*/**
-  - (S) A4988 (green/red)
+  - (8+S) 3xTMC2208+1xA4988 (Default) 
   - (8) 4xTMC2208 Standalone
   - (9) 4xTMC2209 Standalone
   - (U8) 4xTMC2208_UART with no module ESP12.
@@ -43,37 +43,36 @@ Below is an example with the firmware for a Q5 printer with a Mks_Robin_nanov1.2
 
   **/*-------Options UI TFT--------*/**
   - (F) UI STANDARD (Emulation LCD screen on TFT)
-  - (C) UI MARLIN (TFT Color screen)
+  - (C) UI MARLIN (TFT Color screen) (Default)
   - (I) UI MKS (TFT Color screen>=480x320 use Lvgl/NANOv2-3)
   - (r) UI STANDARD (Marlin Mode on TFT FOR SKR/NANOv2-3 include BTT's TFT)
 
   **/*------Modules--------*/**
-  - (n) NeoPixel (management of led strips)
+  - (N) NeoPixel (management of led strips +Number = nb leds)
   - (W) Module ESP8266/ESP12 (infos at the middle of the page)
   - (w) Module ESP8266/ESP12 with ESP3Dv3.0 Firmware.
-  - (T) Extruder Titan
+  - (T) Extruder Titan (Default)
   - (B) Extruder BMG
-  - (b) Extruder BMG mini
   - (O) Extruder OMG
-  - (X) Extruder Nema14 (SuperDriveHX/Mini-Sherpa/LGX...)
+  - (X) Extruder DirectDrive Nema14 Pancake (SuperDriveHX/Mini-Sherpa/LGX...)
   
   **/*-------Others options in firmware----*/**
   - (G) SENSORLESS_HOMING (Only 2209)
   - (g) SENSORLESS_PROBING (Only 2209)
-  - (m) MPCTEMP - Model predictive temperature control
-  - (H) Hotend Volcano or HotendAllMetal
+  - (m) MPCTEMP - Model predictive temperature control (New PID)
+  - (H) Hotend Volcano or HotendAllMetal (+Number = Type of thermistor)
   - (A) BED_LEVELING_BILINEAR
-  - (U) BED_LEVELING_UBL
-  - (P) PreHeat bed before leveling
-  - (R) ARC_SUPPORT
-  - (L) Linear Advance (Possible Bug with BabyStep and TMC2208)
-  - (M) MEATPACK (Improve dialogue/communication with OctoPrint)
-  - (Z) Input Shaping.
+  - (U) BED_LEVELING_UBL (Default)
+  - (P) PreHeat bed before leveling (Default)
+  - (R) ARC_SUPPORT (Default)
+  - (L) Linear Advance (Default)
+  - (M) MEATPACK (Improve dialogue/communication with OctoPrint, Default)
+  - (Z) Input Shaping (No valided on Deltas).
 
   **/*-------Others options for advanced users who build their firmware----*/**
   - HOST_ACTION_COMMANDS (Action Command Prompt support Message on OctoPrint) (default)
-  - Host start print by menu (Only TFT_COLOR_UI)
-  - BINARY_FILE_TRANSFER (default)
+  - Host start print by menu (Only TFT_COLOR_UI) (Default)
+  - BINARY_FILE_TRANSFER
   - TEMP_SENSOR_0 (After changed the thermitor nozzle)
   - LCD_LANGUAGE (Change to the native language)
   - Add line for nb of leds.
