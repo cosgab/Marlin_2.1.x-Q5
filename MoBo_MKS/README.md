@@ -1,10 +1,13 @@
-### 2022-06-18 MARLIN 2.1
+### 2023-02-09 MARLIN 2.1.x
 
 - QQS-Pro With MoBo Nanov3+4xTMC2209 = QQSP_TFT-header-Robin_nano_v3.bin
 - QQS-Pro With MoBo SRK+4xTMC2209 = QQSP_STOCK-header-MoBo-firmware.bin
 - QQS-Pro STOCK With 4xTMC2209 = QQSP_STOCK_TMC9-Robin_mini.bin
   
 Each firmware has a header that corresponds to the hardware (board) and functions used in the firmware.
+
+New 2023:
+Due to the increasing number of user requests and combinations of different HotEnd, MoBo and software features, I can build a firmware suitable for your configuration: A small contribution will be asked.
 
 **ADD:**
  - Pack Firmware for BTT-TFT35/70 mode landscape and portrait for TFT35v3. 
@@ -24,18 +27,25 @@ QQSP+TS35-U9CBPULR32-Robin_nano_v3.bin
  - (32)Steps nb -
  - (MoBo) NanoV3
 
-  **Note**: After choosing your binary, remove the "QQSP_TS35-U9CBPULR32-" header or rename the file to "Robin_nano_v3.bin" for QQS or "firmware.bin".
+  🔧**Note**: After choosing your binary, remove the "QQSP_TS35-U9CBPULR32-" header or rename the file to "Robin_nano_v3.bin" for QQS or "firmware.bin".
   place it on your SD card, insert your SD card into the printer and power on your printer.
   
-  After the flash and to configure and prepare your printer, please follow the steps on the Wiki => [HERE](https://github.com/Foxies-CSTL/Marlin_2.0.x/wiki/2.SETTINGS-THE-PRINTER)
+  After the flash and to configure and prepare your printer, please follow the steps on the Wiki => [🚸](https://github.com/Foxies-CSTL/Marlin_2.1.x/wiki/2.SETTINGS-THE-PRINTER)
   
+<img width=400 src="https://github.com/Foxies-CSTL/Marlin_2.1.x/wiki/icons/FLSun-Wiki.png" />
+
+  or for a summary of [the steps to follow](../Instructions.md)
+
+  📌**New 2023:**
+  *Due to the increasing number of user requests and combinations of different HotEnd, MoBo and software features, I can build a firmware suitable for your configuration: A small contribution will be asked* 🍻.
+
+
+**Header caption:**
  - P = Probe (Purple)
  - R = Runout for the filament (Orange)
  - F = Fan1 for the HeatSink (Green) (begin at 80°C)
 
 ![Cnx_NanoV3](https://github.com/Foxies-CSTL/Marlin_2.0.x/wiki/images/NanoV3-EndStop.png)
-
-  **Header caption:**
 
   **/*------Drivers--------*/**
   - (S) A4988 (green/red rectangle)
@@ -89,4 +99,15 @@ QQSP+TS35-U9CBPULR32-Robin_nano_v3.bin
   - (Q5_8+SCTPULR-Robin_nano)   Q5 Stock(3xTMC2208+1xA4988) with TITAN extruder. 
   - (Q5_9CBPULR-Robin_nano)     Q5 with 4xTMC2209 with BMG extruder.
   - (QQS)U9rTPULR16-SKR14_firmware QQS with SKRv1.4 Board with emulation LCD (Marlin Mode)
+ ## ✨Support my work✨
+
+  This FLSun Deltas porting project for Marlin firmware was only possible thanks to its supporters, you can participate:
+ <br/>
+  <br/> Via [![paypal.me](./icons/paypal_50px.png)](https://www.paypal.me/Foxies40)<br/>[![Donate](https://img.shields.io/badge/Donate-Thanks-green)](https://paypal.me/Foxies40)<br/>
+<br/>
+ 
+Via   <a href='https://ko-fi.com/U7U77F782' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://cdn.ko-fi.com/cdn/kofi4.png?v=3' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>   with a Mini-Blog.
+
+  You can also send me a tip via [Thingiverse](https://www.thingiverse.com/FamStel/about) if you prefer.
+ ### Massive thank you in advance :heart:
 ***

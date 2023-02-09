@@ -1,4 +1,4 @@
-### 2023-02-08 MARLIN 2.1.2 (compatible with GD32*)
+### 2023-02-09 MARLIN 2.1.2 (compatible with GD32*)
 
 - QQS-Pro STOCK With 4xA4988 = QQSP_STOCK-Robin_mini.bin
 - QQS-Pro STOCK With 4xTMC2208 = QQSP_STOCK_TMC8-Robin_mini.bin
@@ -19,18 +19,21 @@ SCWTPULR-Robin_mini.bin => QQSPro Stock
    - (L)LinearAdvance - 
    - (R)Arc function enabled.
 
-  **Note**: After choosing your binary, remove the "SCWTPULR-" header or rename the file to "Robin_mini.bin" for QQS,
+  🔧**Note**: After choosing your binary, remove the "SCWTPULR-" header or rename the file to "Robin_mini.bin" for QQS,
   place it on your SD card, insert your SD card into the printer and power on your printer.
   
 -* With GD32 chip, the rename is "Robin_nano.bin"
 
-  **Note2**: In some QQSPs(GD32 chip), the flash is blocked because of the screen. To unblock it, you need to remove the shielding from the wire ribbon that connects the MoBo to the screen and reflash the firmware.
+  ♻️ **Caution for QQS printer**♻️: In some QQSPs(GD32 chip), the flash is blocked because of the screen. To unblock it, you need to remove the shielding from the wire ribbon that connects the MoBo to the screen and reflash the firmware.
   
-  After the flash and to configure and prepare your printer, please follow the steps on the Wiki => 
+  After the flash and to configure and prepare your printer, please follow the steps on the Wiki => [🚸](https://github.com/Foxies-CSTL/Marlin_2.1.x/wiki/2.SETTINGS-THE-PRINTER)
   
-  [HERE](https://github.com/Foxies-CSTL/Marlin_2.1.x/wiki/2.SETTINGS-THE-PRINTER)
-
 <img width=400 src="https://github.com/Foxies-CSTL/Marlin_2.1.x/wiki/icons/FLSun-Wiki.png" />
+
+  or for a summary of [the steps to follow](../Instructions.md)
+  
+  📌**New 2023:**
+  *Due to the increasing number of user requests and combinations of different HotEnd, MoBo and software features, I can build a firmware suitable for your configuration: A small contribution will be asked* 🍻.
 
 **ADD:** Pack firmwares for BTT-TFT35/50/70 mode landscape and portrait.
 
@@ -94,4 +97,15 @@ SCWTPULR-Robin_mini.bin => QQSPro Stock
   - (QQSP_8+SCTPULR-Robin_nano)     QQS with NanoV1.2 + 3xTMC2208standalone+1xA4988 and TITAN/STOCK extruder. 
   - (QQSP_9CBPULR-Robin_nano35)     QQS with NanoV1.3 + 4xTMC2209Standalone and BMG extruder.
   - (QQSP_U9rTPULR16-SKR14_firmware QQS with SKRv1.4 Board + 4x2209Uart with BTT-TFT emulation LCD (Marlin Mode)
+ ## ✨Support my work✨
+
+  This FLSun Deltas porting project for Marlin firmware was only possible thanks to its supporters, you can participate:
+ <br/>
+  <br/> Via [![paypal.me](./icons/paypal_50px.png)](https://www.paypal.me/Foxies40)<br/>[![Donate](https://img.shields.io/badge/Donate-Thanks-green)](https://paypal.me/Foxies40)<br/>
+<br/>
+ 
+Via   <a href='https://ko-fi.com/U7U77F782' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://cdn.ko-fi.com/cdn/kofi4.png?v=3' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>   with a Mini-Blog.
+
+  You can also send me a tip via [Thingiverse](https://www.thingiverse.com/FamStel/about) if you prefer.
+ ### Massive thank you in advance :heart:
 ***

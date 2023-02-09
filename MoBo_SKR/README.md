@@ -1,4 +1,4 @@
-### 2022-06-18 MARLIN 2.1
+### 2023-02-09 MARLIN 2.1.x
 
 Each firmware has a header that corresponds to the hardware (board) and functions used in the firmware.
 
@@ -20,10 +20,19 @@ QQSP+BTT-U9rBPULR32-SKR2b-firmware.bin
   - (32)Steps nb -
   - (MoBo) SKR2 revision b
 
-  **Note**: After choosing your binary, remove the "8CWBL-SRKxx" header or rename the file to "firmware.bin" for QQS-SKR,
+  🔧**Note**: After choosing your binary, remove the "8CWBL-SRKxx" header or rename the file to "firmware.bin" for QQS-SKR,
   place it on your SD card, insert your SD card into the printer and power on your printer.
   
-  After the flash and to configure and prepare your printer, please follow the steps on the Wiki => [HERE](https://github.com/Foxies-CSTL/Marlin_2.1.x/wiki/2.SETTINGS-THE-PRINTER)
+  After the flash and to configure and prepare your printer, please follow the steps on the Wiki => [🚸](https://github.com/Foxies-CSTL/Marlin_2.1.x/wiki/2.SETTINGS-THE-PRINTER)
+  
+<img width=400 src="https://github.com/Foxies-CSTL/Marlin_2.1.x/wiki/icons/FLSun-Wiki.png" />
+
+  or for a summary of [the steps to follow](../Instructions.md)
+
+  📌**New 2023:**
+  *Due to the increasing number of user requests and combinations of different HotEnd, MoBo and software features, I can build a firmware suitable for your configuration: A small contribution will be asked* 🍻.
+  
+  **Header caption:**
   
   - P = Probe (Purple)
   - R = Runout for the filament (Orange)
@@ -37,8 +46,6 @@ QQSP+BTT-U9rBPULR32-SKR2b-firmware.bin
   - (QQS)U9rTPULR16-SKR14T_firmware   QQS SKR14T(4xTMC2209UART)16steps with TITAN extruder. 
   - (QQS)U8rBPUR32-SKR13_firmware  QQS SKR13(4xTMC2208_standAlone)32steps without LA, with BMG Right_Hand extruder.
   - (QQS)U9rTPULR16-SKR14_firmware QQS with SKRv1.4 Board with emulation LCD (Marlin Mode)
-  
-  **Header caption:**
 
   **/*------Drivers--------*/**
   - (S) A4988 (green/red)
@@ -86,5 +93,15 @@ QQSP+BTT-U9rBPULR32-SKR2b-firmware.bin
   - Add line for nb of leds.
   - Fixed "Special Menu" for MPC and levelings.
   - etc 
+ ## ✨Support my work✨
+
+  This FLSun Deltas porting project for Marlin firmware was only possible thanks to its supporters, you can participate:
+ <br/>
+  <br/> Via [![paypal.me](./icons/paypal_50px.png)](https://www.paypal.me/Foxies40)<br/>[![Donate](https://img.shields.io/badge/Donate-Thanks-green)](https://paypal.me/Foxies40)<br/>
+<br/>
  
+Via   <a href='https://ko-fi.com/U7U77F782' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://cdn.ko-fi.com/cdn/kofi4.png?v=3' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>   with a Mini-Blog.
+
+  You can also send me a tip via [Thingiverse](https://www.thingiverse.com/FamStel/about) if you prefer.
+ ### Massive thank you in advance :heart:
 ***

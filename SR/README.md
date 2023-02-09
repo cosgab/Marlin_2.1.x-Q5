@@ -1,12 +1,12 @@
 ### 2023-02-09 MARLIN 2.1.2 RELEASE
 
-**IMPORTANT NOTE**: 
+📝**IMPORTANT NOTE**: 
 Most of the problems with the SR come from the detrimental interaction of the Stock display (serial exchanges on the USB port, UART) on the operation of the old Marlin modified by FLSun. This leads to problems with step loss/skipping with the stepper motor drivers, extruder noise, blocking in some prints, ... (TMC in UART mode) or problems of dialogue priority with Octoprint, Repetier server or pronterface (USB) and the TFT screen.
 
 - [ ] **So all my firmwares work without this weak link but with another TFT screen and contain all the last improvements of Marlin.**  
 
-**NOTE**: 
-The SR printer has two types of motherboards. The first ones have BTT_SKR13 and the new ones have Mks_robin_nanoV3.x. 
+♻️ **Caution for SR printer**♻️: 
+The SR printer has two types of motherboards (MoBo). The first ones have BTT_SKR13 and the new ones have Mks_robin_nanoV3.x. 
 These are not the same firmwares for Marlin so be careful when downloading to take the right firmware associated with the MoBo.
 
 SKR13 => Firmware SRB_xxxxxxx.bin
@@ -42,14 +42,17 @@ SRM-SCBPULR32-Robin_nano_v3.bin
   - (R)Arc function enabled
   - (32) All axes in 32 steps instead of 16 steps.
 
-  **Note**: After choosing your binary, remove the "SRM-SCBPULR32-" header or rename the file to "Robin_nano_v3.bin" for SR-MKS,
+  🔧**Note**: After choosing your binary, remove the "SRM-SCBPULR32-" header or rename the file to "Robin_nano_v3.bin" for SR-MKS,
   place it on your SD card, insert your SD card into the printer and power on your printer.
   
-  After the flash and to configure and prepare your printer, please follow the steps on the Wiki => 
+  After the flash and to configure and prepare your printer, please follow the steps on the Wiki => [🚸](https://github.com/Foxies-CSTL/Marlin_2.1.x/wiki/2.SETTINGS-THE-PRINTER)
   
-  [HERE](https://github.com/Foxies-CSTL/Marlin_2.1.x/wiki/2.SETTINGS-THE-PRINTER)
-  
-  <img width=400 src="https://github.com/Foxies-CSTL/Marlin_2.1.x/wiki/icons/FLSun-Wiki.png" />
+<img width=400 src="https://github.com/Foxies-CSTL/Marlin_2.1.x/wiki/icons/FLSun-Wiki.png" />
+
+  or for a summary of [the steps to follow](../Instructions.md)
+
+  📌**New 2023:**
+  *Due to the increasing number of user requests and combinations of different HotEnd, MoBo and software features, I can build a firmware suitable for your configuration: A small contribution will be asked* 🍻.
   
   **/*-------Others Firmwares for QQS with SKR family or Mks_Nano Family----*/**
   - (QQS)U9rTPULR16-SKR14T_firmware   QQS SKR14T(4xTMC2209UART)16steps with TITAN extruder. 
@@ -100,4 +103,16 @@ SRM-SCBPULR32-Robin_nano_v3.bin
   - Fixed "Special Menu" for MPC and levelings.
   - etc 
   
+***
+ ## ✨Support my work✨
+
+  This FLSun Deltas porting project for Marlin firmware was only possible thanks to its supporters, you can participate:
+ <br/>
+  <br/> Via [![paypal.me](./icons/paypal_50px.png)](https://www.paypal.me/Foxies40)<br/>[![Donate](https://img.shields.io/badge/Donate-Thanks-green)](https://paypal.me/Foxies40)<br/>
+<br/>
+ 
+Via   <a href='https://ko-fi.com/U7U77F782' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://cdn.ko-fi.com/cdn/kofi4.png?v=3' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>   with a Mini-Blog.
+
+  You can also send me a tip via [Thingiverse](https://www.thingiverse.com/FamStel/about) if you prefer.
+ ### Massive thank you in advance :heart:
 ***
