@@ -14,6 +14,9 @@ Please test this firmware and let us know if it misbehaves in any way. Volunteer
 ## Q5 (motherboard NANO_V1.x)
 ## SR (motherboard MKS/BTT with other screen like BTT-TFT35v3/Mks-TS35v2/RepRap TFT).
 
+**20230209** Release 2.1.2
+- Marlin 2.1.2 (QQSP, Q5, SR)
+
 **20220827** Release 2.1.1
 - Marlin 2.1.1 (QQSP, Q5, SR)
 - Fix issues from v2.1
