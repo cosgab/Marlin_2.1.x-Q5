@@ -67,7 +67,7 @@ Below is an example with the firmware for a Q5 printer with a Mks_Robin_nanov1.2
   - (R) ARC_SUPPORT (Default)
   - (L) Linear Advance (Default)
   - (M) MEATPACK (Improve dialogue/communication with OctoPrint, Default)
-  - (Z) Input Shaping (No valided on Deltas).
+  - (Z) Input Shaping (No validated on Deltas).
 
   **/*-------Others options for advanced users who build their firmware----*/**
   - HOST_ACTION_COMMANDS (Action Command Prompt support Message on OctoPrint) (default)
