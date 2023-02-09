@@ -23,9 +23,9 @@ Below is an example with the firmware for a Q5 printer with a Mks_Robin_nanov1.2
   🔧**Note**: After choosing your binary, remove the "8+SCWTPULR-" header or rename the file to "Robin_nano.bin" for old Q5 or "Robin_nano35.bin" for the new Q5,
   place it on your SD card, insert your SD card into the printer and power on your printer.
   
-  After the flash and to configure and prepare your printer, please follow the steps on the Wiki => [🚸](https://github.com/Foxies-CSTL/Marlin_2.1.x/wiki/2.SETTINGS-THE-PRINTER)
+  After the flash and to configure and prepare your printer, please follow the steps on the Wiki
   
-<img width=400 src="https://github.com/Foxies-CSTL/Marlin_2.1.x/wiki/icons/FLSun-Wiki.png" />
+   => [<img width=400 src="https://github.com/Foxies-CSTL/Marlin_2.1.x/wiki/icons/FLSun-Wiki.png" />](https://github.com/Foxies-CSTL/Marlin_2.1.x/wiki/2.SETTINGS-THE-PRINTER)
 
   or for a summary of [the steps to follow](../Instructions.md)
 

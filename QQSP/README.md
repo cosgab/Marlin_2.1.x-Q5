@@ -26,9 +26,9 @@ SCWTPULR-Robin_mini.bin => QQSPro Stock
 
   ♻️ **Caution for QQS printer**♻️: In some QQSPs(GD32 chip), the flash is blocked because of the screen. To unblock it, you need to remove the shielding from the wire ribbon that connects the MoBo to the screen and reflash the firmware.
   
-  After the flash and to configure and prepare your printer, please follow the steps on the Wiki => [🚸](https://github.com/Foxies-CSTL/Marlin_2.1.x/wiki/2.SETTINGS-THE-PRINTER)
+  After the flash and to configure and prepare your printer, please follow the steps on the Wiki
   
-<img width=400 src="https://github.com/Foxies-CSTL/Marlin_2.1.x/wiki/icons/FLSun-Wiki.png" />
+=> [<img width=400 src="https://github.com/Foxies-CSTL/Marlin_2.1.x/wiki/icons/FLSun-Wiki.png" />](https://github.com/Foxies-CSTL/Marlin_2.1.x/wiki/2.SETTINGS-THE-PRINTER)
 
   or for a summary of [the steps to follow](../Instructions.md)
   

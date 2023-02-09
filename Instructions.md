@@ -26,9 +26,9 @@ and therefore the movements of the head will no longer be precise and will cause
 **Thank you for reading this far and this is valid regardless of the firmware used.**
 
 ***
-After the flash and to configure and prepare your printer, please follow the steps on the Wiki => [🚸🚸🚸](https://github.com/Foxies-CSTL/Marlin_2.1.x/wiki/2.SETTINGS-THE-PRINTER)
-  
-<img width=400 src="https://github.com/Foxies-CSTL/Marlin_2.1.x/wiki/icons/FLSun-Wiki.png" />
+After the flash and to configure and prepare your printer, please follow the steps on the Wiki 
+
+=> [<img width=400 src="https://github.com/Foxies-CSTL/Marlin_2.1.x/wiki/icons/FLSun-Wiki.png" />](https://github.com/Foxies-CSTL/Marlin_2.1.x/wiki/2.SETTINGS-THE-PRINTER)
 
 Here is a summary of the steps to follow in order:
 1. Flash firmware
