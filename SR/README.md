@@ -1,4 +1,4 @@
-### 2022-08-27 MARLIN 2.1.1 RELEASE
+### 2023-02-09 MARLIN 2.1.2 RELEASE
 
 **IMPORTANT NOTE**: 
 Most of the problems with the SR come from the detrimental interaction of the Stock display (serial exchanges on the USB port, UART) on the operation of the old Marlin modified by FLSun. This leads to problems with step loss/skipping with the stepper motor drivers, extruder noise, blocking in some prints, ... (TMC in UART mode) or problems of dialogue priority with Octoprint, Repetier server or pronterface (USB) and the TFT screen.
@@ -60,7 +60,6 @@ SRM-SCBPULR32-Robin_nano_v3.bin
 
   **/*------Drivers--------*/**
   - (S) Stock=4xTMC2209_UART. (default)
-  - (16) All drivers 16steps
   - (32) All drivers 32steps (TMC-UART)
 
   **/*-------Options UI TFT--------*/**
@@ -71,31 +70,32 @@ SRM-SCBPULR32-Robin_nano_v3.bin
   - (D) UI DWIN (TFT DGUS Color screen like Mks H43)
 
   **/*------Modules--------*/**
-  - (n) NeoPixel (management of led strips)
+  - (N) NeoPixel (management of led strips, +number = nb leds)
   - (W) Module ESP8266/ESP12 (infos at the middle of the page)
   - (w) Module ESP8266/ESP12 with ESP3Dv3.0 Firmware.
   - (B) Extruder BMG right_hand (Stock) (default)
   - (O) Extruder OMG v2
-  - (X) Extruder DirectDrive NEMA14 (**SDHX**/Mini-Sherpa/Orbiter/Salfin)
+  - (X) Extruder DirectDrive NEMA14 Pancake (**SDHX**/Mini-Sherpa/Orbiter/Salfin)
   
   **/*-------Others options in firmware----*/**
   - (G) SENSORLESS_HOMING (Only 2209)
   - (g) SENSORLESS_PROBING (Only 2209)
   - (m) MPCTEMP - Model predictive temperature control
-  - (H) Hotend Volcano or HotendAllMetal
+  - (H) Hotend Volcano or HotendAllMetal (+number = type thermistor)
   - (U) BED_LEVELING_UBL (default)
   - (P) PreHeat bed before leveling (default)
   - (R) ARC_SUPPORT (default)
   - (L) Linear Advance (default)
-  - (M) MEATPACK (Improve dialogue/communication with OctoPrint)
-  - (Z) Input Shaping.
+  - (M) MEATPACK (Improve dialogue/communication with OctoPrint) (default)
+  - (Z) Input Shaping. (No validated on Deltas)
   
   **/*-------Others options for advanced users who build their firmware----*/**
   - HOST_ACTION_COMMANDS (Action Command Prompt support Message on OctoPrint) (default)
   - Host start print by menu (Only TFT_COLOR_UI)
-  - BINARY_FILE_TRANSFER (default)
+  - BINARY_FILE_TRANSFER
   - TEMP_SENSOR_0 (After changed the thermitor nozzle)
   - LCD_LANGUAGE (Change to the native language)
+  - FW retract (Default)
   - Add line for nb of leds.
   - Fixed "Special Menu" for MPC and levelings.
   - etc 
