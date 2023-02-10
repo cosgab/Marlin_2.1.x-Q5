@@ -37,7 +37,7 @@ After the flash and to configure and prepare your printer, please follow the ste
 Here is a summary of the steps to follow in order:
 1. Flash firmware
  
-  *Request for a calibration screen*
+  *Request for a calibration screen* (Note on Wiki)
   
 2. Initialize EEPROM (Via "Special Delta" menu)
   
@@ -48,11 +48,16 @@ Here is a summary of the steps to follow in order:
  - Fine Calib. > autostore settings
 
 4. Wizard Z_OffSet (Z0 height) > Done > Store settings (no need if you go to the next step)
+
 5. Levelings PLA/PETG/ABS (UBL) > autostore settings in location ( 1=PLA, 2=PETG and 3=ABS)
-6. PID nozzle for PLA > autostore settings.
-7. Tuning your Slicer to choose a correct flavor=Marlin, relative mode(Cura) and remove M82 (Extruder Absolute mode) or replace by M83 (relative mode) in GCodeStart.
-8. insert in your GCodeStart after G28, G29 Lx to load your mesh/levelling depending on your filament type.
-9. Run a print from SD card and refine the height layer with BabyStepping function (3 ways).
+
+8. PID nozzle for PLA > autostore settings: PID for PLA or New PID by MCP (Need to have a Z0 adjusted)
+
+9. Tuning your Slicer to choose a correct flavor=Marlin, relative mode(Cura) and remove M82 (Extruder Absolute mode) or replace by M83 (relative mode) in GCodeStart.
+
+9. insert in your GCodeStart after G28, G29 Lx to load your mesh/levelling depending on your filament type.
+
+10. Run a print from SD card and refine the height layer with BabyStepping function (3 ways => Note on Wiki).
 
  => it's correct so store settings. Go to next print and enjoy.
 
@@ -60,6 +65,6 @@ Here is a summary of the steps to follow in order:
   a. Result is correct on the whole then problem with the Slicer settings, check dot 7.
 
 📌Note:
-- In my firmware the G28 automatically loads the last used mesh/levelling. So if you use only PLA, the G29L1 is only needed once.
+- In my firmware the G28 automatically loads the last used mesh/levelling. So if you use only PLA, the "G29 L1" command is only needed once.
 - the adjustment of the right layer height (Z_OffSet) by babystepping must be memorized because you lose this correction as soon as you power off the machine.
 ***
