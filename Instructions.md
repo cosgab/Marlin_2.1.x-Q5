@@ -2,10 +2,14 @@
 📝After the flash/update operation, you need to configure/prepare your Delta. Deltas are different in their printing methods from Cartesian printers such as Ender, Prusa or others.
 
 Managing a Delta is already more complicated than managing a simple Cartesian printer because there are some basics to understand:
-- The print head of a Cartesian printer uses a stepper motor for each of the X, Y, Z Cartesian axes, so as soon as you give it position coordinates, it does so according to the Cartesian axes associated with those stepper motors. 
-An example: 
-a command to move the print head +10mm on the X axis, it is only the X stepper motor that will work i.e. position itself at +10mm on the X Cartesian axis. Same for Y and Z.
-The only thing you need to know is the starting point on the bed (X zero, Y zero, Z zero) and the horizontality or deformation of the bed surface. That is why a leveling/meshing of the bed surface is necessary (manual leveling or automatic leveling like ABL or UBL).
+- The print head of a Cartesian printer uses a stepper motor for each of the X, Y, Z Cartesian axes, so as soon as you give it position coordinates, it does so according to the Cartesian axes associated with those stepper motors.
+
+  An example: 
+  a command to move the print head +10mm on the X axis, it is only the X stepper motor that will work i.e. position itself at +10mm on the X Cartesian axis.
+  Same for Y and Z. 
+  The only thing you need to know is the starting point on the bed (X zero, Y zero, Z zero) and the horizontality or deformation of the bed surface.
+  
+  That is why a leveling/meshing of the bed surface is necessary (manual leveling or automatic leveling like ABL or UBL).
 
 - For Delta printers, the print head does not know how to move in this Cartesian volume because it uses the three stepper motors to position itself on the X, Y or Z axis. These stepper motors should be called A, B, C but the manufacturers have kept the Cartesian name, hence the confusion for most users. So if we take the example above, for a displacement order in X of +10mm, it is the three stepper motors that will be controlled and without displacement reference, the movement will be random.
 
@@ -32,12 +36,17 @@ After the flash and to configure and prepare your printer, please follow the ste
 
 Here is a summary of the steps to follow in order:
 1. Flash firmware
-*Request for a calibration screen*
+ 
+  *Request for a calibration screen*
+  
 2. Initialize EEPROM (Via "Special Delta" menu)
-*Request for a calibration screen*
+  
+  *Request for a calibration screen*
+
 3. Calibration
  - Fast Calib. > autostore settings (only if you are in a hurry)
  - Fine Calib. > autostore settings
+
 4. Wizard Z_OffSet (Z0 height) > Done > Store settings (no need if you go to the next step)
 5. Levelings PLA/PETG/ABS (UBL) > autostore settings in location ( 1=PLA, 2=PETG and 3=ABS)
 6. PID nozzle for PLA > autostore settings.
