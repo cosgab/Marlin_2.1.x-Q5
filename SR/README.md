@@ -16,13 +16,16 @@ Nano3.x => Firmware SRM_xxxxxxxx.bin
 Each firmware has a header that corresponds to the hardware (board) and functions used in the firmware.
 
 **ADD:**
-  - Pack Firmware for BTT-TFT35/50/70 mode landscape and portrait for TFT35v3. 
-  
-- BTT-TFT35v3 (Option "r"),
+- Pack Firmware for BTT-TFT35/50/70 mode landscape and portrait for TFT35v3. 
+- BTT-TFT35v3 (**Option "r"**), 
+
+  ⚡️Compatible with all SR motherboards(MoBo) and for users who print only via media (SD card, USB sticks)
   
   <img width=400 src="https://github.com/Foxies-CSTL/Marlin_2.1.x/wiki/menus/SR-TFT35v3.png" />
 
-- Mks-TS35R (Option "C"),
+- Mks-TS35R (**Option "C"**),
+ 
+  ⚡️Compatible only with the NanoV3.x MoBo with EXP1/EXP2 connectors (some users have received a MoBo without these connectors) and for all users who print via media (SD card, USB sticks) or hosts (Octoprint, Repetier server, Pronterface, etc) 
   
   <img width=700 src="https://github.com/Foxies-CSTL/Marlin_2.1.x/wiki/menus/SR-TS35R.png" />
 
