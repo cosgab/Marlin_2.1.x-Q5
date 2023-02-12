@@ -21,19 +21,17 @@
  */
 #pragma once
 
+
 /**
  * FLSUN HiSpeed V1 (STM32F103VET6) board pin assignments
  * FLSun Hispeed (clone MKS_Robin_miniV2) board.
  *
  * MKS Robin Mini USB uses UART3 (PB10-TX, PB11-RX)
- * #define SERIAL_PORT 3
+ * #define SERIAL_PORT_2 3
  */
 
-#if NOT_TARGET(__STM32F1__, STM32F1)
-  #error "Oops! Select an STM32F1 board in 'Tools > Board.'"
-#elif HAS_MULTI_HOTEND || E_STEPPERS > 1
-  #error "FLSUN HiSpeedV1 only supports one hotend / E-stepper. Comment out this line to continue."
-#endif
+#define ALLOW_STM32DUINO
+#include "env_validate.h"
 
 #define BOARD_INFO_NAME      "FLSun HiSpeedV1"
 #define BOARD_WEBSITE_URL    "github.com/Foxies-CSTL"
@@ -41,7 +39,7 @@
 #define BOARD_NO_NATIVE_USB
 
 // Avoid conflict with TIMER_SERVO when using the STM32 HAL
-#define TEMP_TIMER  5
+#define TEMP_TIMER                             5
 
 //
 // Release PB4 (Y_ENABLE_PIN) from JTAG NRST role
@@ -56,9 +54,9 @@
 #endif
 #if EITHER(NO_EEPROM_SELECTED, FLASH_EEPROM_EMULATION)
   #define FLASH_EEPROM_EMULATION
-  #define EEPROM_PAGE_SIZE     (0x800U)           // 2KB
+  #define EEPROM_PAGE_SIZE     (0x800U)           // 2K
   #define EEPROM_START_ADDRESS (0x8000000UL + (STM32_FLASH_SIZE) * 1024UL - (EEPROM_PAGE_SIZE) * 2UL)
-  #define MARLIN_EEPROM_SIZE    EEPROM_PAGE_SIZE  // 2KB
+  #define MARLIN_EEPROM_SIZE    EEPROM_PAGE_SIZE  // 2K
 #endif
 
 //
@@ -71,8 +69,8 @@
 #define SPI_DEVICE                             2
 
 // SPI Flash
-#define HAS_SPI_FLASH                          1
-#if HAS_SPI_FLASH
+#define SPI_FLASH
+#if ENABLED(SPI_FLASH)
   // SPI 2
   #define SPI_FLASH_CS_PIN                  PB12  // SPI2_NSS / Flash chip-select
   #define SPI_FLASH_MOSI_PIN                PB15
@@ -105,6 +103,10 @@
   #define Y_STOP_PIN                  Y_DIAG_PIN  // +Y
   #define Z_MAX_PIN                   Z_DIAG_PIN  // +Z
   #define Z_MIN_PIN                         PA11  // -Z
+#endif
+
+#ifndef FIL_RUNOUT_PIN
+  #define FIL_RUNOUT_PIN                    PA4   // MT_DET
 #endif
 
 //
@@ -181,7 +183,7 @@
   #define MOTOR_CURRENT_PWM_Z_PIN           PA7   // VREF4 CONTROL Z
   #define MOTOR_CURRENT_PWM_RANGE          1500   // (255 * (1000mA / 65535)) * 257 = 1000 is equal 1.6v Vref in turn equal 1Amp
   #ifndef DEFAULT_PWM_MOTOR_CURRENT
-    #define DEFAULT_PWM_MOTOR_CURRENT { 900, 900, 900 }
+    #define DEFAULT_PWM_MOTOR_CURRENT { 900, 900, 850 }
   #endif
 
   /**
@@ -217,7 +219,7 @@
   #define MOTOR_CURRENT_PWM_E_PIN           PB0   // VREF1 CONTROL E
   #define MOTOR_CURRENT_PWM_RANGE           1500  // (255 * (1000mA / 65535)) * 257 = 1000 is equal 1.6v Vref in turn equal 1Amp
   #ifndef DEFAULT_PWM_MOTOR_CURRENT
-   #define DEFAULT_PWM_MOTOR_CURRENT { 900, 900, 900 }
+   #define DEFAULT_PWM_MOTOR_CURRENT { 900, 900, 850 }
   #endif
 #endif
 
@@ -251,25 +253,23 @@
 //
 // Power Supply Control
 //
+#if ENABLED(PSU_CONTROL)
+  #define KILL_PIN                          PA2   // PW_DET
+  #define KILL_PIN_STATE                    HIGH
+  //#define PS_ON_PIN                       PA3   // PW_CN /PW_OFF
+#endif
 #if ENABLED(MKS_PWC)
   #if ENABLED(TFT_LVGL_UI)
     #undef PSU_CONTROL
-    #undef MKS_PWC
     #define SUICIDE_PIN                     PB2   // Enable MKSPWC SUICIDE PIN
-    #define SUICIDE_PIN_STATE               LOW   // Enable MKSPWC PIN STATE
-  #else    
-    #define PS_ON_PIN                       PB2   // PW_OFF
+    #define SUICIDE_PIN_INVERTING          false  // Enable MKSPWC PIN STATE
+    #define KILL_PIN                        PA2   // Enable MKSPWC DET PIN
+    #define KILL_PIN_STATE                  true  // Enable MKSPWC PIN STATE
+  #else
+    #define PS_ON_PIN                       PA3   //PW_OFF, you can change it to other pin
+    #define KILL_PIN                        PA2   //PW_DET, you can change it to other pin
+    #define KILL_PIN_STATE                  true  //true : HIGH level trigger
   #endif
-  #define KILL_PIN                          PA2
-  #define KILL_PIN_STATE                    HIGH
-#endif
-
-#if ENABLED(BACKUP_POWER_SUPPLY)
-    #define POWER_LOSS_PIN                  PA2   // PW_DET (UPS) MKSPWC
-    #define PS_ON_PIN                       PA3   // PW_CN /PW_OFF, you can change it to other pin
-#else
-    #define POWER_LOSS_PIN                  -1    // PW_DET
-    #define PS_ON_PIN                       PB2   // PW_OFF
 #endif
 
 //
@@ -277,10 +277,7 @@
 //
 #if HAS_TFT_LVGL_UI
   #define MT_DET_1_PIN                      PA4   // MT_DET
-  #define MT_DET_PIN_STATE                  LOW
-  #define FIL_RUNOUT_PIN           MT_DET_1_PIN   // MT_DET
-#else
-  #define FIL_RUNOUT_PIN                    PA4   // MT_DET  
+  #define MT_DET_PIN_STATE                   LOW
 #endif
 
 //
@@ -324,10 +321,6 @@
   #define BEEPER_PIN                        PC5
 #endif
 
-#if ENABLED(SPEAKER) && BEEPER_PIN == PC5
-  #error "FLSun HiSpeed default BEEPER_PIN is not a SPEAKER."
-#endif
-
 //
 // TFT with FSMC interface
 //
@@ -346,23 +339,26 @@
    */
   #define TFT_RESET_PIN                     PC6   // FSMC_RST
   #define TFT_BACKLIGHT_PIN                 PD13
-  
-  #define DOGLCD_MOSI                       -1    // Prevent auto-define by Conditionals_post.h
-  #define DOGLCD_SCK                        -1
 
-  #define TOUCH_CS_PIN                      PC2   // SPI2_NSS
-  #define TOUCH_SCK_PIN                     PB13  // SPI2_SCK
-  #define TOUCH_MISO_PIN                    PB14  // SPI2_MISO
-  #define TOUCH_MOSI_PIN                    PB15  // SPI2_MOSI
-  
   #define LCD_USE_DMA_FSMC                        // Use DMA transfers to send data to the TFT
   #define FSMC_CS_PIN                       PD7   // NE4
   #define FSMC_RS_PIN                       PD11  // A0  
   #define FSMC_DMA_DEV                      DMA2
   #define FSMC_DMA_CHANNEL               DMA_CH5
-
   #define TFT_CS_PIN                 FSMC_CS_PIN
   #define TFT_RS_PIN                 FSMC_RS_PIN
+
+  #define TOUCH_BUTTONS_HW_SPI
+  #define TOUCH_BUTTONS_HW_SPI_DEVICE          2
+  
+  #define TOUCH_CS_PIN                      PC2   // SPI2_NSS
+  #define TOUCH_SCK_PIN                     PB13  // SPI2_SCK
+  #define TOUCH_MISO_PIN                    PB14  // SPI2_MISO
+  #define TOUCH_MOSI_PIN                    PB15  // SPI2_MOSI  
+  #define TOUCH_INT_PIN                     -1
+  
+  #define DOGLCD_MOSI                       -1    // Prevent auto-define by Conditionals_post.h
+  #define DOGLCD_SCK                        -1
 
   #ifdef TFT_CLASSIC_UI
     #define TFT_MARLINBG_COLOR            0x3186  // Grey
@@ -371,31 +367,4 @@
     #define TFT_BTOKMENU_COLOR            0x145F  // Cyan
   #endif
   #define TFT_BUFFER_SIZE                  14400
-  
 #endif
-/*
-#if HAS_WIRED_LCD
-  #define LCD_PINS_ENABLE        PD13
-  #define LCD_PINS_D4              -1 //PE14 //dataline EXP1_06_PIN  // PA6(LCD_D4)
-  #if ENABLED(CR10_STOCKDISPLAY)
-
-  #define LCD_PINS_RS              EXP1_04_PIN
-
-  #define BTN_EN1                  EXP1_08_PIN
-  #define BTN_EN2                  EXP1_06_PIN
-
-  #define LCD_PINS_ENABLE          EXP1_03_PIN
-  #define LCD_PINS_D4              EXP1_05_PIN
-#else
-  #if IS_ULTIPANEL
-    #define LCD_PINS_D5            -1 //PE15 //dataline EXP1_05_PIN  // PA7(LCD_D5)
-    #define LCD_PINS_D6            -1 //PD11 //rs EXP1_04_PIN  // PC4(LCD_D6)
-    #define LCD_PINS_D7            -1 //PD10 //dataline EXP1_03_PIN  // PC5(LCD_D7)
-
-    #if !defined(BTN_ENC_EN) && ENABLED(REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER)
-      #define BTN_ENC_EN           LCD_PINS_D7  // Detect the presence of the encoder
-    #endif
-  #endif
-#endif
-*/
-
