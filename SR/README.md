@@ -25,7 +25,7 @@ Each firmware has a header that corresponds to the hardware (board) and function
 
 - Mks-TS35R (**Option "C"**),
  
-  ⚡️Compatible only with the NanoV3.x MoBo with EXP1/EXP2 connectors (some users have received a MoBo without these connectors) and for all users who print via media (SD card, USB sticks) or hosts (Octoprint, Repetier server, Pronterface, etc) 
+  ⚡️Compatible only with the NanoV3.x MoBo with EXP1/EXP2 connectors (some users have received a MoBo without these connectors) and for all users who print via media (SD card, USB sticks) or from hosts (Octoprint, Repetier server, Pronterface, etc) 
   
   <img width=700 src="https://github.com/Foxies-CSTL/Marlin_2.1.x/wiki/menus/SR-TS35R.png" />
 
@@ -57,11 +57,6 @@ SRM-SCBPULR32-Robin_nano_v3.bin
   📌**New 2023:**
   *Due to the increasing number of user requests and combinations of different HotEnd, MoBo and software features, I can build a firmware suitable for your configuration: A small contribution will be asked* 🍻.
   
-  **/*-------Others Firmwares for QQS with SKR family or Mks_Nano Family----*/**
-  - (QQS)U9rTPULR16-SKR14T_firmware   QQS SKR14T(4xTMC2209UART)16steps with TITAN extruder. 
-  - (QQS)U8rBPUR32-SKR12PRO_firmware     QQS SKR12PRO(4xTMC2208_standAlone)32steps without LA, with BMG extruder.
-  - (QQS)U9rTPULR16-SKR14_firmware QQS with SKRv1.4 Board with emulation LCD (Marlin Mode)
-  
   **Header caption:**
 
   **/*------Drivers--------*/**
@@ -86,7 +81,7 @@ SRM-SCBPULR32-Robin_nano_v3.bin
   **/*-------Others options in firmware----*/**
   - (G) SENSORLESS_HOMING (Only 2209)
   - (g) SENSORLESS_PROBING (Only 2209)
-  - (m) MPCTEMP - Model predictive temperature control
+  - (m) MPCTEMP - Model predictive temperature control (New PID)
   - (H) Hotend Volcano or HotendAllMetal (+number = type thermistor)
   - (U) BED_LEVELING_UBL (default)
   - (P) PreHeat bed before leveling (default)
