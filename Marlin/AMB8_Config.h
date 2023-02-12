@@ -90,7 +90,7 @@
 //  Type Calibration (CAL)
 //#define AUTO_BED_LEVELING_BILINEAR //(A)
 #define AUTO_BED_LEVELING_UBL    //(U) 
-#define LEVEL_BED_CORNERS
+#define LCD_BED_TRAMMING
 #define G26_MESH_VALIDATION //UBL
 //#define Z_STEPPER_AUTO_ALIGN
 
