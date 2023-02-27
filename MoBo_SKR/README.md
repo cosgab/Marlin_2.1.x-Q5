@@ -1,4 +1,4 @@
-### 2023-02-09 MARLIN 2.1.x
+### 2023-02-27 MARLIN 2.1.2
 
 Each firmware has a header that corresponds to the hardware (board) and functions used in the firmware.
 
@@ -76,18 +76,18 @@ QQSP+BTT-U9rBPULR32-SKR2b-firmware.bin
   **/*-------Others options in firmware----*/**
   - (G) SENSORLESS_HOMING (Only 2209)
   - (g) SENSORLESS_PROBING (Only 2209)
-  - (m) MPCTEMP - Model predictive temperature control
+  - (m) MPCTEMP - Model predictive temperature control(New PID) (Default)
   - (H) Hotend Volcano or HotendAllMetal  
   - (A) BED_LEVELING_BILINEAR
-  - (U) BED_LEVELING_UBL
-  - (P) PreHeat bed before leveling
-  - (R) ARC_SUPPORT
-  - (L) Linear Advance (Possible Bug with BabyStep and TMC2208)
-  - (M) MEATPACK (Improve dialogue/communication with OctoPrint)
+  - (U) BED_LEVELING_UBL (Default)
+  - (P) PreHeat bed before leveling (Default)
+  - (R) ARC_SUPPORT (Default)
+  - (L) Linear Advance (Default)
+  - (M) MEATPACK (Improve dialogue/communication with OctoPrint) (Default)
 
   **/*-------Others options for advanced users who build their firmware----*/**
   - HOST_ACTION_COMMANDS (Action Command Prompt support Message on OctoPrint) (default)
-  - BINARY_FILE_TRANSFER (default)
+  - BINARY_FILE_TRANSFER
   - TEMP_SENSOR_0 (After changed the thermitor nozzle)
   - LCD_LANGUAGE (Change to the native language)
   - Add line for nb of leds.
