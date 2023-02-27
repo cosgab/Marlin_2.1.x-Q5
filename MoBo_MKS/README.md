@@ -1,12 +1,10 @@
-### 2023-02-09 MARLIN 2.1.x
+### 2023-02-27 MARLIN 2.1.2
 
 - QQS-Pro With MoBo Nanov3+4xTMC2209 = QQSP_TFT-header-Robin_nano_v3.bin
-- QQS-Pro With MoBo SRK+4xTMC2209 = QQSP_STOCK-header-MoBo-firmware.bin
-- QQS-Pro STOCK With 4xTMC2209 = QQSP_STOCK_TMC9-Robin_mini.bin
   
 Each firmware has a header that corresponds to the hardware (board) and functions used in the firmware.
 
-New 2023:
+📌New 2023:
 Due to the increasing number of user requests and combinations of different HotEnd, MoBo and software features, I can build a firmware suitable for your configuration: A small contribution will be asked.
 
 **ADD:**
@@ -27,7 +25,7 @@ QQSP+TS35-U9CBPULR32-Robin_nano_v3.bin
  - (32)Steps nb -
  - (MoBo) NanoV3
 
-  🔧**Note**: After choosing your binary, remove the "QQSP_TS35-U9CBPULR32-" header or rename the file to "Robin_nano_v3.bin" for QQS or "firmware.bin".
+  🔧**Note**: After choosing your binary, remove the "QQSP+TS35-U9CBPULR32-" header or rename the file to "Robin_nano_v3.bin" for QQS or Q5.
   place it on your SD card, insert your SD card into the printer and power on your printer.
   
   After the flash and to configure and prepare your printer, please follow the steps on the Wiki 
@@ -76,19 +74,19 @@ QQSP+TS35-U9CBPULR32-Robin_nano_v3.bin
   **/*-------Others options in firmware----*/**
   - (G) SENSORLESS_HOMING (Only 2209)
   - (g) SENSORLESS_PROBING (Only 2209)
-  - (m) MPCTEMP - Model predictive temperature control
+  - (m) MPCTEMP - Model predictive temperature control(New PID)
   - (H) Hotend Volcano or HotendAllMetal
   - (A) BED_LEVELING_BILINEAR
-  - (U) BED_LEVELING_UBL
-  - (P) PreHeat bed before leveling
-  - (R) ARC_SUPPORT
-  - (L) Linear Advance (Possible Bug with BabyStep and TMC2208)
-  - (M) MEATPACK (Improve dialogue/communication with OctoPrint)
+  - (U) BED_LEVELING_UBL (Default)
+  - (P) PreHeat bed before leveling (Default)
+  - (R) ARC_SUPPORT (Default)
+  - (L) Linear Advance (Default)
+  - (M) MEATPACK (Improve dialogue/communication with OctoPrint)(Default)
 
   **/*-------Others options for advanced users who build their firmware----*/**
-  - HOST_ACTION_COMMANDS (Action Command Prompt support Message on OctoPrint) (default)
+  - HOST_ACTION_COMMANDS (Action Command Prompt support Message on OctoPrint) (Default)
   - Host start print by menu (Only TFT_COLOR_UI)
-  - BINARY_FILE_TRANSFER (default)
+  - BINARY_FILE_TRANSFER
   - TEMP_SENSOR_0 (After changed the thermitor nozzle)
   - LCD_LANGUAGE (Change to the native language)
   - Add line for nb of leds.
@@ -96,8 +94,8 @@ QQSP+TS35-U9CBPULR32-Robin_nano_v3.bin
   - etc 
    
   **/*-------Others Firmwares for Q5 nanov1.2 or QQS with SKR family or Mks_Nano Family----*/**
-  - (Q5_8+SCTPULR-Robin_nano)   Q5 Stock(3xTMC2208+1xA4988) with TITAN extruder. 
-  - (Q5_9CBPULR-Robin_nano)     Q5 with 4xTMC2209 with BMG extruder.
+  - (Q5+TS35_8+SCTPULR-Robin_nano_v3)   Q5 Stock(3xTMC2208+1xA4988) with TITAN extruder on Nano_V3.x board. 
+  - (QQS+BTT_U9rBPULRM32-Robin_nano_V3)       QQS9 with 4xTMC2209Uart with BMG extruder on Nano_V3.x board and BTT-TFT screen.
   - (QQS)U9rTPULR16-SKR14_firmware QQS with SKRv1.4 Board with emulation LCD (Marlin Mode)
  ## ✨Support my work✨
 
