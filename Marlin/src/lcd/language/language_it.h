@@ -321,7 +321,7 @@ namespace Language_it {
   LSTR MSG_MOVE_05IN                      = _UxGT("Muovi di 0.5\"");
   LSTR MSG_MOVE_1IN                       = _UxGT("Muovi di 1\"");
   LSTR MSG_SPEED                          = _UxGT("Velocità");
-  LSTR MSG_BED_Z                          = _UxGT("Piatto Z");
+  LSTR MSG_MESH_Z_OFFSET                  = _UxGT("Piatto Z");
   LSTR MSG_NOZZLE                         = _UxGT("Ugello");
   LSTR MSG_NOZZLE_N                       = _UxGT("Ugello ~");
   LSTR MSG_NOZZLE_PARKED                  = _UxGT("Ugello parcheggiato");

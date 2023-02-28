@@ -91,6 +91,7 @@ def fetch_example(url):
         brch = "bugfix-2.1.x"
         if '@' in path: path, brch = map(str.strip, path.split('@'))
         url = f"https://raw.githubusercontent.com/MarlinFirmware/Configurations/{brch}/config/{url}"
+    url = url.replace("%", "%25").replace(" ", "%20")
 
     # Find a suitable fetch command
     if shutil.which("curl") is not None:
