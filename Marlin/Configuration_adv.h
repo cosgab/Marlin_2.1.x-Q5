@@ -645,6 +645,8 @@
  */
 #if NONE(Q5, SR_MKS, SR_BTT, NANO1X, NANO3) 
   #define E0_AUTO_FAN_PIN -1
+#elif BOTH(SR_MKS, XP2)
+  #define E0_AUTO_FAN_PIN FAN1_PIN  //HE1
 #elif ANY(SR_MKS, NANO3)
   #define E0_AUTO_FAN_PIN PB0  //HE1
 #else

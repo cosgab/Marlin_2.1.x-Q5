@@ -705,7 +705,9 @@
 
 // Below this temperature the heater will be switched off
 // because it probably indicates a broken thermistor wire.
-#define HEATER_0_MINTEMP   5
+#ifndef HEATER_0_MINTEMP
+  #define HEATER_0_MINTEMP   5
+#endif
 #define HEATER_1_MINTEMP   5
 #define HEATER_2_MINTEMP   5
 #define HEATER_3_MINTEMP   5
@@ -821,11 +823,13 @@
   #define MPC_AUTOTUNE_MENU                         // Add MPC auto-tuning to the "Advanced Settings" menu. (~350 bytes of flash)
 
   #define MPC_MAX BANG_MAX                            // (0..255) Current to nozzle while MPC is active.
-  //#define MPC_HEATER_POWER { 40.0f }                  // (W) Heat cartridge powers.
+  #ifndef MPC_HEATER_POWER
+    #define MPC_HEATER_POWER { 40.0f }                  // (W) Heat cartridge powers.
+  #endif
 
   #define MPC_INCLUDE_FAN                             // Model the fan speed?
   
-  #if ANY(XP1, XP2)
+  #ifdef XP1
     #define MPC_HEATER_POWER { 50.0f }
     #define MPC_BLOCK_HEAT_CAPACITY { 13.6647 }           // (J/K) Heat block heat capacities.
     #define MPC_SENSOR_RESPONSIVENESS { 0.0666 }         // (K/s per ∆K) Rate of change of sensor temperature from heat block.
@@ -834,7 +838,7 @@
       #define MPC_AMBIENT_XFER_COEFF_FAN255 { 0.1294 }  // (W/K) Heat transfer coefficients from heat block to room air with fan on full.
     #endif  
   #else
-    #define MPC_HEATER_POWER { 40.0f }
+  // #define MPC_HEATER_POWER { 40.0f }
   // Measured physical constants from M306
     #define MPC_BLOCK_HEAT_CAPACITY { 16.7f }           // (J/K) Heat block heat capacities.
     #define MPC_SENSOR_RESPONSIVENESS { 0.22f }         // (K/s per ∆K) Rate of change of sensor temperature from heat block.
@@ -1891,12 +1895,12 @@
  */
 //#define MULTIPLE_PROBING 2
 //#define EXTRA_PROBING    1
-#if ANY(P_PROBE, N_PROBE)
+#if ANY(P_PROBE, N_PROBE, X_PROBE)
   #define MULTIPLE_PROBING 2
   #define EXTRA_PROBING    1
 #else
-  //#define MULTIPLE_PROBING 2
-  //#define EXTRA_PROBING    1
+  #define MULTIPLE_PROBING 2
+  #define EXTRA_PROBING    1
 #endif
 
 /**
@@ -2413,7 +2417,7 @@
     #define GRID_MAX_POINTS_X 10     // MeshHight
   #elif ANY(XP1, XP2)
     #define MESH_INSET 13//17
-    #define GRID_MAX_POINTS_X 5      //MeshStd
+    #define GRID_MAX_POINTS_X 8      //MeshStd
   #else
   	#define MESH_INSET 15           // Set Mesh bounds as an inset region of the bed
 	  #define GRID_MAX_POINTS_X 8   // MeshFine Don't use more than 15 points per axis, implementation limited.
@@ -2675,7 +2679,7 @@ EEPROM_W25Q
   #define MARLIN_EEPROM_SIZE  4096
 #endif
 
-  //#define EEPROM_AUTO_INIT  // Init EEPROM automatically on any errors.
+  #define EEPROM_AUTO_INIT  // Init EEPROM automatically on any errors.
   //#define EEPROM_INIT_NOW   // Init EEPROM on first boot after a new build.
 #endif
 
@@ -3868,7 +3872,7 @@ EEPROM_W25Q
   // Support for second Adafruit NeoPixel LED driver controlled with M150 S1 ...
   //#define NEOPIXEL2_SEPARATE
   #if ENABLED(NEOPIXEL2_SEPARATE)
-    #define NEOPIXEL2_PIXELS           15 // Number of LEDs in the second strip
+    //#define NEOPIXEL2_PIXELS           15 // Number of LEDs in the second strip
     #define NEOPIXEL2_BRIGHTNESS      127 // Initial brightness (0-255)
     #define NEOPIXEL2_STARTUP_TEST        // Cycle through colors at startup
     #define NEOPIXEL_M150_DEFAULT      -1 // Default strip for M150 without 'S'. Use -1 to set all by default.
