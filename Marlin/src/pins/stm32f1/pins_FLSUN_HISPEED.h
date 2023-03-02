@@ -292,7 +292,7 @@
  *    Connector J2
  *      -------
  * DIO O|1   2|O  3v3
- * CSK O|3   5|O  GND
+ * CSK O|3   4|O  GND
  * RST O|5   6|O  GND
  *      -------
  */

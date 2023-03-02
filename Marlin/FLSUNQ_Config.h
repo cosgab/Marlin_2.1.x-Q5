@@ -548,17 +548,19 @@
 #endif
 
 // PandaPi Probe: change your IC2 pins (Tests in progress.......).Dist=0.2<=>2.6
+//M102 S-5 = x > 600 => too high
 #ifdef B_PROBE
   #define BD_SENSOR
   //#undef AUTO_BED_LEVELING_UBL
   //#undef RESTORE_LEVELING_AFTER_G28
   //#undef G26_MESH_VALIDATION
   #ifdef QQSP
-    #define I2C_BD_SCL_PIN   PA2   // PW_DET (Green) 
-  #else
-    #define I2C_BD_SCL_PIN   FIL_RUNOUT2_PIN //(Green)
+    #define I2C_BD_SCL_PIN   PA5          //WifiCrtl (Green) or BlTouch (yellow)
+    #define I2C_BD_SDA_PIN   Z_MIN_PIN    //PA11 (White) or BltTouch (grey)
+  #elif ENABLE(SR_MKS)
+    #define I2C_BD_SCL_PIN   SERVO0_PIN    //PA8(Green)
+    #define I2C_BD_SDA_PIN   Z_MIN_PIN    //PC8(White)
   #endif
-  #define I2C_BD_SDA_PIN   Z_MIN_PIN  //PC8 (White)
   #define I2C_BD_DELAY  20
 #endif
 // NEOPIXEL for SR_MKS
