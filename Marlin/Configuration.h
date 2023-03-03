@@ -1140,7 +1140,7 @@
   #else
 
   // Print surface diameter/2 minus unreachable space (avoid collisions with vertical towers).
-    #define PRINTABLE_RADIUS       140.0    // (mm)
+    #define PRINTABLE_RADIUS       130.0    // (mm)
 
   // Maximum reachable area
     #define DELTA_MAX_RADIUS         132.0      // (mm)
@@ -3701,7 +3701,8 @@ EEPROM_W25Q
  */
 #if BOTH(TFT_COLOR_UI, Q5)|| BOTH(TFT_CLASSIC_UI, Q5)
   #define TFT_ROTATION TFT_ROTATE_180
-#else
+#endif
+#ifndef TFT_ROTATION
   #define TFT_ROTATION TFT_NO_ROTATION
 #endif
 
