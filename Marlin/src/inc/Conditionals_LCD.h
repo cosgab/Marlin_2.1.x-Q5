@@ -605,7 +605,9 @@
   #define EXTRUDERS 0
   #undef SINGLENOZZLE
   #undef SWITCHING_EXTRUDER
+  #undef MECHANICAL_SWITCHING_EXTRUDER
   #undef SWITCHING_NOZZLE
+  #undef MECHANICAL_SWITCHING_NOZZLE
   #undef MIXING_EXTRUDER
   #undef HOTEND_IDLE_TIMEOUT
   #undef DISABLE_E
@@ -615,12 +617,19 @@
 #define E_TERN_(N)  TERN_(HAS_MULTI_EXTRUDER, N)
 #define E_TERN0(N)  TERN0(HAS_MULTI_EXTRUDER, N)
 
+#if EITHER(SWITCHING_EXTRUDER, MECHANICAL_SWITCHING_EXTRUDER)
+  #define HAS_SWITCHING_EXTRUDER 1
+#endif
+#if EITHER(SWITCHING_NOZZLE, MECHANICAL_SWITCHING_NOZZLE)
+  #define HAS_SWITCHING_NOZZLE 1
+#endif
+
 #if ENABLED(E_DUAL_STEPPER_DRIVERS) // E0/E1 steppers act in tandem as E0
 
   #define E_STEPPERS      2
   #define E_MANUAL        1
 
-#elif ENABLED(SWITCHING_EXTRUDER)   // One stepper for every two EXTRUDERS
+#elif HAS_SWITCHING_EXTRUDER        // One stepper for every two EXTRUDERS
 
   #if EXTRUDERS > 4
     #define E_STEPPERS    3
@@ -629,7 +638,7 @@
   #else
     #define E_STEPPERS    1
   #endif
-  #if DISABLED(SWITCHING_NOZZLE)
+  #if !HAS_SWITCHING_NOZZLE
     #define HOTENDS       E_STEPPERS
   #endif
 
@@ -654,7 +663,7 @@
 #endif
 
 // No inactive extruders with SWITCHING_NOZZLE or Průša MMU1
-#if ENABLED(SWITCHING_NOZZLE) || HAS_PRUSA_MMU1
+#if HAS_SWITCHING_NOZZLE || HAS_PRUSA_MMU1
   #undef DISABLE_INACTIVE_EXTRUDER
 #endif
 
@@ -946,7 +955,7 @@
 
 /**
  * Number of Primary Linear Axes (e.g., XYZ)
- * X, XY, or XYZ axes. Excluding duplicate axes (X2, Y2. Z2. Z3, Z4)
+ * X, XY, or XYZ axes. Excluding duplicate axes (X2, Y2, Z2, Z3, Z4)
  */
 #if NUM_AXES >= 3
   #define PRIMARY_LINEAR_AXES 3
@@ -1074,7 +1083,7 @@
 #endif
 
 // Switching extruder has its own servo?
-#if ENABLED(SWITCHING_EXTRUDER) && (DISABLED(SWITCHING_NOZZLE) || SWITCHING_EXTRUDER_SERVO_NR != SWITCHING_NOZZLE_SERVO_NR)
+#if ENABLED(SWITCHING_EXTRUDER) && (!HAS_SWITCHING_NOZZLE || SWITCHING_EXTRUDER_SERVO_NR != SWITCHING_NOZZLE_SERVO_NR)
   #define DO_SWITCH_EXTRUDER 1
 #endif
 
