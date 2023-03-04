@@ -319,7 +319,7 @@
   #define MULTI_VOLUME              // Multiple volume support(µSD + USB)
 #elif ENABLED(TFT_OTHER)
   //#define MKS_TS35_V2_0           // Only for NanoV2 or V3
-  //#define MKS_ROBIN_TFT35         // Mks_Robin_TFT35V2.0
+  #define MKS_ROBIN_TFT35         // Mks_Robin_TFT35V2.0
   //#define MKS_ROBIN_TFT43         // Mks_Robin_TFT43
   #define TOUCH_SCREEN              // (C/F) (Default) UI MARLIN
 #else
