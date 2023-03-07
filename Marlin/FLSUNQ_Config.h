@@ -524,10 +524,10 @@
     #define SHAPING_ZETA_X  0.15f
     #define SHAPING_FREQ_Y    40.00
     #define SHAPING_ZETA_Y  0.15f
-  #elif BOTH(SRM, DDRIVE)
-    #define SHAPING_FREQ_X    37.8
+  #elif BOTH(SRM, DDRIVE)   //SDHX 20230215
+    #define SHAPING_FREQ_X    51.06
     #define SHAPING_ZETA_X  0.15f  
-    #define SHAPING_FREQ_Y    40.8
+    #define SHAPING_FREQ_Y    43.48
     #define SHAPING_ZETA_Y  0.15f
   #elif BOTH(QQSP, DDRIVE)
     #define SHAPING_FREQ_X    25.6
