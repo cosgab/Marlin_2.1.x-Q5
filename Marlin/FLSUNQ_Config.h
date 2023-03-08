@@ -93,6 +93,8 @@
   #define TFT_COLOR_UI         //(C) UI Color MARLIN with Mks-TS35v2
   //#define TFT_BTT_UI             //(r) UI TOUCH by BTT-TFT Family (emulation LCD Marlin)
   //#define TFT_DWIN_UI          //(D) UI for DGUS screen like CrealityTouch or Mks H43
+  //=====Option portrait for QQSP/Q5 ======
+  //#define TFT_PORTRAIT 
 #endif
 
 /* ========================================//
@@ -265,12 +267,13 @@
   //#define MEDIA_MENU_AT_TOP           // Add Print media menu at top list.
   //#define PREHEAT_SHORTCUT_MENU_ITEM  // Add preheat/temperature menu (first page)
   //#define CANCEL_OBJECTS              // Add menu "Cancel Objet"
-  //#define TOUCH_IDLE_SLEEP 900        // Auto-Sleep screenview. (M255 S100)
+  //#define TOUCH_IDLE_SLEEP_MINS 5     // Auto-Sleep to 5mn screenview. (M255 S100)
   //#define LCD_BACKLIGHT_TIMEOUT_MINS 3 // (mn) Timeout before turning off the backlight
   #define SOUND_MENU_ITEM               // Add a mute option to the LCD menu
   #ifndef STALLGUARD_2                   
   // Only with TMC2209 sensorless (need wiring DIAG pins)
     #define DIAG_JUMPERS_REMOVED
+    #define DIAG_PINS_REMOVED
     #define PROBE_OFFSET_WIZARD
     #define G26_MESH_VALIDATION         // (Default) Command G26 to print a Mesh Validation Pattern tool.
     #define CUSTOM_MENU_MAIN            // Special Delta preparation menu.
@@ -321,6 +324,12 @@
   //#define MKS_TS35_V2_0           // Only for NanoV2 or V3
   #define MKS_ROBIN_TFT35         // Mks_Robin_TFT35V2.0
   //#define MKS_ROBIN_TFT43         // Mks_Robin_TFT43
+  #define TOUCH_SCREEN              // (C/F) (Default) UI MARLIN
+#elif ENABLED(TFT_PORTRAIT)
+  #define TFT_ROTATION TFT_ROTATE_90       //PORTRAIT TFT32
+  #define TFT_COLOR_UI_PORTRAIT            //PORTRAIT TFT32
+  #define TOUCH_ORIENTATION TOUCH_PORTRAIT //PORTRAIT TFT32
+  #define MKS_ROBIN_TFT32           // (Default) Mks_Robin_TFT_V2.0
   #define TOUCH_SCREEN              // (C/F) (Default) UI MARLIN
 #else
   #define MKS_ROBIN_TFT32           // (Default) Mks_Robin_TFT_V2.0
@@ -548,7 +557,7 @@
 #endif
 
 // PandaPi Probe: change your IC2 pins (Tests in progress.......).Dist=0.2<=>2.6
-//M102 S-5 = x > 600 => too high
+// Test: M102 S-5 = x > 600 => too high
 #ifdef B_PROBE
   #define BD_SENSOR
   //#undef AUTO_BED_LEVELING_UBL
