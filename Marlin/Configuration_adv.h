@@ -3883,7 +3883,7 @@
   #define CUSTOM_MENU_MAIN_ONLY_IDLE       // Only show custom menu when the machine is idle
 
   #define MAIN_MENU_ITEM_1_DESC "Init. EEPROM"
-  #define MAIN_MENU_ITEM_1_GCODE "M502\nM500\nM997"
+  #define MAIN_MENU_ITEM_1_GCODE "M502\nM593F0\nM500\nM997"
   #define MAIN_MENU_ITEM_1_CONFIRM
 
   #define MAIN_MENU_ITEM_2_DESC "Fast Calib.Delta"

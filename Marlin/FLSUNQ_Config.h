@@ -21,6 +21,8 @@
 * -To enable Stallguard function (Homing and/or probing) with TMC2209 with wiring Diag/EndStop and put some jumpers.
 * -Comment/Uncomment line to add or modify some options. 
 *  Default is actif for QQS and it's uncommented ;-)
+*
+* Change EEPROM reset with disable(M593 F0) IS to prepare your Delta without IS enable. 
 */
 //For run tests on my dev'printer!!
 //#define XP_DEV
@@ -216,14 +218,14 @@
 * == Tip: commented the line "BOOT_MARLIN_LOGO_SMALL" for more space EEPROM ==
 * ============================================================================
 */
-//#define HOSTS                            // Enable buffer for Octoprint.
+#define HOSTS                            // Enable buffer for Octoprint.
 #define HOST_ACTION_COMMANDS             // Default - Action Command Prompt support Message on Octoprint
 #define HOST_START_MENU_ITEM             // Add a menu item that tells the host to start a print
 
 //#define BINARY_FILE_TRANSFER             // Bin transfert for ESP3D firmware v2.1 or others.
                                          // Not compatible with the MEATPACK option.
 //------ Support for MeatPack G-code compression (OCTOPRINT)--------//
-//#define MEATPACK_ON_SERIAL_PORT_1      // (M) With connection USB
+//#define MEATPACK_ON_SERIAL_PORT_1      // (M) With connection USB. block the request octoprint
 //#define MEATPACK_ON_SERIAL_PORT_2      // With other connection like Tx/Rx Wifi socket.
 
 //----------Options Plus-----------//
@@ -539,9 +541,9 @@
     #define SHAPING_FREQ_Y    43.48
     #define SHAPING_ZETA_Y  0.15f
   #elif BOTH(QQSP, DDRIVE)
-    #define SHAPING_FREQ_X    25.6
+    #define SHAPING_FREQ_X   51.06// 25.6
     #define SHAPING_ZETA_X  0.15f  
-    #define SHAPING_FREQ_Y    25.6
+    #define SHAPING_FREQ_Y   43.48// 25.6
     #define SHAPING_ZETA_Y  0.15f      
   #elif ANY(SR_BTT, SR_MKS)
     #define SHAPING_FREQ_X    25.0   // info FLSun
