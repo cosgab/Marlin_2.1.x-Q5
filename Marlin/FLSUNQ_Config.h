@@ -267,7 +267,6 @@
 //= For users who dont have a terminal =//
 #if BOTH(ADD_MENUS, TFT_CLASSIC_UI)||BOTH(ADD_MENUS, TFT_COLOR_UI)||BOTH(ADD_MENUS, TFT_BTT_UI)
   #define DELTA_CALIBRATION_MENU        // (Default) Auto for CLASSIC and COLOR.
-  #define SOFT_ENDSTOPS_MENU_ITEM       // (Default) Menu endstop
   #define LCD_INFO_MENU                 // (Default) Informations printer.
   //#define MEDIA_MENU_AT_TOP           // Add Print media menu at top list.
   //#define PREHEAT_SHORTCUT_MENU_ITEM  // Add preheat/temperature menu (first page)
