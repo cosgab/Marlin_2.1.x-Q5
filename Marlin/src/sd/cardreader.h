@@ -108,7 +108,7 @@ public:
 
   static void changeMedia(DiskIODriver *_driver) { driver = _driver; }
 
-  static SdFile getroot() { return root; }
+  static MediaFile getroot() { return root; }
 
   static void mount();
   static void release();
@@ -182,12 +182,12 @@ public:
    * Relative paths apply to the workDir.
    *
    * update_cwd: Pass 'true' to update the workDir on success.
-   *   inDirPtr: On exit your pointer points to the target SdFile.
+   *   inDirPtr: On exit your pointer points to the target MediaFile.
    *             A nullptr indicates failure.
    *       path: Start with '/' for abs path. End with '/' to get a folder ref.
    *       echo: Set 'true' to print the path throughout the loop.
    */
-  static const char* diveToFile(const bool update_cwd, SdFile* &inDirPtr, const char * const path, const bool echo=false);
+  static const char* diveToFile(const bool update_cwd, MediaFile* &inDirPtr, const char * const path, const bool echo=false);
 
   #if ENABLED(SDCARD_SORT_ALPHA)
     static void presort();
@@ -217,7 +217,7 @@ public:
 
   // Current Working Dir - Set by cd, cdup, cdroot, and diveToFile(true, ...)
   static char* getWorkDirName()  { workDir.getDosName(filename); return filename; }
-  static SdFile& getWorkDir()    { return workDir.isOpen() ? workDir : root; }
+  static MediaFile& getWorkDir()    { return workDir.isOpen() ? workDir : root; }
 
   // Print File stats
   static uint32_t getFileSize()  { return filesize; }
@@ -256,7 +256,7 @@ private:
   //
   // Working directory and parents
   //
-  static SdFile root, workDir, workDirParents[MAX_DIR_DEPTH];
+  static MediaFile root, workDir, workDirParents[MAX_DIR_DEPTH];
   static uint8_t workDirDepth;
   static int16_t nrItems; // Cache the total count
 
@@ -316,8 +316,8 @@ private:
   #endif // SDCARD_SORT_ALPHA
 
   static DiskIODriver *driver;
-  static SdVolume volume;
-  static SdFile file;
+  static MarlinVolume volume;
+  static MediaFile file;
 
   static uint32_t filesize, // Total size of the current file, in bytes
                   sdpos;    // Index most recently read (one behind file.getPos)

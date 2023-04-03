@@ -25,8 +25,11 @@
 * Change EEPROM reset with disable(M593 F0) IS to prepare your Delta without IS enable. 
 */
 //For run tests on my dev'printer!!
-//#define XP_DEV
-
+#define XP_DEV
+#define COLOR_BACKGROUND        COLOR_DARK
+#define COLOR_PROGRESS_BAR      COLOR_VIVID_GREEN
+#define COLOR_WEBSITE_URL       COLOR_DODGER_BLUE  //0xED03 //OrangeFox
+#define COLOR_AXIS_NOT_HOMED    COLOR_SCARLET
 //===================================================
 #ifndef XP_DEV                       // (Default)
 // Init EEPROM on first boot after a new build.
@@ -329,7 +332,7 @@
   #define TOUCH_SCREEN              // (C/F) (Default) UI MARLIN
 #elif ENABLED(TFT_PORTRAIT)
   #define TFT_ROTATION TFT_ROTATE_90       //PORTRAIT TFT32
-  #define TFT_COLOR_UI_PORTRAIT            //PORTRAIT TFT32
+  #define TFT_COLOR_UI_PORTRAIT   1        //PORTRAIT TFT32
   #define TOUCH_ORIENTATION TOUCH_PORTRAIT //PORTRAIT TFT32
   #define MKS_ROBIN_TFT32           // (Default) Mks_Robin_TFT_V2.0
   #define TOUCH_SCREEN              // (C/F) (Default) UI MARLIN
@@ -570,9 +573,9 @@
     #define I2C_BD_SDA_PIN   Z_MIN_PIN    //PA11 (White) or BltTouch (grey)
   #elif ENABLE(SR_MKS)
     #define I2C_BD_SCL_PIN   SERVO0_PIN    //PA8(Green)
-    #define I2C_BD_SDA_PIN   Z_MIN_PIN    //PC8(White)
+    #define I2C_BD_SDA_PIN   Z_MIN_PIN    //PC8(White) or PB2 (PW_OFF)
   #endif
-  #define I2C_BD_DELAY  20
+  #define I2C_BD_DELAY  18 //20
 #endif
 // NEOPIXEL for SR_MKS
 #if BOTH(NEOPIXEL_LED, SR_MKS)

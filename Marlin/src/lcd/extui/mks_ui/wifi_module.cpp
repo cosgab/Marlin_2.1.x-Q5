@@ -743,7 +743,7 @@ int32_t lastFragment = 0;
 
 char saveFilePath[50];
 
-static SdFile upload_file, *upload_curDir;
+static MediaFile upload_file, *upload_curDir;
 static filepos_t pos;
 
 int write_to_file(char *buf, int len) {
@@ -1622,7 +1622,7 @@ static void file_fragment_msg_handle(const uint8_t * const msg, const uint16_t m
         }
       }
       upload_file.close();
-      SdFile file, *curDir;
+      MediaFile file, *curDir;
       const char * const fname = card.diveToFile(false, curDir, saveFilePath);
       if (file.open(curDir, fname, O_RDWR)) {
         gCfgItems.curFilesize = file.fileSize();
@@ -1996,7 +1996,7 @@ void mks_wifi_firmware_update() {
 
     if (wifi_upload(0) >= 0) {
       card.removeFile((char *)ESP_FIRMWARE_FILE_RENAME);
-      SdFile file, *curDir;
+      MediaFile file, *curDir;
       const char * const fname = card.diveToFile(false, curDir, ESP_FIRMWARE_FILE);
       if (file.open(curDir, fname, O_READ)) {
         file.rename(curDir, (char *)ESP_FIRMWARE_FILE_RENAME);

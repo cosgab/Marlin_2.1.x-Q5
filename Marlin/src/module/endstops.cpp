@@ -1185,24 +1185,6 @@ void Endstops::update() {
     #if W_SPI_SENSORLESS
       if (tmc_spi_homing.w && stepperW.test_stall_status()) { SBI(live_state, W_ENDSTOP); hit = true; }
     #endif
-    #if U_SPI_SENSORLESS
-      if (tmc_spi_homing.u && stepperU.test_stall_status()) {
-        SBI(live_state, U_ENDSTOP);
-        hit = true;
-      }
-    #endif
-    #if V_SPI_SENSORLESS
-      if (tmc_spi_homing.v && stepperV.test_stall_status()) {
-        SBI(live_state, V_ENDSTOP);
-        hit = true;
-      }
-    #endif
-    #if W_SPI_SENSORLESS
-      if (tmc_spi_homing.w && stepperW.test_stall_status()) {
-        SBI(live_state, W_ENDSTOP);
-        hit = true;
-      }
-    #endif
 
     if (TERN0(ENDSTOP_INTERRUPTS_FEATURE, hit)) update();
 
