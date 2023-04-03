@@ -210,7 +210,7 @@
    *       ￣￣ AE￣￣
    */
   // Module ESP-WIFI
-  #ifdef MKS_WIFI
+  #if ENABLED(WIFISUPPORT)
     //Mode COMMUNICATION_PROTOCOL RAW_SERIAL with monitoring ESP3Dv3
     #define MKS_WIFI_SERIAL_NUM             SERIAL_PORT_2
     #define MKS_WIFI_UART                   USART1
@@ -228,15 +228,17 @@
   #else
     //#undef PLATFORM_M997_SUPPORT                //Issue with the Mks Cura plugin that sends M997s(reboot MoBo).
   #endif
-  /* fix Marlin
-  #define ESP_WIFI_MODULE_COM                  2  // Must also set either SERIAL_PORT or SERIAL_PORT_2 to this
-  #define ESP_WIFI_MODULE_BAUDRATE      BAUDRATE  // Must use same BAUDRATE as SERIAL_PORT & SERIAL_PORT_2
-  #define ESP_WIFI_MODULE_TXD_PIN           PA9   // MKS or ESP WIFI RX PIN
-  #define ESP_WIFI_MODULE_RXD_PIN           PA10  // MKS or ESP WIFI TX PIN
-  #define ESP_WIFI_MODULE_GPIO0_PIN         PA8
-  #define ESP_WIFI_MODULE_GPIO1_PIN         PC7
-  #define ESP_WIFI_MODULE_RESET_PIN         PA5   // WIFI CTRL/RST
-  #define ESP_WIFI_MODULE_ENABLE_PIN        -1
+  /* fix Marlin 
+  #if ENABLED(WIFISUPPORT)
+    #define ESP_WIFI_MODULE_COM                  2  // Must also set either SERIAL_PORT or SERIAL_PORT_2 to this
+    #define ESP_WIFI_MODULE_BAUDRATE      BAUDRATE  // Must use same BAUDRATE as SERIAL_PORT & SERIAL_PORT_2
+    #define ESP_WIFI_MODULE_TXD_PIN           PA9   // MKS or ESP WIFI RX PIN
+    #define ESP_WIFI_MODULE_RXD_PIN           PA10  // MKS or ESP WIFI TX PIN
+    #define ESP_WIFI_MODULE_RESET_PIN         PA5   // WIFI CTRL/RST
+    #define ESP_WIFI_MODULE_ENABLE_PIN        -1
+    #define ESP_WIFI_MODULE_GPIO0_PIN         PA8
+    #define ESP_WIFI_MODULE_GPIO1_PIN         PC7
+  #endif
   */
 #endif
 
@@ -269,7 +271,7 @@
 #define HEATER_0_PIN                        PC3   // HEATER_E0
 #define HEATER_BED_PIN                      PA0   // HEATER_BED-WKUP
 
-#define FAN_PIN                             PB1   // E_FAN
+#define FAN0_PIN                            PB1   // E_FAN
 
 //
 // Misc. Functions
@@ -390,8 +392,6 @@
   #define LCD_BACKLIGHT_PIN                 PD13
 
   #define LCD_USE_DMA_FSMC                        // Use DMA transfers to send data to the TFT
-  #define FSMC_DMA_DEV                      DMA2
-  #define FSMC_DMA_CHANNEL               DMA_CH5
   #define FSMC_CS_PIN                       PD7   // NE4
   #define FSMC_RS_PIN                       PD11  // A0
 
