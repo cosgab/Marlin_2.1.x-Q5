@@ -1418,11 +1418,7 @@
 #define V_MAX_ENDSTOP_HIT_STATE HIGH
 #define W_MIN_ENDSTOP_HIT_STATE HIGH
 #define W_MAX_ENDSTOP_HIT_STATE HIGH
-#if NONE(X_PROBE, N_PROBE, B_PROBE)
-  #define Z_MIN_PROBE_ENDSTOP_HIT_STATE LOW
-#else
-  #define Z_MIN_PROBE_ENDSTOP_HIT_STATE HIGH
-#endif
+#define Z_MIN_PROBE_ENDSTOP_HIT_STATE Z_MIN_ENDSTOP_HIT_STATE
 
 // Enable this feature if all enabled endstop pins are interrupt-capable.
 // This will remove the need to poll the interrupt pins, saving many CPU cycles.
@@ -2173,7 +2169,7 @@
 #endif
 
 #if EITHER(MIN_SOFTWARE_ENDSTOPS, MAX_SOFTWARE_ENDSTOPS)
-  //#define SOFT_ENDSTOPS_MENU_ITEM    // Enable/Disable software endstops from the LCD
+  #define SOFT_ENDSTOPS_MENU_ITEM    // Enable/Disable software endstops from the LCD
 #endif
 
 /**
