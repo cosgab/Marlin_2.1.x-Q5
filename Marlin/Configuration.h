@@ -66,30 +66,6 @@
 #define STRING_CONFIG_H_AUTHOR "(Foxies, DeltaFox)" // Who made the changes.
 #define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 
-/**
- * *** VENDORS PLEASE READ ***
- *
- * Marlin allows you to add a custom boot image for Graphical LCDs.
- * With this option Marlin will first show your custom screen followed
- * by the standard Marlin logo with version number and web URL.
- *
- * We encourage you to take advantage of this new feature and we also
- * respectfully request that you retain the unmodified Marlin boot screen.
- */
-
-// Show the Marlin bootscreen on startup. ** ENABLE FOR PRODUCTION **
-#define SHOW_BOOTSCREEN
-
-// Show the bitmap in Marlin/_Bootscreen.h on startup.
-#if ANY(TFT_CLASSIC_UI, TFT_BTT_UI)
-  #define SHOW_CUSTOM_BOOTSCREEN  //TIPS
-#endif
-
-// Show the bitmap in Marlin/_Statusscreen.h on the status screen.
-#if ANY(TFT_CLASSIC_UI, TFT_BTT_UI)
-  #define CUSTOM_STATUS_SCREEN_IMAGE  //TIPS
-#endif
-
 // @section machine
 
 // Choose the name from boards.h that matches your setup
