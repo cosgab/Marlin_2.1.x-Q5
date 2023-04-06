@@ -331,7 +331,7 @@
   #define TOUCH_SCREEN              // (C/F) (Default) UI MARLIN
 #elif ENABLED(TFT_PORTRAIT)
   #define TFT_ROTATION TFT_ROTATE_90       //PORTRAIT TFT32
-  #define TFT_COLOR_UI_PORTRAIT   1        //PORTRAIT TFT32
+  #define TFT_COLOR_UI_PORTRAIT    1       //PORTRAIT TFT32
   #define TOUCH_ORIENTATION TOUCH_PORTRAIT //PORTRAIT TFT32
   #define MKS_ROBIN_TFT32           // (Default) Mks_Robin_TFT_V2.0
   #define TOUCH_SCREEN              // (C/F) (Default) UI MARLIN
