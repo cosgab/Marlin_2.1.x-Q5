@@ -411,13 +411,13 @@ void GcodeSuite::G28() {
     TERN_(HOME_Z_FIRST, if (doZ) homeaxis(Z_AXIS));
 
     const bool seenR = parser.seenval('R');
-    const float z_homing_height = seenR ? parser.value_linear_units() : Z_HOMING_HEIGHT;
-
-    if (z_homing_height && (seenR || NUM_AXIS_GANG(doX, || doY, || TERN0(Z_SAFE_HOMING, doZ), || doI, || doJ, || doK, || doU, || doV, || doW))) {
-      // Raise Z before homing any other axes and z is not already high enough (never lower z)
-      if (DEBUGGING(LEVELING)) DEBUG_ECHOLNPGM("Raise Z (before homing) by ", z_homing_height);
-      do_z_clearance(z_homing_height);
-      TERN_(BLTOUCH, bltouch.init());
+    float z_homing_height;
+    if (seenR)
+      z_homing_height = current_position.z + parser.value_linear_units();
+    else {
+      z_homing_height = (Z_HOMING_HEIGHT) - _MIN(probe.offset.z, 0);
+      if (!TERN(HOME_AFTER_DEACTIVATE, axis_is_trusted, axis_was_homed)(Z_AXIS))
+        z_homing_height += current_position.z;
     }
 
     // Diagonal move first if both are homing
