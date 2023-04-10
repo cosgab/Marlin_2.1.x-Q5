@@ -25,11 +25,7 @@
 * Change EEPROM reset with disable(M593 F0) IS to prepare your Delta without IS enable. 
 */
 //For run tests on my dev'printer!!
-#define XP_DEV
-#define COLOR_BACKGROUND        COLOR_DARK
-#define COLOR_PROGRESS_BAR      COLOR_VIVID_GREEN
-#define COLOR_WEBSITE_URL       COLOR_DODGER_BLUE  //0xED03 //OrangeFox
-#define COLOR_AXIS_NOT_HOMED    COLOR_SCARLET
+//#define XP_DEV
 //===================================================
 #ifndef XP_DEV                       // (Default)
 // Init EEPROM on first boot after a new build.
