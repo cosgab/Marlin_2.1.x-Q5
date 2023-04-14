@@ -917,7 +917,6 @@ void set_message_with_feedback(FSTR_P const fstr) {
 
     const float z1 = measure_point_with_encoder();
     do_z_clearance_by(SIZE_OF_LITTLE_RAISE);
-    planner.synchronize();
 
     SERIAL_ECHOPGM("Remove shim");
     LCD_MESSAGE(MSG_UBL_BC_REMOVE);
