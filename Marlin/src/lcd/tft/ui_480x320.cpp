@@ -223,7 +223,7 @@ void MarlinUI::draw_status_screen() {
   TERN_(TOUCH_SCREEN, touch.clear());
 
   // Statuses of heaters and fans
-  uint16_t y = STATUS_MARGIN_SIZE;;
+  uint16_t y = STATUS_MARGIN_SIZE;
   for (uint16_t i = 0; i < ITEMS_COUNT; i++) {
     uint16_t x = (TFT_WIDTH / ITEMS_COUNT - 80) / 2  + (TFT_WIDTH * i / ITEMS_COUNT);
     switch (i) {
@@ -281,7 +281,7 @@ void MarlinUI::draw_status_screen() {
 
     tft_string.set("Y");
     tft.add_text(11 * coords_width / 30 - tft_string.width() / 2, tft_string.vcenter(FONT_LINE_HEIGHT), COLOR_AXIS_HOMED, tft_string);
-    
+
     const bool nhy = axis_should_home(Y_AXIS);
     tft_string.set(blink && nhy ? "?" : ftostr4sign(LOGICAL_Y_POSITION(current_position.y)));
     tft_string.ltrim();
@@ -290,7 +290,7 @@ void MarlinUI::draw_status_screen() {
 
   tft_string.set("Z");
   tft.add_text(7 * coords_width / 10 - tft_string.width() / 2, tft_string.vcenter(FONT_LINE_HEIGHT), COLOR_AXIS_HOMED, tft_string);
-  
+
   const bool nhz = axis_should_home(Z_AXIS);
   tft_string.set(blink && nhz ? "?" : ftostr52sp(LOGICAL_Z_POSITION(current_position.z)));
   tft_string.ltrim();
