@@ -20,7 +20,9 @@
 /*------Drivers-(1 CHOICE)-----*/
 //#define STOCK                      //(S) For 4xA4988 with Robin_mini Board(Comment POWER_LOSS_RECOVERY)
 //#define RAMPS                      //(S) For 4xA4988(green or red color)
-#define SKR
+//#define SKR2
+#define OCTOP
+#define XBOX
 
 /* MODE TMC */
 //#define AMB8_TMC                   //(8) For 4xTMC220x_STANDALONE For 2208(white color) or 2209(black color)
@@ -39,8 +41,6 @@
 */
 //#define INV_EXT                    //(T) Uncommment to reverse direction.
 //#define BMG                        //(B) Uncomment to change Extruder step.
-
-
 
 /*--- Choice UI TFT ----*/
 //#define TFT_CLASSIC_UI             //(F) UI STANDARD 
@@ -70,6 +70,14 @@
   #define TEMP_SENSOR_BED 5
   #define TEMP_SENSOR_CHAMBER 11
   #define TEMP_CHAMBER_PIN TEMP_1_PIN //
+#elif ENABLED(SR2)
+  #define TEMP_SENSOR_0 11
+  #define TEMP_SENSOR_BED 5
+  #define TEMP_SENSOR_CHAMBER 11
+#elif ENABLED(OCTOP)
+  #define TEMP_SENSOR_0 1
+  #define TEMP_SENSOR_BED 1
+  #define TEMP_SENSOR_CHAMBER 0
 #else
   #define TEMP_SENSOR_0 11
   #define TEMP_SENSOR_BED 5
