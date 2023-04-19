@@ -20,6 +20,8 @@
  *
  */
 
+#include "env_validate.h"
+
 /** CAUTION **
  *This board definition is to facilitate support for a Filament Extrusion
  *devices, used to convert waste plastic into 3D printable filament. 
@@ -42,8 +44,7 @@
     #define FLASH_EEPROM_EMULATION
   #endif
   #define EEPROM_PAGE_SIZE      (0x800UL) // 2K
-  //#define EEPROM_START_ADDRESS      (0x8000000UL + FLASH_SIZE - (EEPROM_PAGE_SIZE))
-  //#define EEPROM_START_ADDRESS      (0x801F800UL)
+  //#define EEPROM_START_ADDRESS  (0x8000000UL + (STM32_FLASH_SIZE) * 1024UL - (EEPROM_PAGE_SIZE) * 1UL)
   #define EEPROM_START_ADDRESS      (0x0801F000UL)
   #define MARLIN_EEPROM_SIZE    EEPROM_PAGE_SIZE
 #endif
