@@ -1,6 +1,6 @@
 /**
  * Marlin 3D Printer Firmware
- * Copyright (c) 2022 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
+ * Copyright (c) 2021 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
  *
  * Based on Sprinter and grbl.
  * Copyright (c) 2011 Camiel Gubbels / Erik van der Zalm
@@ -19,15 +19,15 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  *
  */
-#pragma once
 
 /** CAUTION **
- * This board definition is to facilitate support for a Filament Extrusion
- * devices, used to convert waste plastic into 3D printable filament.
- * This board is NOT a general 3D printing controller; it is NOT supported
- * as a toolboard via CANBUS (as it was originally designed) or any device
- * that requires kinematics.
+ *This board definition is to facilitate support for a Filament Extrusion
+ *devices, used to convert waste plastic into 3D printable filament. 
+ *This board is NOT a general 3D printing controller,
+ *it is NOT supported as a toolboard via CANBUS (as it was originally designed)
+ *or any device that requires kinematics
  */
+#pragma once
 
 #ifndef BOARD_INFO_NAME
   #define BOARD_INFO_NAME "BTT EBB42 V1.1"
@@ -42,9 +42,18 @@
     #define FLASH_EEPROM_EMULATION
   #endif
   #define EEPROM_PAGE_SIZE      (0x800UL) // 2K
-  #define EEPROM_START_ADDRESS  (0x0801F800UL)
+  //#define EEPROM_START_ADDRESS      (0x8000000UL + FLASH_SIZE - (EEPROM_PAGE_SIZE))
+  //#define EEPROM_START_ADDRESS      (0x801F800UL)
+  #define EEPROM_START_ADDRESS      (0x0801F000UL)
   #define MARLIN_EEPROM_SIZE    EEPROM_PAGE_SIZE
 #endif
+// #if (NO_EEPROM_SELECTED)
+//   #undef NO_EEPROM_SELECTED
+//   #define I2C_EEPROM                            // AT24C16
+//   #define MARLIN_EEPROM_SIZE              0x1000  // 4K
+//   #define EEPROM_DEVICE_ADDRESS   0x50
+// #endif
+
 
 //#define USES_DIAG_JUMPERS
 
@@ -64,11 +73,9 @@
 //
 // Limit Switches
 //
-#if !HAS_WIRED_LCD
-  #define X_STOP_PIN                        PB6
-  #define Y_STOP_PIN                        PB5
-  #define Z_STOP_PIN                        PB7
-#endif
+#define X_STOP_PIN                          PB6   // X-STOP
+#define Y_STOP_PIN                          PB5   // Y-STOP
+#define Z_STOP_PIN                          PB7   // Z-STOP
 
 //
 // Z Probe must be this pin
@@ -79,15 +86,15 @@
 // Steppers
 //
 #define X_ENABLE_PIN                        -1
-#define X_STEP_PIN                          PA10 // Unused. Assigned so Marlin will compile
+#define X_STEP_PIN                          PA10 //unused pin. Only assigned to a unattached pin to allow Marlin to compile
 #define X_DIR_PIN                           -1
 
 #define Y_ENABLE_PIN                        -1
-#define Y_STEP_PIN                          PA10 // Unused. Assigned so Marlin will compile
+#define Y_STEP_PIN                          PA10 //unused pin. Only assigned to a unattached pin to allow Marlin to compile
 #define Y_DIR_PIN                           -1
 
 #define Z_ENABLE_PIN                        -1
-#define Z_STEP_PIN                          PA10 // Unused. Assigned so Marlin will compile
+#define Z_STEP_PIN                          PA10 //unused pin. Only assigned to a unattached pin to allow Marlin to compile
 #define Z_DIR_PIN                           -1
 
 #define E0_ENABLE_PIN                       PD2
@@ -133,8 +140,9 @@
 // Heaters / Fans
 //
 #define HEATER_0_PIN                        PA2   // "HE"
-#define FAN_PIN                             PA0   // "FAN0"
+#define FAN0_PIN                            PA0   // "FAN0"
 #define FAN1_PIN                            PA1   // "FAN1"
+
 
 //
 // Default NEOPIXEL_PIN
@@ -147,7 +155,13 @@
 // LCD / Controller
 //
 #if HAS_WIRED_LCD
+  #undef X_STOP_PIN //Reusing the 'endstop' pins for a rotary encoder
+  #undef Y_STOP_PIN
+  #undef Z_STOP_PIN
+  #define X_STOP_PIN                        -1
+  #define Y_STOP_PIN                        -1
+  #define Z_STOP_PIN                        -1
   #define BTN_EN1                           PB7
   #define BTN_EN2                           PB5
   #define BTN_ENC                           PB6
-#endif
+#endif // HAS_WIRED_LCD
