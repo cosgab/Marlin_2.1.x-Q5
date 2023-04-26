@@ -24,6 +24,7 @@
 *
 * Change EEPROM reset with disable(M593 F0) IS to prepare your Delta without IS enable. 
 * Add mode portrait for TFT32/TS35.
+* New MoBo temp.
 */
 //For run tests on my dev'printer!!
 //#define XP_DEV

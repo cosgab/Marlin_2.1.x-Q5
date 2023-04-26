@@ -642,7 +642,9 @@
 #ifndef TEMP_SENSOR_BOARD
   #define TEMP_SENSOR_BOARD 0
 #endif
-#define TEMP_SENSOR_SOC 0
+#ifndef TEMP_SENSOR_SOC
+  #define TEMP_SENSOR_SOC 0
+#endif
 #define TEMP_SENSOR_REDUNDANT 0
 
 // Dummy thermistor constant temperature readings, for use with 998 and 999
