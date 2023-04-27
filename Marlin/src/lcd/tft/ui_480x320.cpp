@@ -334,7 +334,10 @@ void MarlinUI::draw_status_screen() {
   #endif
 
   #if ENABLED(TOUCH_SCREEN)
-    add_control(404, y, menu_main, imgSettings);
+    // Settings button
+    add_control(SETTINGS_X, y, menu_main, imgSettings);
+
+    // SD-card button / Cancel button
     #if HAS_MEDIA
       const bool cm = card.isMounted(), pa = printingIsActive();
       if (cm && pa)
