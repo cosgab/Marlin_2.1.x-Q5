@@ -608,6 +608,11 @@
  *    -1 : AD595  with Thermocouple
  *
  * ================================================================
+ *  SoC internal sensor
+ * ================================================================
+ *   100 : SoC internal sensor
+ *
+ * ================================================================
  *  Custom/Dummy/Other Thermal Sensors
  * ================================================================
  *     0 : not used
@@ -1308,6 +1313,7 @@
 // Specify here all the endstop connectors that are connected to any endstop or probe.
 // Almost all printers will be using one per axis. Probes will use one or more of the
 // extra connectors. Leave undefined any used for non-endstop and non-probe purposes.
+/*
 #ifdef N_PROBE
   #define USE_XMIN_PLUG
   #define USE_YMIN_PLUG
@@ -1328,6 +1334,7 @@
 //#define USE_UMAX_PLUG
 //#define USE_VMAX_PLUG
 //#define USE_WMAX_PLUG
+*/
 
 // Enable pullup for all endstops to prevent a floating state
 #define ENDSTOPPULLUPS
