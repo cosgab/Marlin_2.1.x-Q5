@@ -27,7 +27,7 @@
 * New MoBo temp.
 */
 //For run tests on my dev'printer!!
-#define XP_DEV
+//#define XP_DEV
 //===================================================
 #ifndef XP_DEV                       // (Default)
 // Init EEPROM on first boot after a new build.
@@ -35,11 +35,12 @@
 /*_______________________1___________________________*/
 //==================== Hardware =====================//
 /*-------------Motherboard/Printer-(1 CHOICE)-------*/
-#define QQSP                         // (Default_QQS) env = flsun_hispeedv1
+//#define QQSP                         // (Default_QQS) env = flsun_hispeedv1
                                      // env:flsun_hispeedv1 (GD32F303VE6) 
 //#define Q5                         // env = mks_robin_nano_v1v2 or (Q5_2021) env = mks_robin_nano_v1_3_f4
 //#define MOTHERBOARD BOARD_MKS_ROBIN_NANO_V1_3_F4 // for Q5_2021 = uncomment/comment for your MoBo nanoV1.3.
-//#define SR_MKS                     // env = mks_robin_nano_v3_usb_flash_drive_msc
+#define SR_MKS                     // env = mks_robin_nano_v3_usb_flash_drive_msc
+#define MOTHERBOARD BOARD_MKS_ROBIN_NANO_V3_1
 //#define SR_BTT                     // env = lpc1768
               
       // NOTE: change in platformio.ini file or
@@ -107,7 +108,8 @@
 * =========================================//
 */
 //#define LCD_LANGUAGE en                // Change for your country ('bg':'Bulgarian', 'ca':'Catalan', 'cz':'Czech', 'da':'Danish', 'el':'Greek', 'fi':'Finnish', 'hr':'Croatian', 'hu':'Hungarian', 'jp_kana':'Japanese', 'nl':'Dutch', 'pl':'Polish', 'pt_br':'Portuguese (Brazilian)', 'ro':'Romanian', 'ru':'Russian', 'sk':'Slovak', 'sv':'Swedish', 'tr':'Turkish', 'uk':'Ukrainian', 'vi':'Vietnamese', 'zh_CN':'Chinese (Simplified)', etc)
-//#define BOOT_MARLIN_LOGO_SMALL         // Small Logo Marlin to reduce de binary. Comment to have normal LOGO(Default).
+#define BOOT_MARLIN_LOGO_SMALL         // Small Logo Marlin to reduce de binary. Comment to have normal LOGO(Default).
+#define SPEAKER
 
 /*_________________________________4______________________________*/
           /*---- Extruder, Custom effector and Modules -----*/
@@ -122,26 +124,26 @@
  * =========================================================
  */
                   /* User settings extruder */
-//#define INV_EXT                        // Uncommment to reverse direction for BMG_righ/Sherpa/SuperDriveHX.
-//#define EXTRUDER_STEPS  410            // Uncomment to ajust your eSteps (on firmware-32steps is doubled).
+#define INV_EXT                        // Uncommment to reverse direction for BMG_righ/Sherpa/SuperDriveHX.
+#define EXTRUDER_STEPS  1434.41172     // Uncomment to ajust your eSteps (on firmware-32steps is doubled).
 
 // BMG_right Extruder (B) step(417) ou SuperDriveHX Extruder (n) step(720).
 //#define BMG                            //(B) Uncommment for BMG_left.
-//#define DDRIVE                         //(X) Uncommment for Mini-Sherpa/SuperDrive/Lgx.
+#define DDRIVE                         //(X) Uncommment for Mini-Sherpa/SuperDrive/Lgx.
 //#define OMG                            //(O) Uncommment for OMG.(QQS no inv)
                   /*  Custom Effector  */
                   /* rods, height, arms*/
 //#define QQS_SR                         // Custom effector with balls like SR printer.
 //#define FKSN                           // Customn effector FRANKENSUNrods, height
                   /* Module Socket_Wifi */ 
-#define MOD_WIFI                         //(W) (Default_QQS) Module ESP8266/ESP12
+//#define MOD_WIFI                         //(W) (Default_QQS) Module ESP8266/ESP12
 //#define ESP3D_30                       //(w) Enable firmware ESP3D v3.0 (ESP8266/ESP12) only with TFT_LVGL_UI
 
                   /* Option for Neopixel */
 //For LedStrip which need an external power source on Vcc_ledstrip_pin.
-//#define NEOPIXEL_LED                   //(n) Use port GPIO Wifi module (PC7) on QQS
+#define NEOPIXEL_LED                   //(n) Use port GPIO Wifi module (PC7) on QQS
                                          //(n) Use port BLTouch (PA8) on SR_MKS
-//#define NEOPIXEL_PIXELS     24         // Number of LEDs in the strip
+#define NEOPIXEL_PIXELS     32         // Number of LEDs in the strip
 
         /* Option for other Probe (BD_probe, IR, Touch-Mi,.. ) or Sensorless (TMC2209_UART) */
 // WARNING:These options need wiring pins DIAG to EndStop plug(Signal).
@@ -164,7 +166,11 @@
 
 // For user who change their nozzle thermistor and limited nozzle temp (ie. Volcano)
 // by another one ex: "ATC Semitec 104GT-2/ATC Semitec 104NT-4-R025H42G" = 5, "100k Hisens 3950" = 13 
-//#define TEMP_SENSOR_0 13               // uncomment with a good number/type.
+#define TEMP_SENSOR_0 66               // uncomment with a good number/type.
+#define HEATER_0_MAXTEMP   400        // (H66)
+#define HEATER_0_MINTEMP    21
+#define MAX_CONSECUTIVE_LOW_TEMPERATURE_ERROR_ALLOWED 10
+#define PREHEAT_TIME_HOTEND_MS 30000
 //#define VOLCANO                        // (H) HotEndAllMetal set to 300°C with appropriate thermistor.
 
 
@@ -173,8 +179,8 @@
 //#define HEATER_0_MAXTEMP 300           // Uncomment Volcano line.
 
 // To change the old PID nozzle for Hotend with a new Model Predictive Control.
-//#define MPCTEMP                        // (m) ex: run "M306 P40" to configure MPCTEMP for 40W hotend heater 
-
+#define MPCTEMP                        // (m) ex: run "M306 P40" to configure MPCTEMP for 40W hotend heater 
+#define MPC_HEATER_POWER { 70.0f }
 /*__________________________5_____________________________*/
       /** =============================
       * ======= MODE LEVELING==========
@@ -199,7 +205,7 @@
   //======Many options for Modules: ========//
 #define LIN_ADVANCE                      // (L) (Default2209) with K=0 For TMC_UART2208 prefer mode spreadCycle(by TFT menu) or commented if problem.
 #define POWER_LOSS_RECOVERY              // (Default) Continue print after Power-Loss.
-//#define FWRETRACT                      // Firmware-based and LCD-controlled retract
+#define FWRETRACT                        // Firmware-based and LCD-controlled retract
 
 //=================================================================================//
 //======================== End_Hardware ===========================================//
@@ -223,21 +229,22 @@
 #define HOST_ACTION_COMMANDS             // Default - Action Command Prompt support Message on Octoprint
 #define HOST_START_MENU_ITEM             // Add a menu item that tells the host to start a print
 
-//#define BINARY_FILE_TRANSFER             // Bin transfert for ESP3D firmware v2.1 or others.
+//#define BINARY_FILE_TRANSFER           // Bin transfert for ESP3D firmware v2.1 or others.
                                          // Not compatible with the MEATPACK option.
 //------ Support for MeatPack G-code compression (OCTOPRINT)--------//
-//#define MEATPACK_ON_SERIAL_PORT_1      // (M) With connection USB. block the request octoprint
+#define MEATPACK_ON_SERIAL_PORT_1        // (M) With connection USB. block the request octoprint
 //#define MEATPACK_ON_SERIAL_PORT_2      // With other connection like Tx/Rx Wifi socket.
 
 //----------Options Plus-----------//
 //#define SDCARD_SORT_ALPHA
 //#define SD_REPRINT_LAST_SELECTED_FILE  // Reselect last print file.
-//#define CONFIGURATION_EMBEDDING        // Use 'M503 C' to write the settings out to the SD Card as 'mc.zip'.
+#define CONFIGURATION_EMBEDDING          // Use 'M503 C' to write the settings out to the SD Card as 'mc.zip'.
 //#define INPUT_SHAPING                  // (Z) Zero Vibration (ZV) Input Shaping for X and/or Y movements.
 
 //-----------------------------//
 //For tests on my dev'printer!!//
 //-----------------------------//
+#define DBUG
 #else
  #include "Configs/Config_XP.h"
 #endif
