@@ -3855,8 +3855,9 @@
  */
 #if ANY(TFT_BTT_UI, MOD_BTT_UI)
 #define AUTO_REPORT_POSITION
-#if ENABLED(AUTO_REPORT_POSITION)
+  #if ENABLED(AUTO_REPORT_POSITION)
   //#define AUTO_REPORT_REAL_POSITION // Auto-report the real position
+  #endif
 #endif
 
 /**
