@@ -31,9 +31,9 @@
 /*_______________________1___________________________*/
 //==================== Hardware =====================//
 /*-------------Motherboard/Printer-(1 CHOICE)-------*/
-#define QQSP                         // (Default_QQS) env = flsun_hispeedv1
+//#define QQSP                         // (Default_QQS) env = flsun_hispeedv1
                                      // env:flsun_hispeedv1 (GD32F303VE6) 
-//#define Q5                         // env = mks_robin_nano35 or (Q5_2021) env = mks_robin_nano_v1_3_f4 (#define TEMP_TIMER  5)
+#define Q5                         // env = mks_robin_nano35 or (Q5_2021) env = mks_robin_nano_v1_3_f4 (#define TEMP_TIMER  5)
                                      // for Q5_2021 = uncomment/comment your MoBo in configuration.h (Line114)
 //#define SR_MKS                     // env = mks_robin_nano_v3_usb_flash_drive_msc
 //#define SR_BTT                     // env = lpc1768
@@ -100,7 +100,7 @@
 * =========================================//
 */
 //#define LCD_LANGUAGE en                // Change for your country ('bg':'Bulgarian', 'ca':'Catalan', 'cz':'Czech', 'da':'Danish', 'el':'Greek', 'fi':'Finnish', 'hr':'Croatian', 'hu':'Hungarian', 'jp_kana':'Japanese', 'nl':'Dutch', 'pl':'Polish', 'pt_br':'Portuguese (Brazilian)', 'ro':'Romanian', 'ru':'Russian', 'sk':'Slovak', 'sv':'Swedish', 'tr':'Turkish', 'uk':'Ukrainian', 'vi':'Vietnamese', 'zh_CN':'Chinese (Simplified)', etc)
-//#define BOOT_MARLIN_LOGO_SMALL         // Small Logo Marlin to reduce de binary. Comment to have normal LOGO(Default).
+#define BOOT_MARLIN_LOGO_SMALL         // Small Logo Marlin to reduce de binary. Comment to have normal LOGO(Default).
 
 /*_________________________________4______________________________*/
           /*---- Extruder, Custom effector and Modules -----*/
@@ -116,18 +116,18 @@
  */
                   /* User settings extruder */
 //#define INV_EXT                        // Uncommment to reverse direction for BMG_righ/Sherpa/SDHX/LGX-lite(QQS/Q5/SR).
-//#define EXTRUDER_STEPS 1440//708//830  // Uncomment to ajust your eSteps (on firmware-32steps is doubled).
+#define EXTRUDER_STEPS 137.55//708//830  // Uncomment to ajust your eSteps (on firmware-32steps is doubled).
 
 // BMG_right Extruder (B) step(417) ou SuperDriveHX Extruder (X) step(720).
 //#define BMG                            //(B) Uncommment for BMG_left.
 //#define DDRIVE                         //(X) Uncommment for SuperDriveHX/Mini-Sherpa/Orbiter/LGX-Lite.
-//#define OMG                            //(O) Uncommment for OMG.(QQS no inv)
+#define OMG                            //(O) Uncommment for OMG.(QQS no inv)
                   /*  Custom Effector  */
                   /* rods, height, arms*/
 //#define QQS_SR                         // Custom effector with Direct_Drive SuperDriveHX(QQSP)
 //#define FKSN                           // Customn effector FRANKENSUN
                   /* Module Socket_Wifi */ 
-#define MOD_WIFI                         //(W) (Default_QQS) With Module ESP8266/ESP12 or Connexion Tx/RX
+//#define MOD_WIFI                         //(W) (Default_QQS) With Module ESP8266/ESP12 or Connexion Tx/RX
 //#define ESP3D_30                       //(w) Enable firmware ESP3D v3.0 (ESP8266/ESP12) only with TFT_LVGL_UI
 
                   /* Option for Neopixel */

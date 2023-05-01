@@ -101,8 +101,8 @@
     #define BAUD_RATE_GCODE
   #endif
   #ifdef Q5
-    #define MOTHERBOARD BOARD_MKS_ROBIN_NANO           // (Default) Q5 old MoBo 
-    //#define MOTHERBOARD BOARD_MKS_ROBIN_NANO_V1_3_F4 // Q5 new MoBo
+    //#define MOTHERBOARD BOARD_MKS_ROBIN_NANO           // (Default) Q5 old MoBo 
+    #define MOTHERBOARD BOARD_MKS_ROBIN_NANO_V1_3_F4 // Q5 new MoBo
     #define BAUD_RATE_GCODE
   #endif
   #ifdef SR_MKS
