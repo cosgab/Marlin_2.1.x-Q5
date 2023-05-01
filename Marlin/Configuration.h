@@ -2204,8 +2204,8 @@
  * these options to restore the prior leveling state or to always enable
  * leveling immediately after G28.
  */
-#define RESTORE_LEVELING_AFTER_G28
-//#define ENABLE_LEVELING_AFTER_G28
+//#define RESTORE_LEVELING_AFTER_G28
+#define ENABLE_LEVELING_AFTER_G28
 
 /**
  * Auto-leveling needs preheating
@@ -2319,8 +2319,8 @@
     #define MESH_INSET 1
     #define GRID_MAX_POINTS_X 11
   #else
-  	#define MESH_INSET 15           // Set Mesh bounds as an inset region of the bed
-	  #define GRID_MAX_POINTS_X 8   // Don't use more than 15 points per axis, implementation limited.
+  	#define MESH_INSET 10           // Set Mesh bounds as an inset region of the bed
+	  #define GRID_MAX_POINTS_X 13   // Don't use more than 15 points per axis, implementation limited.
   /// 10=53points, 13=90points, 15=110points
   #endif
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
