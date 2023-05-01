@@ -27,13 +27,13 @@
 //#define XP_DEV
 //===================================================
 #ifndef XP_DEV                       // (Default)
-#define EEPROM_INIT_NOW              // Init EEPROM on first boot after a new build.
+//#define EEPROM_INIT_NOW              // Init EEPROM on first boot after a new build.
 /*_______________________1___________________________*/
 //==================== Hardware =====================//
 /*-------------Motherboard/Printer-(1 CHOICE)-------*/
 //#define QQSP                         // (Default_QQS) env = flsun_hispeedv1
                                      // env:flsun_hispeedv1 (GD32F303VE6) 
-#define Q5                         // env = mks_robin_nano35 or (Q5_2021) env = mks_robin_nano_v1_3_f4 (#define TEMP_TIMER  5)
+#define Q5                           // env = mks_robin_nano35 or (Q5_2021) env = mks_robin_nano_v1_3_f4 (#define TEMP_TIMER  5)
                                      // for Q5_2021 = uncomment/comment your MoBo in configuration.h (Line114)
 //#define SR_MKS                     // env = mks_robin_nano_v3_usb_flash_drive_msc
 //#define SR_BTT                     // env = lpc1768
@@ -116,7 +116,7 @@
  */
                   /* User settings extruder */
 //#define INV_EXT                        // Uncommment to reverse direction for BMG_righ/Sherpa/SDHX/LGX-lite(QQS/Q5/SR).
-#define EXTRUDER_STEPS 137.55//708//830  // Uncomment to ajust your eSteps (on firmware-32steps is doubled).
+#define EXTRUDER_STEPS 137.55 //708//830  // Uncomment to ajust your eSteps (on firmware-32steps is doubled).
 
 // BMG_right Extruder (B) step(417) ou SuperDriveHX Extruder (X) step(720).
 //#define BMG                            //(B) Uncommment for BMG_left.
