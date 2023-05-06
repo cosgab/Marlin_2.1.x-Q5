@@ -45,7 +45,7 @@
 /*________________________2___________________________*/
           /*-----Type Stepper Drivers-(1 CHOICE)-----*/
 /* MODE STOCK for QQS & Q5 & SR */
-#define STOCK                         // (S) (Default_QQS) For 4xA4988(green or red color).
+//#define STOCK                         // (S) (Default_QQS) For 4xA4988(green or red color).
                                       // (S) (Default_Q5) For 3xTMC2208+1xA4988.
                                       // (S) (Default_SR) For 4xTMC2209_UART.
 
@@ -55,7 +55,7 @@
 
 /* MODE UART XYZ+E for QQS & Q5 */
 //#define Q_UART8                     // (U8) 4xTMC2208_UART Note: remove on your printer the module WIFI and wire your TMC.
-//#define Q_UART9                     // (U9) 4xTMC2209_UART Note: remove on your printer the module WIFI and wire your TMC.
+#define Q_UART9                     // (U9) 4xTMC2209_UART Note: remove on your printer the module WIFI and wire your TMC.
 
 /* SPECIAL MODE UART XYZ+E for QQS-Pro */
 //#define QQS_UARTH                   // (UH) Mode special 2209 wiring with one I/O pin (Remove module ESP12)
